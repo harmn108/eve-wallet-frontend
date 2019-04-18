@@ -33,8 +33,11 @@
 
 			img {
 				width: 80%;
-				max-width: 400px;
 				margin-top: 20px;
+
+				@media (max-height: 780px) {
+					max-width: 320px;
+				}
 			}
 		}
 
