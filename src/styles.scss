@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+* {box-sizing: border-box;}
+
+body {
+	font-family: 'Lato', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+a {
+	color: #607BED;
+	text-decoration: none;
+
+	&:hover {
+		color: darken(#607BED, 5%);
+	}
+}
+
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+.text-center {text-align: center;}
+
+.button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 120px;
+	padding: 8px 32px;
+	font: 700 16px/22px 'Lato', sans-serif;
+	text-align: center;
+	border-radius: 8px;
+	color: #607BED;
+	cursor: pointer;
+	border: 1px solid #607BED;
+	outline: 0;
+	transition: 300ms;
+
+	&--primary {
+		border: 0;
+		background-color: #607BED;
+		color: #ffffff;
+
+		&:not(:disabled):hover {
+			background-color: darken(#607BED, 5%);
+		}
+	}
+
+	&--fat {
+		border: 0;
+		background-color: #607BED;
+		color: #ffffff;
+		padding: 16px 32px;
+
+		&:not(:disabled):hover {
+			background-color: darken(#607BED, 5%);
+		}
+	}
+
+	&--upper {
+		text-transform: uppercase;
+	}
+
+	&:disabled {
+		opacity: .5;
+	}
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"] {
+	font: 16px/19px 'Lato', sans-serif;
+	border-radius: 8px;
+	padding: 16px 23px;
+	border: 1px solid rgba(#323044, .5);
+	color: #1F2742;
+	outline: none;
+	transition: 300ms;
+
+	&:focus {
+		border: 1px solid #607BED;
+	}
+
+	&::placeholder {
+		color: #8A8FA5;
+	}
+}
+
+.input-wrapper {
+	position: relative;
+	display: flex;
+	border-radius: 8px;
+
+	input[type="text"],
+	input[type="password"],
+	input[type="number"],
+	input[type="email"] {
+		flex: 1;
+		border: none;
+		margin: 0;
+		vertical-align: middle;
+
+		~ .input-wrapper__shadow{
+			border: 1px solid rgba(50, 48, 68, 0.5);
+		}
+
+		&:not(:disabled):not(:read-only):focus {
+			~ .input-wrapper__shadow {
+				border: 1px solid #607BED;
+			}
+		}
+	}
+
+	.input-wrapper__suffix {
+		min-width: 52px;
+		display: inline-block;
+		height: 52px;
+		vertical-align: middle;
+	}
+
+	.input-wrapper__shadow {
+    position: absolute;
+    top: -1px; left: -1px;
+    bottom: -1px; right: -1px;
+    border-radius: 8px;
+    pointer-events: none;
+	}
+}
+
+.error-message {
+	font-size: 16px;
+	color: #DA3939
+}
+
+
+.confirm-transaction-dialog .mat-dialog-container {
+	padding: 50px 80px;
+	border-radius: 20px;
+
+	@media (max-width: 768px) {
+		padding: 32px;
+	} 
+}

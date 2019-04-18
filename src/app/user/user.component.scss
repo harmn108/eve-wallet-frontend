@@ -1,0 +1,60 @@
+.auth {
+	font-size: 0;
+	width: 100%;
+	height: 100vh;
+
+	&-col {
+		font-size: 16px;
+		display: inline-block;
+		width: 50%;
+		min-height: 100%;
+		overflow: auto;
+		vertical-align: top;
+		position: absolute;
+
+		&--dark {
+			background: linear-gradient(135deg, #191925 0%, #122042 100%);
+			padding: 70px 80px 0;
+			left: 0;
+
+			h1 {
+				font-size: 64px;
+				font-weight: normal;
+				color: #ffffff;
+
+				b {
+					display: block;
+					font-weight: bold;
+				}
+			}
+
+			img {
+				width: 80%;
+				max-width: 400px;
+				margin-top: 20px;
+			}
+		}
+
+		&--light {
+			right: 0;
+			padding: 70px 72px;
+		}
+
+		&__inner {
+			max-width: 400px;
+			margin: 15vh auto 0;
+		}
+	}
+}
+
+@media (max-width: 1024px) {
+	.auth-col {
+		width: 100%;
+		min-height: 80%;
+		position: static;
+
+		&--dark {
+			display: none;
+		}
+	}
+}

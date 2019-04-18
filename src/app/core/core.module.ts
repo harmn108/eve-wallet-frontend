@@ -7,6 +7,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { TemplateComponent } from './template/template.component';
+import { ConfirmTransactionDialog } from './confirm-transaction/confirm-transaction.component';
+import { AuthguardService } from './guards/auth.guard';
+import { LoginCheckGuardService } from './guards/login-check.guard';
+import { UserModule } from '../user/user.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -17,6 +21,7 @@ export function createTranslateLoader(http: HttpClient) {
         CommonModule,
         RouterModule,
         SharedModule,
+        UserModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
@@ -29,6 +34,7 @@ export function createTranslateLoader(http: HttpClient) {
     declarations: [
         HomepageComponent,
         TemplateComponent,
+        ConfirmTransactionDialog
         // HeaderComponent,
         // FooterComponent,
     ],
@@ -37,9 +43,12 @@ export function createTranslateLoader(http: HttpClient) {
         // AccountService,
         // NotificationService,
         // ErrorService
+        AuthguardService,
+        LoginCheckGuardService,
     ],
     // exports: [SafePipe, SharedModule],
     entryComponents: [
+        ConfirmTransactionDialog
     ]
 })
 export class CoreModule {

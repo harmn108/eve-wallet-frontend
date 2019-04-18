@@ -1,0 +1,47 @@
+h2 {
+	font-size: 24px;
+	line-height: 30px;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 0 0 12px;
+}
+
+p.description {
+	font-size: 14px;
+	line-height: 17px;
+	color: #8A8FA5;
+	text-align: center;
+	margin: 0 0 40px;
+}
+
+table {
+	width: 100%;
+	font-weight: bold;
+
+	td {
+		padding: 0 0 12px 0;
+	}
+
+	td:first-child {
+		vertical-align: top;
+		color: #1E2741;
+	}
+
+	td:last-child {
+		word-break: break-all;
+		text-align: right;
+	}
+}
+
+.amount { color: #607BED;  }
+.address { color: #38446D; font-weight: normal; }
+.fee { color: #38446D; }
+
+.buttons {
+	text-align: center;
+	margin: 50px 0 0;
+	
+	.button--primary {
+		margin-right: 36px;
+	}
+}

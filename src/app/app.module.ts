@@ -10,19 +10,21 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { isPlatformBrowser } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserModule } from './user/user.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'eve-wallet-frontend-app'}),
     AppRoutingModule,
     CoreModule,
     TransferHttpCacheModule,
+    UserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({

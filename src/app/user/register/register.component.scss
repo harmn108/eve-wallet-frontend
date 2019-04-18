@@ -1,0 +1,52 @@
+h2 {
+	text-transform: uppercase;
+	color: #1F2742;
+	margin: 0 0 27px;
+}
+
+.descr {
+	color: #8A8FA5;
+	margin: 0 0 27px;
+}
+
+input {
+	width: 100%;
+	margin: 0 0 20px 0;
+}
+
+.buttons-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 0 20px;
+
+	.button {
+		padding: 16px 32px;
+	}
+
+	a {
+		font-weight: 600;
+	}
+}
+
+.input-wrapper__suffix .button {
+	height: 100%;
+	position: relative;
+	right: -1px;
+
+	&.done {
+		min-width: 52px;
+	}
+}
+
+p.terms {
+	font-size: 14px;
+	line-height: 17px;
+	color: #8A8FA5;
+	margin: 25px 0;
+
+	a {
+		color: inherit;
+		font-weight: bold;
+	}
+}

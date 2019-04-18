@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { TemplateComponent } from './core/template/template.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { HomepageComponent } from './core/homepage/homepage.component';
+import { userRoutes } from './user/user-routing.module';
+import { walletRoutes } from './wallet/wallet-routing.module';
+import { LoginComponent } from './user/login/login.component';
 
 const routes: Routes = [
     {
@@ -12,26 +15,16 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: HomepageComponent
+                redirectTo: 'user/login'
             },
+            ...userRoutes,
+            ...walletRoutes
         ]
     },
     {
         path: 'page-not-found',
         pathMatch: 'full',
         component: PageNotFoundComponent
-    },
-    {
-        path: ':lang',
-        component: TemplateComponent,
-        // canActivateChild: [LanguageGuard],
-        children: [
-            {
-                path: '**',
-                redirectTo: '',
-                pathMatch: 'full'
-            }
-        ]
     },
     {
         path: '**',

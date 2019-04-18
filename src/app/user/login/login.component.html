@@ -1,0 +1,14 @@
+<h2>Login</h2>
+<p class="descr">Enter you email and password to login</p>
+<form novalidate (ngSubmit)="login()" [formGroup]="loginForm">
+  <input type="text" placeholder="Email" formControlName="email">
+  <input type="password" placeholder="Password" formControlName="password">
+  <div class="buttons-container">
+    <button class="button button--fat button--upper" type="submit" [disabled]="loginForm.untouched && loginForm.controls['email'].value == '' && loginForm.controls['password'].value == ''">Log in</button>
+    <a [routerLink]="['/auth/create-password']">Forgot your password?</a>
+  </div>
+  <p *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched && loginForm.controls['email'].value !== '' && loginType" class="error-message">Email type is not correct</p>
+  <p *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched && loginForm.controls['password'].value !== '' && loginType" class="error-message">
+	Password must be at least 10 characters long, contain UPPERCASE and  lowercase letters, a number or a symbol
+  </p>
+</form>
