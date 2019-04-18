@@ -1,0 +1,28 @@
+<div *ngIf="false">
+	<h2>Backup Recovery Phrase</h2>
+	<p class="description">Enter your password to backup your Recovery Phrase.</p>
+
+	<input type="password" placeholder="Password">
+
+	<div class="buttons">
+		<button class="button button--fat button--primary">Continue</button>
+	</div>
+</div>
+
+<div *ngIf="true">
+	<h2>Backup Recovery Phrase</h2>
+
+	<p class="recovery-phrase-text">If someone were to find your recovery phrase they could access your wallet. It is strongly recommended to store your recovery phrase in physically separate, offline environment.</p>
+
+	<b>Your recovery phrase is the only way to reset your web wallet password.</b>
+
+	<div class="recovery-phrase">
+		derater liang youl puggish biltong sebilla sleechy lechery venust foreran hattock aniline snooper compole topic cremor
+	</div>
+
+	<p class="recovery-phrase-text">In the next step, you will need to enter four words from the recovery phrase in a random order.</p>
+
+	<div class="buttons text-right">
+		<button class="button button--primary button--upper">Next</button>
+	</div>
+</div>

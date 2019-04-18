@@ -27,4 +27,13 @@ input {
 	a {
 		font-weight: 600;
 	}
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+
+		.button {
+			width: 100%;
+			margin: 0 0 25px;
+		}
+	}
 }

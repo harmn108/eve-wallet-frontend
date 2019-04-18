@@ -22,7 +22,10 @@
 		</div>
 	</div>
 	<div class="security__item">
-		<h3 class="security__item__name">Address:</h3>
+		<h3 class="security__item__name">
+			<span>Address:</span>
+			<img src="assets/images/question.svg" matTooltip="Public key is your address to receive tokens." matTooltipPosition="after"/>
+		</h3>
 		<div class="security__item__inner security__item__inner--address">
 			<div>
 				<span>0x6VTswksF9F4tERp1QHVB4Rgj5ik1HvP8vMauUomPfe3EB3T6rw</span>
@@ -31,32 +34,38 @@
 		</div>
 	</div>
 	<div class="security__item">
-		<h3 class="security__item__name">Private Key:</h3>
+		<h3 class="security__item__name">
+			<span>Private Key:</span>
+			<img src="assets/images/question.svg" matTooltip="If someone were to find your private key they could access your wallet." matTooltipPosition="after"/>
+		</h3>
 		<div class="security__item__inner security__item__inner--private-key">
 			<div class="input-wrapper">
 				<input type="password" readonly value="private key here">
 				<div class="input-wrapper__suffix">
-					<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHZlcnNpb249IjEuMSI+PGcgc3Ryb2tlPSIjNjA3QkVEIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTEyLDE3IEM3LDE3IDUsMTIuMTM1IDUsMTIuMTM1IEM1LDEyLjEzNSA3LDcgMTIsNyBDMTcsNyAxOSwxMi4xMzUgMTksMTIuMTM1IEMxOSwxMi4xMzUgMTcsMTcgMTIsMTcgWiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMiwxNCBDMTMuMTA0LDE0IDE0LDEzLjEwNCAxNCwxMiBDMTQsMTAuODk2IDEzLjEwNCwxMCAxMiwxMCBDMTAuODk2LDEwIDEwLDEwLjg5NiAxMCwxMiBDMTAsMTMuMTA0IDEwLjg5NiwxNCAxMiwxNCBaIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9nPjwvc3ZnPg=="/>
+					<img src="assets/images/eye.svg"/>
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper">Backup</button>
+			<button class="button button--primary button--upper" (click)="backupPrivateKey()">Backup</button>
 		</div>
 		<div class="security__item__status">
 			<div class="icon-done"></div>
 		</div>
 	</div>
 	<div class="security__item">
-		<h3 class="security__item__name">Recovery Phrase:</h3>
+		<h3 class="security__item__name">
+			<span>Recovery Phrase:</span>
+			<img src="assets/images/question.svg" matTooltip="If someone were to find your recovery phrase they could access your wallet." matTooltipPosition="after"/>
+		</h3>
 		<div class="security__item__inner security__item__inner--private-key">
 			<div class="input-wrapper">
 				<input type="password" readonly value="private key here">
 				<div class="input-wrapper__suffix">
-					<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHZlcnNpb249IjEuMSI+PGcgc3Ryb2tlPSIjNjA3QkVEIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTEyLDE3IEM3LDE3IDUsMTIuMTM1IDUsMTIuMTM1IEM1LDEyLjEzNSA3LDcgMTIsNyBDMTcsNyAxOSwxMi4xMzUgMTksMTIuMTM1IEMxOSwxMi4xMzUgMTcsMTcgMTIsMTcgWiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMiwxNCBDMTMuMTA0LDE0IDE0LDEzLjEwNCAxNCwxMiBDMTQsMTAuODk2IDEzLjEwNCwxMCAxMiwxMCBDMTAuODk2LDEwIDEwLDEwLjg5NiAxMCwxMiBDMTAsMTMuMTA0IDEwLjg5NiwxNCAxMiwxNCBaIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9nPjwvc3ZnPg=="/>
+					<img src="assets/images/eye.svg"/>
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper">Backup</button>
+			<button class="button button--primary button--upper" (click)="backupRecoveryPhrase()">Backup</button>
 		</div>
 		<div class="security__item__status">
 			<div class="icon-done"></div>

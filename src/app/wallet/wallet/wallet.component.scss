@@ -11,11 +11,60 @@
 }
 
 .header {
-	height: 60px;
+	width: 100%;
+	padding: 25px 0;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.menu {
+	display: flex;
+	&-items {
+		display: inline-flex;
+		justify-content: flex-end;
+		overflow: hidden;
+		max-width: 0;
+		transition: 850ms max-width;
+		white-space: nowrap;
+
+		a {
+			margin-right: 25px;
+			color: #ffffff;
+			cursor: pointer;
+			text-transform: uppercase;
+		}
+
+		&--open {
+			max-width: 300px;
+		}
+	}
+
+	&__icon {
+		cursor: pointer;
+		font-size: 0;
+		display: inline-block;
+		width: 4px;
+		padding: 0 8px;
+
+		span {
+			display: inline-block;
+			width: 4px; height: 4px;
+			border-radius: 2px;
+			background: #ffffff;
+			&:not(:last-child) { margin-bottom: 4px; }
+		}
+	}
 }
 
 .footer {
-	height: 60px;
+	padding: 25px 0;
+	text-align: right;
+	color: #A19EAF;
+
+	@media (max-width: 576px) {
+		text-align: center;
+	}
 }
 
 .wallet {
@@ -34,6 +83,24 @@
 		background: #ffffff;
 
 		.wallet-card__inner { cursor: default; }
+
+		&:before {
+			content: '';
+			display: inline-block;
+			position: absolute;
+			background: url(assets/images/edge.svg) 100% 100% no-repeat;
+			height: 8px; width: 8px;
+			bottom: 0;
+		}
+
+		&.a:before {
+			right: -8px;
+		}
+
+		&.b:before {
+			left: -8px;
+			transform: rotate(-90deg);
+		}
 
 		&:after {
 			content: '';

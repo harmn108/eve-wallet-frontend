@@ -14,7 +14,10 @@
 
 		&--dark {
 			background: linear-gradient(135deg, #191925 0%, #122042 100%);
-			padding: 70px 80px 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding: 70px 80px 70px;
 			left: 0;
 
 			h1 {
@@ -56,5 +59,11 @@
 		&--dark {
 			display: none;
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	.auth-col {
+		padding: 40px 32px;
 	}
 }

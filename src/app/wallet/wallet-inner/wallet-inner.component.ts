@@ -14,7 +14,7 @@ export class WalletInnerComponent {
   generateTransaction() {
   	const dialogRef = this.dialog.open(ConfirmTransactionDialog, {
   		width: '870px',
-  		panelClass: 'confirm-transaction-dialog'
+  		panelClass: 'wallet-dialog'
   	});
   }
 }

@@ -6,5 +6,13 @@ import { Component, Inject } from '@angular/core';
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent {
+	menuOpen: boolean;
 
+	signout() {
+
+	}
+
+	toggleMenu() {
+		this.menuOpen = !this.menuOpen;
+	}
 }
