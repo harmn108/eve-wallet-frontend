@@ -23,70 +23,7 @@
 				</div>
 			</div>
 			<div class="wallet-inner">
-				<div class="receive-section">
-					<div>
-						<h2>Receive EVEO</h2>
-						<div class="public-key-wrapper">
-							<div class="public-key">AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNL</div>
-							<img src="assets/images/copy.svg">
-						</div>
-						<p class="description">Your address can also be known as you <b>public key</b>. It is what you share with people so they can send you tokens.</p>
-					</div>
-					<img src="https://chart.googleapis.com/chart?chs=138x138&cht=qr&chl=http%3A%2F%2Flocalhost%3A4200%2Fuser&choe=UTF-8&chld=M|0" alt="">
-				</div>
-				<div class="transfer-section">
-					<h2>Transfer EVEO</h2>
-					<p class="description">Send EVEOs to the recepient's account.</p>
-
-					<label>EVEO Amount</label>
-					<input type="number" placeholder="EVEO">
-
-					<label>Recepient address</label>
-					<input type="text" placeholder="Enter address">
-
-					<label class="transaction-fee">Transaction fee <span>15 EVEO</span></label>
-
-					<button class="button button--primary button--upper" (click)="generateTransaction()">Generate transaction</button>
-				</div>
-
-				<div class="hline"></div>
-
-				<div class="history-section">
-					<h2>History</h2>
-
-					<div class="transaction">
-						<div class="transaction__first-col">
-							<h3 class="transaction__type transaction__type--received">Received</h3>
-							<h3 class="transaction__amount">0.00000000 EVEO</h3>
-						</div>
-						<div class="transaction-data">
-							<div class="transaction-data__peer">
-								<small>Payment from</small>
-								<span>PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</span>
-							</div>
-							<div class="transaction-data__date">
-								<b>2:21 PM</b>
-								<span>19 Mar 2019</span>
-							</div>
-						</div>
-					</div>
-					<div class="transaction">
-						<div class="transaction__first-col">
-							<h3 class="transaction__type transaction__type--sent">Sent</h3>
-							<h3 class="transaction__amount">0.00000000 EVEO</h3>
-						</div>
-						<div class="transaction-data">
-							<div class="transaction-data__peer">
-								<small>Payment to</small>
-								<span>PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</span>
-							</div>
-							<div class="transaction-data__date">
-								<b>2:21 PM</b>
-								<span>19 Mar 2019</span>
-							</div>
-						</div>
-					</div>
-				</div>
+				<router-outlet></router-outlet>
 			</div>
 		</div>
 		<div class="footer">

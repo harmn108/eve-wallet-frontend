@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { isPlatformBrowser } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user.module';
+import { WalletModule } from './wallet/wallet.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -25,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     TransferHttpCacheModule,
     UserModule,
+    WalletModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
