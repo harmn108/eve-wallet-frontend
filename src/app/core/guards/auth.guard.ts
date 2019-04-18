@@ -1,27 +1,24 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, CanActivateChild, Router} from '@angular/router';
-//import {AccountService} from './account.service';
+import { AccountService } from '../services/account.service';
 
 @Injectable()
-
 export class AuthguardService implements CanActivate, CanActivateChild {
     constructor(private router: Router,
-                //private authService: AccountService
+                private authService: AccountService
             ) {
     }
 
     canActivate(): Promise<boolean> {
         return new Promise((resolve) => {
-          //  if (this.authService.loggedIn()) {
+            if (this.authService.loggedIn()) {
                 resolve(true);
                 return;
-          //  }
-
+            }
             resolve(false);
             this.router.navigate(['/']);
 
         });
-
     }
 
     canActivateChild(): Promise<boolean> {

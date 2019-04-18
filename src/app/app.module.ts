@@ -11,6 +11,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { isPlatformBrowser } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user/user.module';
+import { AccountService } from './core/services/account.service';
+import { NotificationService } from './core/services/notification.service';
+import { ErrorService } from './core/services/error.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -37,6 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     TranslateService,
+    AccountService,
+    NotificationService,
+    ErrorService
   ],
   bootstrap: [AppComponent]
 })

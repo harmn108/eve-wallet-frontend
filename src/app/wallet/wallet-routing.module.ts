@@ -1,5 +1,6 @@
 import {Routes} from '@angular/router';
 import { AuthguardService } from '../core/guards/auth.guard';
+import { WalletComponent } from './wallet/wallet.component';
 
 
 export const walletRoutes: Routes = [
@@ -9,7 +10,7 @@ export const walletRoutes: Routes = [
                 {
                     path: '',
                     pathMatch: 'full',
-                    redirectTo: '/page-not-found'
+                    component:WalletComponent
                 },
             ],
             canActivateChild: [AuthguardService]
