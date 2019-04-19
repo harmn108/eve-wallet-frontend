@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,6 +8,16 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './recovery-phrase-words.component.html',
   styleUrls: ['./recovery-phrase-words.component.scss']
 })
-export class RecoveryPhraseWordsComponent {
-	constructor(public dialog: MatDialog) {}
+export class RecoveryPhraseWordsComponent implements OnInit{
+  numberArray = [];
+	constructor(public router:Router, public dialog: MatDialog) {
+
+  }
+  ngOnInit(){
+    
+  }
+
+  generateNumbers(){
+    
+  }
 }

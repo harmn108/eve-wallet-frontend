@@ -98,9 +98,9 @@ export class AccountService {
             this.brainKeyEncrypted = CryptService.brainKeyEncrypt(this.brainKey, password);
             let privateKey = this.web3.account.privateKey;
             this.publicKey = this.web3.account.publicKey;
-            let signedString = this.web3.hashToSign(this.stringToSign, privateKey);
-            console.log(signedString);
+            let signedString = this.web3.hashToSign(""+this.stringToSign, privateKey);
             let url = this.userUrl + '/signup/complete';
+            console.log(this.stringToSign, privateKey)
             this.http.post(url, {
                 confirmationCode: this.code,
                 brainKey: this.brainKeyEncrypted,
@@ -185,9 +185,8 @@ export class AccountService {
                                 if (AccountService.isJsonString(this.accountInfo.meta)) {
                                     this.accountInfo.meta = JSON.parse(this.accountInfo.meta);
                                 }
-                                if (!this.accountInfo.brainKeySeen) {
-                                    this.decryptedBrainKey = bk;
-                                }
+
+                                this.decryptedBrainKey = bk;
                                 this.accountUpdated.next(this.accountInfo);
                                 return this.accountInfo;
                             })

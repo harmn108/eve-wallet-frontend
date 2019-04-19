@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SettingsComponent } from '../../wallet/settings/settings.component';
 
 @Component({
@@ -11,18 +11,22 @@ import { SettingsComponent } from '../../wallet/settings/settings.component';
   styleUrls: ['./private-key.component.scss']
 })
 export class PrivateKeyDialog implements OnInit{
+  backup:boolean = false;
   privateKey:string;
   seenControl:FormControl = new FormControl(false);
   privateKeySavedDataChangedSubscription: Subscription;
 
     constructor(
       private dialogRef: MatDialogRef<SettingsComponent>,
-      private accountService:AccountService
+      private accountService:AccountService,
+      @Inject(MAT_DIALOG_DATA) public data:any
     ){
 
     }
 
     ngOnInit(){ 
+      console.log(this.data);
+      this.backup = this.data.backup;
       this.privateKey = this.accountService.accountInfo.pKey;
       this.privateKeySavedDataChangedSubscription = this.accountService.privateKeySavedDataChanged.subscribe(data => {
         this.dialogRef.close();
@@ -41,6 +45,10 @@ export class PrivateKeyDialog implements OnInit{
       document.execCommand('copy');
       document.body.removeChild(input);
       //snackbar open
+    }
+
+    close(){
+      this.dialogRef.close();
     }
 
     ngOnDestroy() {

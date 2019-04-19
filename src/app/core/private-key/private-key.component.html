@@ -10,7 +10,7 @@
 </div>
 
 <div *ngIf="true">
-	<h2>Backup Private Key</h2>
+	<h2 *ngIf="backup">Backup Private Key</h2>
 
 	<div class="alert-container">
 		<img src="assets/images/alert.svg">
@@ -21,12 +21,12 @@
 		<span>{{privateKey}}</span>
 		<img src="assets/images/copy.svg" (click)="copy()">
 	</div>
-	<label>
+	<label *ngIf="backup">
 		<input type="checkbox" class="checkbox" [formControl]="seenControl">
 		<span>Backed up</span>
 	</label>
 
-	<div class="buttons text-right">
+	<div class="buttons text-right" *ngIf="backup">
 		<button class="button button--primary button--upper" [disabled]="!seenControl.value" (click)="confirm()">Confirm</button>
 	</div>
 </div>

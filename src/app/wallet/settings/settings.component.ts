@@ -6,6 +6,7 @@ import { RecoveryPhraseDialog } from '../../core/recovery-phrase/recovery-phrase
 import { AccountService } from '../../core/services/account.service';
 import { Web3Service } from '../../core/services/web3.service';
 import { TokenService } from '../../core/services/token.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +17,7 @@ export class SettingsComponent implements OnInit{
   account;
   privateKey:string;
   brainKey:string;
-	constructor(private web3:Web3Service, public dialog: MatDialog, private accountService:AccountService) {
+	constructor(private route:ActivatedRoute, private web3:Web3Service, public dialog: MatDialog, private accountService:AccountService) {
 
   }
   
@@ -26,17 +27,19 @@ export class SettingsComponent implements OnInit{
     this.brainKey= this.accountService.brainKeyEncrypted;
   }
 
-	backupPrivateKey() {
+	backupPrivateKey(backup) {
 		const dialogRef = this.dialog.open(PrivateKeyDialog, {
   		width: '870px',
-  		panelClass: 'wallet-dialog'
+      panelClass: 'wallet-dialog',
+      data:{backup:backup}
   	});
 	}
 
-  backupRecoveryPhrase() {
+  backupRecoveryPhrase(backup) {
     const dialogRef = this.dialog.open(RecoveryPhraseDialog, {
       width: '870px',
-      panelClass: 'wallet-dialog'
+      panelClass: 'wallet-dialog',
+      data:{backup:backup}
     });
   }
 
