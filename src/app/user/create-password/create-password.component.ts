@@ -45,7 +45,7 @@ export class CreatePasswordComponent implements OnInit{
 
       this.registerSubscription = this.accountService.registerDataChanged.subscribe(res => {
           this.loading = false;
-          this.router.navigate(['/user/recover-phrase']);
+          this.router.navigate(['/wallet/recovery-phrase']);
       });
   }
    

@@ -12,7 +12,7 @@
 </div>
 
 <div *ngIf="true">
-	<h2>Backup Recovery Phrase</h2>
+	<h2 *ngIf="backup">Backup Recovery Phrase</h2>
 
 	<p class="recovery-phrase-text">If someone were to find your recovery phrase they could access your wallet. It is strongly recommended to store your recovery phrase in physically separate, offline environment.</p>
 
@@ -22,9 +22,9 @@
 		{{brainKey}}
 	</div>
 
-	<p class="recovery-phrase-text">In the next step, you will need to enter four words from the recovery phrase in a random order.</p>
+	<p *ngIf="backup" class="recovery-phrase-text">In the next step, you will need to enter four words from the recovery phrase in a random order.</p>
 
-	<div class="buttons text-right">
+	<div class="buttons text-right" *ngIf="backup">
 		<button class="button button--primary button--upper" (click)="next()">Next</button>
 	</div>
 </div>

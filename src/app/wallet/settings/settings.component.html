@@ -41,12 +41,12 @@
 		<div class="security__item__inner security__item__inner--private-key">
 			<div class="input-wrapper">
 				<input type="password" readonly value="private key here">
-				<div class="input-wrapper__suffix">
+				<div class="input-wrapper__suffix" (click)="backupPrivateKey(false)">
 					<img src="assets/images/eye.svg"/>
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper" *ngIf="!account.privateKeySaved" (click)="backupPrivateKey()">Backup</button>
+			<button class="button button--primary button--upper" *ngIf="!account.privateKeySaved" (click)="backupPrivateKey(true)">Backup</button>
 		</div>
 		<div class="security__item__status" *ngIf="account.privateKeySaved">
 			<div class="icon-done"></div>
@@ -60,12 +60,12 @@
 		<div class="security__item__inner security__item__inner--private-key">
 			<div class="input-wrapper">
 				<input type="password" readonly value="private key here">
-				<div class="input-wrapper__suffix">
+				<div class="input-wrapper__suffix" (click)="backupRecoveryPhrase(false)">
 					<img src="assets/images/eye.svg"/>
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper" *ngIf="!account.brainKeySaved" (click)="backupRecoveryPhrase()">Backup</button>
+			<button class="button button--primary button--upper" *ngIf="!account.brainKeySaved" (click)="backupRecoveryPhrase(true)">Backup</button>
 		</div>
 		<div class="security__item__status" *ngIf="account.brainKeySaved">
 			<div class="icon-done"></div>
