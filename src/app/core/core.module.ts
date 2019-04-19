@@ -7,7 +7,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../shared/shared.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { TemplateComponent } from './template/template.component';
+import { PrivateKeyDialog } from './private-key/private-key.component';
+import { RecoveryPhraseDialog } from './recovery-phrase/recovery-phrase.component';
 import { ConfirmTransactionDialog } from './confirm-transaction/confirm-transaction.component';
+import { ReallyPostponeDialog } from './really-postpone/really-postpone.component';
 import { AuthguardService } from './guards/auth.guard';
 import { LoginCheckGuardService } from './guards/login-check.guard';
 import { UserModule } from '../user/user.module';
@@ -34,7 +37,10 @@ export function createTranslateLoader(http: HttpClient) {
     declarations: [
         HomepageComponent,
         TemplateComponent,
-        ConfirmTransactionDialog
+        ConfirmTransactionDialog,
+        PrivateKeyDialog,
+        RecoveryPhraseDialog,
+        ReallyPostponeDialog,
         // HeaderComponent,
         // FooterComponent,
     ],
@@ -48,7 +54,10 @@ export function createTranslateLoader(http: HttpClient) {
     ],
     // exports: [SafePipe, SharedModule],
     entryComponents: [
-        ConfirmTransactionDialog
+        ConfirmTransactionDialog,
+        PrivateKeyDialog,
+        RecoveryPhraseDialog,
+        ReallyPostponeDialog,
     ]
 })
 export class CoreModule {

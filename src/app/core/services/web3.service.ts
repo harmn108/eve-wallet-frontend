@@ -19,7 +19,7 @@ export class Web3Service {
   }
 
   create() {
-    //let bip39 = require("bip39");
+    let bip39 = require("bip39");
     var mnemonic = bip39.generateMnemonic();
     let hdkey = require("ethereumjs-wallet/hdkey");
     let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
@@ -53,8 +53,8 @@ export class Web3Service {
   }
 
   hashToSign(stringHash, privkey) {
-    return this.web3.eth.accounts.sign(stringHash, privkey).signature;
-}
+    return this.web3.eth.accounts.sign(""+stringHash,'0x'+ privkey).signature;
+  }
 
   sendToken(params): Promise<string> {
     return this.signAndSendTransaction({
@@ -75,6 +75,11 @@ export class Web3Service {
         )
     });
   }
+
+  stringtoHash(string){
+    return this.web3.eth.accounts.hashMessage(""+string);
+  }
+
 
   sendEthereum(params): Promise<string> {
     return this.signAndSendTransaction({

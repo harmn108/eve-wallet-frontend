@@ -7,6 +7,7 @@ import { NotificationService } from '../../core/services/notification.service';
 import { AccountService } from '../../core/services/account.service';
 import { TranslateService } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   errorEventEmiterSubscription: Subscription;
   errorMessage:string = '';
   constructor(
+    public router:Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private translateService:TranslateService, private accountService:AccountService, private notificationService:NotificationService, private FormBuilder: FormBuilder, private errorService:ErrorService) {
     this.buildForm();
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
 
     this.loginSubscription = this.accountService.loginDataChanged.subscribe(user => {
       this.loading = false;
+      this.router.navigate(['/wallet']);
     });
   }
 

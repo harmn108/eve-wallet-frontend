@@ -17,6 +17,7 @@ import { ErrorService } from './core/services/error.service';
 import { WalletModule } from './wallet/wallet.module';
 import { Web3Service } from './core/services/web3.service';
 import { CryptService } from './core/services/crypt.service';
+import { TokenService } from './core/services/token.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificationService,
     ErrorService,
     Web3Service,
-    CryptService
+    CryptService,
+    TokenService
   ],
   bootstrap: [AppComponent]
 })

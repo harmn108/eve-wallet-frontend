@@ -1,0 +1,32 @@
+<div *ngIf="false">
+	<h2>Backup Private Key</h2>
+	<p class="description">Enter your password to backup your Private Key.</p>
+
+	<input type="password" placeholder="Password">
+
+	<div class="buttons">
+		<button class="button button--fat button--primary">Continue</button>
+	</div>
+</div>
+
+<div *ngIf="true">
+	<h2>Backup Private Key</h2>
+
+	<div class="alert-container">
+		<img src="assets/images/alert.svg">
+		<p>You have to backup your recovery phrase. It is strongly recommended to store the backup copies in physically separate, offline environment. If someone were to find your recovery phrase they could access your wallet.</p>
+	</div>
+
+	<div class="public-key">
+		<span>0x6VTswksF9F4tERp1QHVB4Rgj5ik1HvP8vMauUomPfe3EB3T6rw</span>
+		<img src="assets/images/copy.svg">
+	</div>
+	<label>
+		<input type="checkbox" class="checkbox">
+		<span>Backed up</span>
+	</label>
+
+	<div class="buttons text-right">
+		<button class="button button--primary button--upper">Confirm</button>
+	</div>
+</div>

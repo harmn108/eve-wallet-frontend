@@ -1,24 +1,36 @@
 <div class="user-page">
 	<div class="container">
 		<div class="header">
-			
+			<span></span>
+
+			<div class="menu">
+				<div class="menu-items" [ngClass]="{'menu-items--open': menuOpen}">
+					<a routerLink="/wallet/settings">Security</a>
+					<a (click)="signout()">Sign out</a>
+				</div>
+				<div class="menu__icon" (click)="toggleMenu()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
 		</div>
 		<div class="wallet">
-			<div class="wallet-card wallet-card--active">
+			<div class="wallet-card a" [ngClass]="{'wallet-card--active':active == 'eveg'}" (click)="setActive('eveg')">
 				<div class="wallet-card__inner wallet-card__inner--silver">
-					<img src="http://via.placeholder.com/90" alt="">
+					<img src="assets/images/eveg.svg" alt="">
 					<div class="wallet-card__name">
-						<h3>EVEO</h3>
-						<h4>2.56<small>EVEO</small></h4>
+						<h3>EVEG</h3>
+						<h4>2.56<small>EVEG</small></h4>
 					</div>
 				</div>
 			</div>
-			<div class="wallet-card">
+			<div class="wallet-card b" [ngClass]="{'wallet-card--active':active == 'eveo'}" (click)="setActive('eveo')">
 				<div class="wallet-card__inner wallet-card__inner--gold">
-					<img src="http://via.placeholder.com/90" alt="">
+					<img src="assets/images/eveo.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEO</h3>
-						<h4>2.56<small>EVEO</small></h4>
+						<h4>1.35<small>EVEO</small></h4>
 					</div>
 				</div>
 			</div>
@@ -27,7 +39,7 @@
 			</div>
 		</div>
 		<div class="footer">
-			
+			© 2019 EVE
 		</div>
 	</div>
 </div>

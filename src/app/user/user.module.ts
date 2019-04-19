@@ -4,6 +4,7 @@ import {RegisterComponent} from './register/register.component';
 import {SharedModule} from '../shared/shared.module';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { CreatePasswordComponent } from './create-password/create-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +33,8 @@ export function createTranslateLoader(http: HttpClient) {
         LoginComponent,
         RegisterComponent,
         CreatePasswordComponent,
-        RegisterConfirmationComponent
+        RegisterConfirmationComponent,
+        ResetPasswordComponent
     ]
 })
 export class UserModule {

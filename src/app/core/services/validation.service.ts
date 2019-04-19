@@ -45,7 +45,7 @@ export class ValidationService {
     }
 
     static passwordValidator(control) {
-        if (control.value && control.value.match(/(?=^.{10,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)) {
+        if (control.value && control.value.match(/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)) {
             return null;
         } else {
             return {'invalidPassword': true};
