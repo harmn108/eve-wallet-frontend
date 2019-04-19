@@ -18,15 +18,15 @@
 	</div>
 
 	<div class="public-key">
-		<span>0x6VTswksF9F4tERp1QHVB4Rgj5ik1HvP8vMauUomPfe3EB3T6rw</span>
-		<img src="assets/images/copy.svg">
+		<span>{{privateKey}}</span>
+		<img src="assets/images/copy.svg" (click)="copy()">
 	</div>
 	<label>
-		<input type="checkbox" class="checkbox">
+		<input type="checkbox" class="checkbox" [formControl]="seenControl">
 		<span>Backed up</span>
 	</label>
 
 	<div class="buttons text-right">
-		<button class="button button--primary button--upper">Confirm</button>
+		<button class="button button--primary button--upper" [disabled]="!seenControl.value" (click)="confirm()">Confirm</button>
 	</div>
 </div>

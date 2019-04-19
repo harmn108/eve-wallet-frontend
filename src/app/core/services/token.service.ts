@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";    
-import { Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class TokenService {
-active = new Subject<any>();
-
+active = new BehaviorSubject('eveg');
+    
 }

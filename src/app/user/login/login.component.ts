@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
 
   private buildForm() {
     this.loginForm = this.FormBuilder.group({
-      'email': new FormControl('', [Validators.required, ValidationService.emailValidator]),
-      'password': new FormControl('', [Validators.required, , ValidationService.passwordValidator])
+      'email': new FormControl(localStorage.getItem('email')? localStorage.getItem('email') : '', [Validators.required, ValidationService.emailValidator]),
+      'password': new FormControl('', [Validators.required,ValidationService.passwordValidator])
     });
   }
 
@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.accountService.authenticate(this.loginForm.value.email);
-
   }
 
   ngOnDestroy() {

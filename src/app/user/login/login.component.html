@@ -11,7 +11,7 @@
       <button class="button button--fat button--upper button--primary" type="submit" [disabled]="loginForm.controls['email'].value == '' || loginForm.controls['password'].value == ''">LOGIN</button>
       <a [routerLink]="['/user/reset-password']">Forgot your password?</a>
     </div>
-    <p *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched && loginForm.controls['email'].value !== '' && loginType" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>
+    <p *ngIf="(loginForm.controls['email'].invalid && loginForm.controls['email'].touched && loginForm.controls['email'].value !== '' && loginType) || (loginForm.controls['password'].invalid && loginForm.controls['password'].touched && loginForm.controls['password'].value !== '' && loginType)" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>
     <p *ngIf="errorMessage" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>
   </form>
 </div>

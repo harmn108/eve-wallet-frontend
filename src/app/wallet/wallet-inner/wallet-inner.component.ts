@@ -26,6 +26,16 @@ export class WalletInnerComponent implements OnInit{
       this.address = this.accountService.accountInfo.address;
   }
 
+  copy(){
+    var input = document.createElement('input');
+    input.setAttribute('value', this.address);
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    //snackbar open
+  }
+
   generateTransaction() {
   	const dialogRef = this.dialog.open(ConfirmTransactionDialog, {
   		width: '870px',
