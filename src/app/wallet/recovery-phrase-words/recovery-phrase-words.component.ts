@@ -14,10 +14,12 @@ export class RecoveryPhraseWordsComponent implements OnInit{
 
   }
   ngOnInit(){
-    
+    this.generateNumbers();
   }
 
   generateNumbers(){
-    
+    for(let i=0; i<=3 ;i++){
+      this.numberArray.push(Math.floor(Math.random()*12+1))
+    }
   }
 }
