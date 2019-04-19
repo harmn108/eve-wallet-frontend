@@ -5,7 +5,10 @@
                     <span>{{(title == 'login' ? 'user.create' : 'user.login') | translate}}</span>
                 </div>
             </div>
-    
+            <div class="auth-col__logo">
+                <img src="assets/images/eveg-colored.svg"/>
+                <img src="assets/images/eveo-colored.svg"/>
+            </div>
             <div class="auth-col__inner">
                 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
             </div>
