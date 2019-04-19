@@ -1,7 +1,7 @@
 <div class="auth">
         <div class="auth-col auth-col--light">
-            <div class="text-right" routerLink="{{title == 'login' ? 'register' : 'login'}}">
-                <div class="button button--primary button--upper">
+            <div class="text-right">
+                <div class="button button--primary button--upper" routerLink="{{title == 'login' ? 'register' : 'login'}}">
                     <span>{{(title == 'login' ? 'user.create' : 'user.login') | translate}}</span>
                 </div>
             </div>
@@ -11,7 +11,11 @@
             </div>
         </div>
         <div class="auth-col auth-col--dark">
-            <h1><b>EVE</b>Wallet</h1>
-            <img src="assets/images/login-illustration.svg" alt="">
+            <div class="logos">
+                <img src="assets/images/eveg.svg"/>
+                <img src="assets/images/eveo.svg"/>
+                <h1>Wallet</h1>
+            </div>
+            <img src="assets/images/{{title === 'reset-password' ? 'reset' : 'login'}}-illustration.svg" alt="">
         </div>
     </div>

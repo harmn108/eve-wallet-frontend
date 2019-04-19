@@ -184,6 +184,15 @@ textarea {
   }
 }
 
+.sat-loading {
+	text-align: center;
+	margin: 100px 0 0;
+
+	mat-spinner {
+		display: inline-block;
+	}
+}
+
 .alert-container {
 	display: flex;
 	align-items: center;
