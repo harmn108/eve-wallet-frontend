@@ -3,6 +3,8 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import { LoginCheckGuardService } from '../core/guards/login-check.guard';
 import { UserComponent } from './user.component';
+import { CreatePasswordComponent } from './create-password/create-password.component';
+import { RegisterConfirmationComponent } from './register-confirmation/register-confirmation.component';
 
 export const userRoutes: Routes = [
         {
@@ -26,6 +28,16 @@ export const userRoutes: Routes = [
                     component: RegisterComponent,
                   //  canActivate: [LoginCheckGuardService]
                 },
+                {
+                    path: 'create-password',
+                    pathMatch: 'full',
+                    component: CreatePasswordComponent,
+                },
+                {
+                    path: 'confirmation/:code',
+                    pathMatch: 'full',
+                    component: RegisterConfirmationComponent,
+                }
             ]
         }
     ]

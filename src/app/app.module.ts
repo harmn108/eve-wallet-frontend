@@ -14,10 +14,14 @@ import { UserModule } from './user/user.module';
 import { AccountService } from './core/services/account.service';
 import { NotificationService } from './core/services/notification.service';
 import { ErrorService } from './core/services/error.service';
+import { WalletModule } from './wallet/wallet.module';
+import { Web3Service } from './core/services/web3.service';
+import { CryptService } from './core/services/crypt.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     TransferHttpCacheModule,
     UserModule,
+    WalletModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
@@ -42,7 +47,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateService,
     AccountService,
     NotificationService,
-    ErrorService
+    ErrorService,
+    Web3Service,
+    CryptService
   ],
   bootstrap: [AppComponent]
 })

@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  
+  title:string;
+    constructor(){
+
+    }
+
+    onRouterOutletActivate($event){
+      this.title = $event.title;
+    }
 }

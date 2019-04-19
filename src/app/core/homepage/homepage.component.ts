@@ -11,15 +11,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
     public loading = false;
 
     constructor(private router: Router,
-                public translateService: TranslateService) {
+                ) {
     }
 
     ngOnInit() {
-        this.translateService.use('en');
-    }
-
-    public changeLang(lang: string) {
-        this.translateService.use(lang);
+        
     }
 
     ngOnDestroy() {}

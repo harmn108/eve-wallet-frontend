@@ -33,7 +33,7 @@ export class ErrorService {
         incorrect_public_key: 'error.incorrect_public_key',
         signature_verification_error: 'error.signature_verification_error',
         invalid_amount_error: 'error.invalid_amount_error',
-        account_not_found: 'error.account_not_found',
+        account_not_found: 'error.invalid_email_or_pass',
         cant_transfer_in_same_account: 'error.cant_transfer_in_same_account',
         your_balance_is_not_enough: 'error.your_balance_is_not_enough',
         requested_account_doesnt_exist: 'error.requested_account_doesnt_exist',

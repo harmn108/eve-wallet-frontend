@@ -1,13 +1,13 @@
 <div class="auth">
         <div class="auth-col auth-col--light">
-            <div class="text-right" routerLink="login">
+            <div class="text-right" routerLink="{{title == 'login' ? 'register' : 'login'}}">
                 <div class="button button--primary button--upper">
-                    <span>Log in</span>
+                    <span>{{(title == 'login' ? 'user.create' : 'user.login') | translate}}</span>
                 </div>
             </div>
     
             <div class="auth-col__inner">
-                <router-outlet></router-outlet>
+                <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
             </div>
         </div>
         <div class="auth-col auth-col--dark">
