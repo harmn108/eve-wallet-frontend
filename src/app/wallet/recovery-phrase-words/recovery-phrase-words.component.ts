@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { AccountService } from '../../core/services/account.service';
 import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,39 +18,40 @@ export class RecoveryPhraseWordsComponent implements OnInit{
   word2:FormControl = new FormControl();
   word3:FormControl = new FormControl();
   word4:FormControl = new FormControl();
+  setBrainKeySubscription: Subscription;
 
-	constructor(private accountService:AccountService, public router:Router, public dialog: MatDialog) {
+	constructor(
+    private accountService:AccountService, public router:Router, public dialog: MatDialog) {
 
   }
   ngOnInit(){
     this.generateNumbers();
     this.brainKey = this.accountService.decryptedBrainKey;
+    this.setBrainKeySubscription = this.accountService.brainKeySavedDataChanged.subscribe(data => {
+      this.router.navigate(['/wallet/settings']);
+  });
   }
 
   generateNumbers(){
-    let push = true;
-    for(let i=0; i<=3 ;i++){
-      let random = Math.floor(Math.random()*12+1);
-      for(let j =0; j<this.numberArray.length;j++){
-        if(random == this.numberArray[j]){
-          push = false;
+      for(let i = 0;i<4;i++){
+        let randomNumber = Math.round(Math.random()*12+1)
+        if( this.numberArray.indexOf(randomNumber) == -1){
+          this.numberArray.push(randomNumber)
+        }else{
+          i--
         }
       }
-      if(push){
-        this.numberArray.push(random);
-      }
-    }
   }
 
   finish(){
     let brainKeyArray = this.brainKey.split(' ');
-    console.log(brainKeyArray);
-    if(brainKeyArray[this.numberArray[0]] == this.word1.value && 
-      brainKeyArray[this.numberArray[1]] == this.word2.value && 
-      brainKeyArray[this.numberArray[2]] == this.word3.value && 
-      brainKeyArray[this.numberArray[3]] == this.word4.value 
+    if(brainKeyArray[this.numberArray[0]-1] == this.word1.value && 
+      brainKeyArray[this.numberArray[1]-1] == this.word2.value && 
+      brainKeyArray[this.numberArray[2]-1] == this.word3.value && 
+      brainKeyArray[this.numberArray[3]-1] == this.word4.value 
     ){
       console.log(true);
+      this.accountService.setBrainKeySaved();
     }
   }
 }

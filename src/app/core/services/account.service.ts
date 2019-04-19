@@ -46,6 +46,8 @@ export class AccountService {
     registerDataChanged = new Subject<any>();
 
     privateKeySavedDataChanged = new Subject<any>();
+    brainKeySavedDataChanged = new Subject<any>();
+
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
         private http: HttpClient,
@@ -237,6 +239,15 @@ export class AccountService {
             this.accountUpdated.next(this.accountInfo);
             this.privateKeySavedDataChanged.next(data);
         }, error => this.errorService.handleError('setPrivateKeySaved', error, url));
+    }
+
+    setBrainKeySaved() {
+        let url: string = this.userUrl + '/brain-key-saved';
+        this.http.post(url, '', {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe(data => {
+            this.accountInfo.brainKeySaved = true;
+            this.accountUpdated.next(this.accountInfo);
+            this.brainKeySavedDataChanged.next(data);
+        }, error => this.errorService.handleError('setBrainKeySaved', error, url));
     }
 
     loggedIn() {

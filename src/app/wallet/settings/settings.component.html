@@ -8,7 +8,7 @@
 	</div>
 </div>
 
-<div class="alert-container">
+<div class="alert-container" *ngIf="!account.privateKeySaved || !account.brainKeySaved">
 	<img src="assets/images/alert.svg">
 	<p>You have to backup your recovery phrase. It is strongly recommended to store the backup copies in physically separate, offline environment. If someone were to find your recovery phrase they could access your wallet.</p>
 </div>
