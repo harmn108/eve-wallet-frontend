@@ -30,6 +30,10 @@ export class RecoveryPhraseDialog implements OnInit{
     this.router.navigate(['/wallet/backup-recovery-phrase']);
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
   copy(){
     var input = document.createElement('input');
     input.setAttribute('value', this.brainKey);

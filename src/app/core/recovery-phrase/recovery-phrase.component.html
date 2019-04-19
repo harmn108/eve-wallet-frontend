@@ -1,4 +1,4 @@
-<div class="icon-close"></div>
+<div class="icon-close" (click)="close()"></div>
 
 <div *ngIf="false">
 	<h2>Backup Recovery Phrase</h2>
@@ -13,6 +13,7 @@
 
 <div *ngIf="true">
 	<h2 *ngIf="backup">Backup Recovery Phrase</h2>
+	<h2 *ngIf="!backup">Recovery Phrase</h2>
 
 	<p class="recovery-phrase-text">If someone were to find your recovery phrase they could access your wallet. It is strongly recommended to store your recovery phrase in physically separate, offline environment.</p>
 

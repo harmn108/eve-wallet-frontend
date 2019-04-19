@@ -59,6 +59,14 @@ p.description {
 			cursor: pointer;
 		}
 	}
+
+	@media (max-width: 767px) {
+		flex-direction: column-reverse;
+
+		img {
+			margin-left: -15px;
+		}
+	}
 }
 
 .transfer-section {

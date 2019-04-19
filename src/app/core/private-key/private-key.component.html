@@ -1,3 +1,5 @@
+<div class="icon-close" (click)="close()"></div>
+
 <div *ngIf="false">
 	<h2>Backup Private Key</h2>
 	<p class="description">Enter your password to backup your Private Key.</p>
@@ -11,6 +13,7 @@
 
 <div *ngIf="true">
 	<h2 *ngIf="backup">Backup Private Key</h2>
+	<h2 *ngIf="!backup">Private Key</h2>
 
 	<div class="alert-container">
 		<img src="assets/images/alert.svg">

@@ -155,7 +155,7 @@ h2 {
 				.button {
 					margin-left: 24px;
 
-					@media (max-width: 768px) {
+					@media (max-width: 767px) {
 						margin-left: 0;
 					}
 				}
@@ -168,7 +168,7 @@ h2 {
 			flex: 1;
 		}
 
-		@media (max-width: 768px) {
+		@media (max-width: 767px) {
 			flex-wrap: wrap;
 
 			&__name {

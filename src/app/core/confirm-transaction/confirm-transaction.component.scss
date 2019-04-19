@@ -32,7 +32,7 @@ table {
 		text-align: right;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		&, & > tbody, & > thead {
 			display: inline-block;
 		}
@@ -62,7 +62,7 @@ table {
 		margin-right: 36px;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		margin: 24px 0 0;
 	}
 }

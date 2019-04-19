@@ -69,10 +69,31 @@
 			padding: 70px 72px;
 		}
 
+		&__logo {
+			display: flex;
+			max-width: 400px;
+			min-height: calc(15vh - 24px);
+			padding-bottom: 35px;
+			margin: 24px auto 0;
+			align-items: flex-end;
+			justify-content: flex-start;
+
+			img {
+				display: none;
+				width: 70px;
+				height: 70px;
+				margin-right: 15px;
+			}
+
+			@media (max-width: 1024px) {
+				img { display: inline-block; }
+			}
+		}
+
 		&__inner {
 			display: block;
 			max-width: 400px;
-			margin: 15vh auto 0;
+			margin: 0 auto;
 			padding-top: .05px;
 		}
 	}
@@ -90,7 +111,7 @@
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	.auth-col {
 		padding: 40px 32px;
 	}
