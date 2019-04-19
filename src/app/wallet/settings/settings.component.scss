@@ -134,7 +134,6 @@ h2 {
 				.input-wrapper {
 					display: inline-flex;
 					flex: 1; max-height: 36px;
-					margin-right: 24px;
 
 					input {
 						line-height: 26px;
@@ -150,6 +149,14 @@ h2 {
 						justify-content: center;
 
 						img { cursor: pointer; }
+					}
+				}
+
+				.button {
+					margin-left: 24px;
+
+					@media (max-width: 768px) {
+						margin-left: 0;
 					}
 				}
 			}

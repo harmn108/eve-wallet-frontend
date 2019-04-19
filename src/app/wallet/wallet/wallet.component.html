@@ -5,7 +5,7 @@
 
 			<div class="menu">
 				<div class="menu-items" [ngClass]="{'menu-items--open': menuOpen}">
-					<a routerLink="/wallet/settings">Security</a>
+					<a (click)="settings()">Security</a>
 					<a (click)="signout()">Sign out</a>
 				</div>
 				<div class="menu__icon" (click)="toggleMenu()">

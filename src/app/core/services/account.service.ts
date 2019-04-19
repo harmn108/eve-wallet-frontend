@@ -45,6 +45,7 @@ export class AccountService {
     registerData: any;
     registerDataChanged = new Subject<any>();
 
+    privateKeySavedDataChanged = new Subject<any>();
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
         private http: HttpClient,
@@ -85,6 +86,7 @@ export class AccountService {
         if (isPlatformBrowser(this.platformId)) {
             let url = this.userUrl + '/signup';
             this.http.put(url, { email }).subscribe(data => {
+                localStorage.setItem('email',email);
                 this.preRegisterData = data;
                 this.preRegisterDataChanged.next(this.preRegisterData);
             }, error => this.errorService.handleError('preRegister', error, url));
@@ -175,6 +177,7 @@ export class AccountService {
                     if (isPlatformBrowser(this.platformId)) {
                         this.http.post(url, { email, signedString })
                             .map((userInfo: any) => {
+                                localStorage.setItem('email',email);
                                 this.accountInfo = userInfo;
                                 this.accountInfo.email = email;
                                 this.accountInfo.brainKey = this.brainKey;
@@ -215,6 +218,7 @@ export class AccountService {
                     this.brainKeyEncrypted = '';
                     this.web3.account = {};
                     this.logoutData = data;
+                    localStorage.removeItem('email');
                     this.logoutDataChanged.next(this.logoutData);
                     // this.wsService.destroyWebSocket();
                 }, error => this.errorService.handleError('logout', error, url));
@@ -228,7 +232,12 @@ export class AccountService {
     }
 
     setPrivateKeySaved() {
-
+        let url: string = this.userUrl + '/private-key-saved';
+        this.http.post(url, '', {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe(data => {
+            this.accountInfo.privateKeySaved = true;
+            this.accountUpdated.next(this.accountInfo);
+            this.privateKeySavedDataChanged.next(data);
+        }, error => this.errorService.handleError('setPrivateKeySaved', error, url));
     }
 
     loggedIn() {

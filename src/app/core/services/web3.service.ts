@@ -44,7 +44,7 @@ export class Web3Service {
       let wallet = hdwallet.derivePath(wallet_hdpath + 0).getWallet();
       let address = "0x" + wallet.getAddress().toString("hex");
       let publicKey = wallet.getPublicKey().toString("hex");
-      let privateKey = wallet.getPrivateKey().toString("hex");
+      let privateKey ='0x'+ wallet.getPrivateKey().toString("hex");
       account = { address, publicKey, privateKey };
       this.account = account;
       return true;
@@ -53,7 +53,7 @@ export class Web3Service {
   }
 
   hashToSign(stringHash, privkey) {
-    return this.web3.eth.accounts.sign(""+stringHash,'0x'+ privkey).signature;
+    return this.web3.eth.accounts.sign(""+stringHash,privkey).signature;
   }
 
   sendToken(params): Promise<string> {
