@@ -145,6 +145,16 @@
 				margin-left: 4px;
 			}
 		}
+
+		@media (max-width: 576px) {
+			h4 {
+				font-size: 16px;
+				
+				small {
+					display: none;
+				}
+			}
+		}
 	}
 
 	@media (max-width: 576px) {

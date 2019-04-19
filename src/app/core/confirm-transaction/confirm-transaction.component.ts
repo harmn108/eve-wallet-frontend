@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { WalletInnerComponent } from '../../wallet/wallet-inner/wallet-inner.component'
 
 @Component({
   selector: 'app-confirm-transaction-dialog',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./confirm-transaction.component.scss']
 })
 export class ConfirmTransactionDialog {
-  
+  constructor(private dialogRef: MatDialogRef<WalletInnerComponent>) {
+
+  }
+
+  close() {
+  	this.dialogRef.close();
+  }
 }
