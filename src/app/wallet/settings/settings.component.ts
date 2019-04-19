@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 import { PrivateKeyDialog } from '../../core/private-key/private-key.component';
 import { RecoveryPhraseDialog } from '../../core/recovery-phrase/recovery-phrase.component';
@@ -17,7 +17,11 @@ export class SettingsComponent implements OnInit{
   account;
   privateKey:string;
   brainKey:string;
-	constructor(private route:ActivatedRoute, private web3:Web3Service, public dialog: MatDialog, private accountService:AccountService) {
+	constructor(private route:ActivatedRoute,
+              private web3:Web3Service,
+              public dialog: MatDialog,
+              private accountService: AccountService,
+              private snackBar: MatSnackBar) {
 
   }
   
@@ -45,11 +49,13 @@ export class SettingsComponent implements OnInit{
 
   copy(){
     var input = document.createElement('input');
-    input.setAttribute('value', this.account.accountInfo.address);
+    input.setAttribute('value', this.account.address);
     document.body.appendChild(input);
     input.select();
     document.execCommand('copy');
     document.body.removeChild(input);
     //snackbar open
+
+    this.snackBar.open('Copied!', null, {duration: 1000});
   }
 }
