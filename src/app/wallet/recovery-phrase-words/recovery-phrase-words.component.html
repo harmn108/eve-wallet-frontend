@@ -4,24 +4,24 @@
 
 <div class="words" *ngIf="numberArray.length">
 	<div class="words__word">
-		<input type="text" class="input--small"/>
+		<input type="text" class="input--small" [formControl]="word1"/>
 		<small>Word {{numberArray[0]}}</small>
 	</div>
 	<div class="words__word">
-		<input type="text" class="input--small"/>
+		<input type="text" class="input--small" [formControl]="word2"/>
 		<small>Word {{numberArray[1]}}</small>
 	</div>
 	<div class="words__word">
-		<input type="text" class="input--small"/>
+		<input type="text" class="input--small" [formControl]="word3"/>
 		<small>Word {{numberArray[2]}}</small>
 	</div>
 	<div class="words__word">
-		<input type="text" class="input--small"/>
+		<input type="text" class="input--small" [formControl]="word4"/>
 		<small>Word {{numberArray[3]}}</small>
 	</div>
 </div>
 
 <div class="buttons">
-	<button class="button button--fat button--primary button--upper">Finish</button>
+	<button class="button button--fat button--primary button--upper" [disabled]="!word1.value || !word2.value || !word3.value || !word4.value" (click)="finish()">Finish</button>
 	<a routerLink="/wallet/settings">Go back to copy my recovery phrase</a>
 </div>
