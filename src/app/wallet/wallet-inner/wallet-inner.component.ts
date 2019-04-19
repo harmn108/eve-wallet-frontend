@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { ConfirmTransactionDialog } from '../../core/confirm-transaction/confirm-transaction.component';
 import { TokenService } from '../../core/services/token.service';
 import { AccountService } from '../../core/services/account.service';
@@ -13,7 +13,10 @@ import { AccountService } from '../../core/services/account.service';
 export class WalletInnerComponent implements OnInit{
   token:string = 'eveg';
   address:string;
-	constructor(private accountService:AccountService, public dialog: MatDialog, private tokenService:TokenService) {
+	constructor(private accountService: AccountService,
+              public dialog: MatDialog,
+              private tokenService: TokenService,
+              private snackBar: MatSnackBar) {
    
   }
 
@@ -34,6 +37,8 @@ export class WalletInnerComponent implements OnInit{
     document.execCommand('copy');
     document.body.removeChild(input);
     //snackbar open
+
+    this.snackBar.open('Copied!', null, {duration: 1000});
   }
 
   generateTransaction() {

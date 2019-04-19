@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { SettingsComponent } from '../../wallet/settings/settings.component';
 
 @Component({
@@ -17,16 +17,16 @@ export class PrivateKeyDialog implements OnInit{
 
     constructor(
       private dialogRef: MatDialogRef<SettingsComponent>,
-      private accountService:AccountService
-    ){
+      private accountService: AccountService,
+      private snackBar: MatSnackBar) {
 
     }
 
     ngOnInit(){ 
       this.privateKey = this.accountService.accountInfo.pKey;
       this.privateKeySavedDataChangedSubscription = this.accountService.privateKeySavedDataChanged.subscribe(data => {
-        this.dialogRef.close();
-    });
+          this.dialogRef.close();
+      });
     }
 
     confirm(){
@@ -41,6 +41,8 @@ export class PrivateKeyDialog implements OnInit{
       document.execCommand('copy');
       document.body.removeChild(input);
       //snackbar open
+
+      this.snackBar.open('Copied!', null, {duration: 1000});
     }
 
     ngOnDestroy() {

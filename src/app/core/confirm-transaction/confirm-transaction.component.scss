@@ -31,6 +31,23 @@ table {
 		word-break: break-all;
 		text-align: right;
 	}
+
+	@media (max-width: 768px) {
+		&, & > tbody, & > thead {
+			display: inline-block;
+		}
+
+		tr {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		td:last-child {
+			text-align: left;
+			padding-bottom: 20px;
+		}
+	}
 }
 
 .amount { color: #607BED;  }
@@ -43,5 +60,9 @@ table {
 	
 	.button--primary {
 		margin-right: 36px;
+	}
+
+	@media (max-width: 768px) {
+		margin: 24px 0 0;
 	}
 }

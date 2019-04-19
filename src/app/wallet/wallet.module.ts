@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatTooltipModule } from '@angular/material';
+import { MatTooltipModule, MatSnackBarModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { TranslateModule } from "@ngx-translate/core";
@@ -15,7 +15,8 @@ import { RecoveryFirstComponent } from './recovery-first/recovery-first.componen
         CommonModule,
         SharedModule,
         TranslateModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSnackBarModule
     ],
     declarations: [
         WalletComponent,

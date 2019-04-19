@@ -12,9 +12,9 @@
 <p class="terms">By registering you agree to our <a href="#">Terms & Conditions</a></p>
 
 <p class="error-message">Passwords do not match</p>-->
-<div class="vh-centered" *ngIf="loading">
+<div class="sat-loading" *ngIf="loading">
 	<mat-spinner></mat-spinner>
-  </div>
+</div>
 <div *ngIf="!loading">
 	<h2 *ngIf="request">Please check your email to access your secure link.</h2>
 <h2 *ngIf="!request">Create EVE Wallet</h2>

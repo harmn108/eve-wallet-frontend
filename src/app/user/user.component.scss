@@ -18,7 +18,7 @@
 			flex-direction: column;
 			justify-content: space-between;
 			padding: 70px 80px 40px;
-			left: 0;
+			user-select: none; left: 0;
 
 			h1 {
 				font-size: 100px;
@@ -26,7 +26,6 @@
 				font-weight: normal;
 				color: #ffffff;
 				margin: 36px 0 0;
-
 			}
 
 			.logos {
