@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 import Web3 from "web3";
 import Tx from "ethereumjs-tx";
 import bip39 from 'bip39';
 import { Buffer } from "buffer";
 import { environment } from "../../../environments/environment.stage";
+import { isPlatformBrowser } from "@angular/common";
 
 declare var require;
 @Injectable()
@@ -12,10 +13,14 @@ export class Web3Service {
   pvk: string;
   address: string;
   wallet;
-  web3: Web3 = new Web3(new Web3.providers.HttpProvider(environment.NODE_URL));
+  web3: Web3;
   account;
-  constructor() {
-    
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.web3  = new Web3(new Web3.providers.HttpProvider(environment.NODE_URL));
+    }
   }
 
   create() {

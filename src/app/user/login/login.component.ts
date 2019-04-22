@@ -27,15 +27,21 @@ export class LoginComponent implements OnInit {
     public router:Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private translateService:TranslateService, private accountService:AccountService, private notificationService:NotificationService, private FormBuilder: FormBuilder, private errorService:ErrorService) {
-    this.buildForm();
   }
 
   ngOnInit() {
-    this.loginForm.valueChanges.subscribe(
-      () => {
-        this.loginType = false;
+    this.buildForm();
+    if (isPlatformBrowser(this.platformId)) {
+      if(localStorage.getItem('email')){
+        this.loginForm.controls['email'].setValue(localStorage.getItem('email'));
       }
-    )
+      this.loginForm.valueChanges.subscribe(
+        () => {
+          this.loginType = false;
+        }
+      )
+    }
+   
 
     this.errorEventEmiterSubscription = this.errorService.errorEventEmiter.subscribe((data: ErrorEvent) => {
       if (data.action === 'login' || data.action === 'authenticate') {
@@ -56,10 +62,10 @@ export class LoginComponent implements OnInit {
   }
 
   private buildForm() {
-    this.loginForm = this.FormBuilder.group({
-      'email': new FormControl(localStorage.getItem('email')? localStorage.getItem('email') : '', [Validators.required, ValidationService.emailValidator]),
-      'password': new FormControl('', [Validators.required,ValidationService.passwordValidator])
-    });
+      this.loginForm = this.FormBuilder.group({
+        'email': new FormControl('', [Validators.required, ValidationService.emailValidator]),
+        'password': new FormControl('', [Validators.required,ValidationService.passwordValidator])
+      });
   }
 
   login() {

@@ -26,11 +26,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emailControl.valueChanges.subscribe(
-      () => {
-        this.emailType = false;
-      }
-    )
+    if (isPlatformBrowser(this.platformId)) {
+      this.emailControl.valueChanges.subscribe(
+        () => {
+          this.emailType = false;
+        }
+      )
+    }
+ 
 
     this.errorEventEmiterSubscription = this.errorService.errorEventEmiter.subscribe((data: ErrorEvent) => {
       if (data.action === 'preRegister') {
