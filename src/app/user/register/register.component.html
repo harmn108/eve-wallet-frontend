@@ -34,4 +34,5 @@
 <p class="terms">By registering you agree to our <a href="#">Terms & Conditions</a></p>
 
 <p class="error-message" *ngIf="emailControl.value !=='' && emailType">{{'error.invalid_email' | translate}}</p>
+<p class="error-message" *ngIf="errorMessage">{{errorMessage | translate}}</p>
 </div>

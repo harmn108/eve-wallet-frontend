@@ -15,7 +15,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SettingsComponent implements OnInit{
   account;
-  privateKey:string;
   brainKey:string;
 	constructor(private route:ActivatedRoute,
               private web3:Web3Service,
@@ -27,7 +26,6 @@ export class SettingsComponent implements OnInit{
   
   ngOnInit(){
     this.account = this.accountService.accountInfo;
-    this.privateKey = this.web3.account.privateKey;
     this.brainKey= this.accountService.brainKeyEncrypted;
   }
 

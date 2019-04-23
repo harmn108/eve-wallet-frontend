@@ -1,22 +1,36 @@
-<h2>Review and confirm your transfer</h2>
-<p class="description">Please note, there is no way to cancel confirmed transaction.</p>
+<div class="icon-close" (click)="close()" ></div>
 
-<table>
-	<tr>
-		<td>Amount</td>
-		<td class="amount">0.00000000000 EVEO</td>
-	</tr>
-	<tr>
-		<td>Recipient Address</td>
-		<td class="address">PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</td>
-	</tr>
-	<tr>
-		<td>Transaction Fee</td>
-		<td class="fee">0.00 EVEO</td>
-	</tr>
-</table>
+<div *ngIf="!passwordVerified">
+	<p class="description">Enter your password to make transaction</p>
 
-<div class="buttons">
-	<button class="button button--primary">Confirm</button>
-	<button class="button" (click)="close()">Cancel</button>
+	<input type="password" placeholder="Password" [formControl]="password">
+	<p style="color:red;" *ngIf="passError">{{'error.invalid_email_or_pass' | translate}}</p>
+	<div class="buttons">
+		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
+	</div>
+</div>
+
+<div *ngIf="passwordVerified">
+	<h2>Review and confirm your transfer</h2>
+	<p class="description">Please note, there is no way to cancel confirmed transaction.</p>
+	
+	<table>
+		<tr>
+			<td>Amount</td>
+			<td class="amount">0.00000000000 EVEO</td>
+		</tr>
+		<tr>
+			<td>Recipient Address</td>
+			<td class="address">PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</td>
+		</tr>
+		<tr>
+			<td>Transaction Fee</td>
+			<td class="fee">0.00 EVEO</td>
+		</tr>
+	</table>
+	
+	<div class="buttons">
+		<button class="button button--primary">Confirm</button>
+		<button class="button" (click)="close()">Cancel</button>
+	</div>
 </div>

@@ -18,17 +18,24 @@ export class AccountService {
     public brainKey: string;
     public publicKey = '';
     public brainKeyEncrypted = '';
-    public decryptedBrainKey = '';
     public userUrl = `${environment.backend}/api/user`;
     public code = '';
     account: Account;
     balance: number;
 
-    balanceChanged = new Subject();
+    balanceChanged = new BehaviorSubject(null);
     accountChanged = new Subject<Account>();
+
+    transactions:any = []; 
+
+    evegTransactionsChanged = new BehaviorSubject(null);
+    eveoTransactionsChanged = new BehaviorSubject(null);
 
     loginData: any;
     loginDataChanged = new Subject<any>();
+
+    loginSessionData: any;
+    loginSessionDataChanged= new Subject<any>();
 
     logoutData: any;
     logoutDataChanged = new Subject<any>();
@@ -56,17 +63,42 @@ export class AccountService {
         private router: Router) {
     }
 
-    public getBalance() {
-        return this.balance;
-    }
 
     public unsetBalance() {
         this.balance = 0;
         this.balanceChanged.next(0);
     }
 
-    public loadBalance(): void {
+    public getBalance(): void {
+        if (isPlatformBrowser(this.platformId)) {
+            let url = this.userUrl + '/balance';
+            this.http.get(url, {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe(data => {
+                this.balanceChanged.next(data);
+                }, error => console.log(error));
+        }
+    }
 
+    getTransactions(){
+        if (isPlatformBrowser(this.platformId)) {
+            let url = this.userUrl + '/transactions';
+            this.http.get(url, {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe((data:any) => {
+                this.transactions = data;
+                let evegTransactions = [];
+                let eveoTransactions = [];
+                this.transactions.forEach(
+                  el => {
+                  if (el.address === environment.eveg_contract_address) {
+                    evegTransactions.push(el);
+                  }
+                  if (el.address === environment.eveo_contract_address) {
+                    eveoTransactions.push(el);
+                  }
+                  }
+                )
+                this.evegTransactionsChanged.next(evegTransactions);
+                this.eveoTransactionsChanged.next(eveoTransactions);
+                }, error => console.log(error));
+        }  
     }
 
     loadConfirm(code: string): void {
@@ -97,30 +129,28 @@ export class AccountService {
 
     register(password: string): void {
         if (isPlatformBrowser(this.platformId)) {
+            let account = this.web3.create()
+            this.brainKey = account.mnemonic;
             this.brainKeyEncrypted = CryptService.brainKeyEncrypt(this.brainKey, password);
-            let privateKey = this.web3.account.privateKey;
-            this.publicKey = this.web3.account.publicKey;
+            let privateKey = account.privateKey;
+            this.publicKey = account.publicKey;
             let signedString = this.web3.hashToSign(""+this.stringToSign, privateKey);
             let url = this.userUrl + '/signup/complete';
-            console.log(this.stringToSign, privateKey)
             this.http.post(url, {
                 confirmationCode: this.code,
                 brainKey: this.brainKeyEncrypted,
                 publicKey: this.publicKey,
                 signedString,
-                address: this.web3.account.address,
+                address: account.address,
             }).map(userInfo => {
                 this.accountInfo = userInfo;
                 this.accountInfo.brainKey = this.brainKeyEncrypted;
-                this.accountInfo.pKey = privateKey;
-                if (AccountService.isJsonString(this.accountInfo.meta)) {
-                    this.accountInfo.meta = JSON.parse(this.accountInfo.meta);
-                }
                 this.accountUpdated.next(this.accountInfo);
-                this.decryptedBrainKey = CryptService.brainKeyDecrypt(this.brainKeyEncrypted, password);
+                localStorage.setItem('authToken',this.accountInfo.token);
                 if (!this.authenticateData) {
                     this.authenticate(this.accountInfo.email);
                 }
+                this.getBalance();
                 return this.accountInfo;
             })
                 .subscribe(data => {
@@ -135,15 +165,6 @@ export class AccountService {
         if (isPlatformBrowser(this.platformId)) {
 
         }
-    }
-
-    static isJsonString(str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
     }
 
 
@@ -165,16 +186,15 @@ export class AccountService {
     login(email: string, password: string, resForStep2) {
         if (isPlatformBrowser(this.platformId)) {
             let privateKey;
-            let stringHash;
             let signedString;
-            this.brainKey = resForStep2.brainKey ? resForStep2.brainKey : '';
+            this.brainKeyEncrypted = resForStep2.brainKey ? resForStep2.brainKey : '';
             let url = this.userUrl + '/signin/get-token';
             try {
                 let bk = CryptService.brainKeyDecrypt(resForStep2.brainKey, password);
                 let canBackup = this.web3.backup(bk);
                 if(canBackup){
-                    privateKey = this.web3.account.privateKey;
-                    this.publicKey = this.web3.account.publicKey;
+                    this.publicKey = canBackup.publicKey;
+                    privateKey = canBackup.privateKey;
                     signedString = this.web3.hashToSign(''+resForStep2.stringToSign, privateKey);
                     if (isPlatformBrowser(this.platformId)) {
                         this.http.post(url, { email, signedString })
@@ -182,17 +202,13 @@ export class AccountService {
                                 localStorage.setItem('email',email);
                                 this.accountInfo = userInfo;
                                 this.accountInfo.email = email;
-                                this.accountInfo.brainKey = this.brainKey;
-                                this.accountInfo.pKey = privateKey;
-                                if (AccountService.isJsonString(this.accountInfo.meta)) {
-                                    this.accountInfo.meta = JSON.parse(this.accountInfo.meta);
-                                }
-
-                                this.decryptedBrainKey = bk;
+                                this.accountInfo.brainKeyEncrypted = this.brainKeyEncrypted;
                                 this.accountUpdated.next(this.accountInfo);
                                 return this.accountInfo;
                             })
                             .subscribe(data => {
+                                localStorage.setItem('authToken',this.accountInfo.token);
+                                this.getBalance();
                                 this.loginData = data;
                                 this.loginDataChanged.next(this.loginData);
                             }, error => this.errorService.handleError('login', error, url));
@@ -205,6 +221,44 @@ export class AccountService {
                 this.errorService.handleError('login', { 'status': 404 }, url);
             }
         }
+    }
+
+    loginSession(): void {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+        // if accountData is present, do not login again
+        if (this.accountInfo) {
+            return;
+        }
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+            this.errorService.handleError('loginSession', {
+                status: 409,
+                error: {message: 'invalid_session_id'}
+            });
+        }
+        const url = this.userUrl;
+        this.http
+            .get(url, {headers: new HttpHeaders({'X-API-TOKEN': authToken})})
+                .map((userInfo: any) => {
+                    this.accountInfo = userInfo;
+                    this.accountInfo.token = authToken;
+                    this.brainKeyEncrypted=userInfo.brainKey;
+                    this.accountInfo.brainKeyEncrypted = this.brainKeyEncrypted;
+                    this.accountUpdated.next(this.accountInfo);
+                    this.publicKey = userInfo.publicKey;
+                    this.getBalance();
+                    return userInfo;
+                })
+            .subscribe(
+                data => {
+                    this.loginSessionData = data;
+                    this.loginSessionDataChanged.next(this.loginSessionData);
+                },
+                error => this.errorService.handleError('loginSession', error, url)
+            );
+
     }
 
     logout() {
@@ -220,6 +274,7 @@ export class AccountService {
                     this.web3.account = {};
                     this.logoutData = data;
                     localStorage.removeItem('email');
+                    localStorage.removeItem('authToken');
                     this.logoutDataChanged.next(this.logoutData);
                     // this.wsService.destroyWebSocket();
                 }, error => this.errorService.handleError('logout', error, url));

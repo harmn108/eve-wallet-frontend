@@ -28,7 +28,6 @@ export class CreatePasswordComponent implements OnInit{
   ngOnInit(){
     this.buildForm();
     if (isPlatformBrowser(this.platformId)) {
-      this.accountService.brainKey = this.web3.create();
       this.passwordForm.valueChanges.subscribe(
         () =>{
           this.passType = false;

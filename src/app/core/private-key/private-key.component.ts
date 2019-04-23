@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { SettingsComponent } from '../../wallet/settings/settings.component';
+import { CryptService } from '../services/crypt.service';
+import { Web3Service } from '../services/web3.service';
 
 @Component({
   selector: 'app-private-key-dialog',
@@ -15,10 +17,13 @@ export class PrivateKeyDialog implements OnInit{
   privateKey:string;
   seenControl:FormControl = new FormControl(false);
   privateKeySavedDataChangedSubscription: Subscription;
-
+  password:FormControl = new FormControl();
+  passwordVerified:boolean = false;
+  passError:boolean = false;
     constructor(
       private dialogRef: MatDialogRef<SettingsComponent>,
       private accountService: AccountService,
+      private web3:Web3Service,
       @Inject(MAT_DIALOG_DATA) public data:any,
       private snackBar: MatSnackBar) {
 
@@ -27,14 +32,26 @@ export class PrivateKeyDialog implements OnInit{
     ngOnInit(){ 
       console.log(this.data);
       this.backup = this.data.backup;
-      this.privateKey = this.accountService.accountInfo.pKey;
       this.privateKeySavedDataChangedSubscription = this.accountService.privateKeySavedDataChanged.subscribe(data => {
-          this.dialogRef.close();
+        this.privateKey =''; 
+        this.dialogRef.close();
       });
     }
 
     confirm(){
       this.accountService.setPrivateKeySaved();
+    }
+
+    continue(){
+      if(CryptService.brainKeyDecrypt(this.accountService.brainKeyEncrypted,this.password.value)){
+        let brainKey = CryptService.brainKeyDecrypt(this.accountService.brainKeyEncrypted,this.password.value);
+        this.passwordVerified = true;
+        this.passError = false;
+        this.privateKey = this.web3.backup(brainKey).privateKey;
+      }
+      else{
+        this.passError = true;
+      }
     }
 
     copy(){
@@ -54,6 +71,7 @@ export class PrivateKeyDialog implements OnInit{
     }
 
     ngOnDestroy() {
+      this.privateKey ='';
       this.privateKeySavedDataChangedSubscription && this.privateKeySavedDataChangedSubscription.unsubscribe();
   }
 }

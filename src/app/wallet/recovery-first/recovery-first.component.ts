@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ReallyPostponeDialog } from '../../core/really-postpone/really-postpone.component';
 import { AccountService } from '../../core/services/account.service';
 import { Router } from '@angular/router';
+import { TokenService } from '../../core/services/token.service';
 
 
 @Component({
@@ -12,20 +13,28 @@ import { Router } from '@angular/router';
 })
 export class RecoveryFirstComponent implements OnInit{
   brainKey;
-  constructor(public router:Router, public dialog: MatDialog, private accountService:AccountService) {}
+  constructor(private tokenService:TokenService, public router:Router, public dialog: MatDialog, private accountService:AccountService) {}
   
   ngOnInit(){
-    this.brainKey = this.accountService.brainKeyEncrypted;
+    this.brainKey = this.accountService.brainKey;
   }
 
   recover(){
-    this.router.navigate(['backup-recovery-phrase'])
+    this.router.navigate(['wallet/backup-recovery-phrase']);
   }
   
   later() {
   	const dialogRef = this.dialog.open(ReallyPostponeDialog, {
   		width: '870px',
   		panelClass: 'wallet-dialog'
-  	});
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+      }
+      else{
+        this.accountService.brainKey = '';
+        this.router.navigate(['/wallet']);
+      }
+    });
   }
 }

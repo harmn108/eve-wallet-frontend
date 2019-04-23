@@ -29,32 +29,35 @@ export class Web3Service {
     let hdkey = require("ethereumjs-wallet/hdkey");
     let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
     let wallet_hdpath = "m/44'/60'/0'/0/";
-    let account = {};
     let wallet = hdwallet.derivePath(wallet_hdpath + 0).getWallet();
     let address = "0x" + wallet.getAddress().toString("hex");
     let publicKey = wallet.getPublicKey().toString("hex");
     let privateKey ="0x" + wallet.getPrivateKey().toString("hex");
-    account = { address, publicKey, privateKey };
-    this.account =account;
-    return mnemonic;
+    let account = { mnemonic,address, publicKey, privateKey };
+    return account;
   }
 
   backup(mnemonic) {
-    let bip39 = require("bip39");
-    if (bip39.validateMnemonic(mnemonic)) {
-      let hdkey = require("ethereumjs-wallet/hdkey");
-      let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
-      let wallet_hdpath = "m/44'/60'/0'/0/";
-      let account = {};
-      let wallet = hdwallet.derivePath(wallet_hdpath + 0).getWallet();
-      let address = "0x" + wallet.getAddress().toString("hex");
-      let publicKey = wallet.getPublicKey().toString("hex");
-      let privateKey ='0x'+ wallet.getPrivateKey().toString("hex");
-      account = { address, publicKey, privateKey };
-      this.account = account;
-      return true;
+    try{
+      let bip39 = require("bip39");
+      if (bip39.validateMnemonic(mnemonic)) {
+        let hdkey = require("ethereumjs-wallet/hdkey");
+        let hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
+        let wallet_hdpath = "m/44'/60'/0'/0/";
+        let wallet = hdwallet.derivePath(wallet_hdpath + 0).getWallet();
+        let address = "0x" + wallet.getAddress().toString("hex");
+        let publicKey = wallet.getPublicKey().toString("hex");
+        let privateKey ='0x'+ wallet.getPrivateKey().toString("hex");
+        let account = {mnemonic, address, publicKey, privateKey };
+        return account;
+      }
+      else{
+        return null;
+      }
     }
-    return false;
+   catch{
+     return null;
+   }
   }
 
   hashToSign(stringHash, privkey) {

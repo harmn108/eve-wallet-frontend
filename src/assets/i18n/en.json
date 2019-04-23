@@ -27,16 +27,9 @@
     },
     "error": {
             "invalid_email_or_pass":"Invalid email or password",
-            "invalid_email":"Invalid email"
-    },
-    "shared": {
-        "in": "in",
-        "notifications": "Notifications",
-        "mark_as_read": "Mark All as read",
-        "no_notifications": "No notifications",
-        "page_not_found": "Page Not Found",
-        "back_to_home": "Back to Home",
-        "sponsored": "Sponsored"
+            "invalid_email":"Invalid email",
+            "system_error":"It seems you already have a EVE Wallet, please try to login",
+            "ins_invalid_amount_error":"Insufficient Amount"
     },
     "core": {
         "next": "Next",

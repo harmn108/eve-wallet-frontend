@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { AccountService } from '../../core/services/account.service';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './recovery-phrase-words.component.html',
   styleUrls: ['./recovery-phrase-words.component.scss']
 })
-export class RecoveryPhraseWordsComponent implements OnInit{
+export class RecoveryPhraseWordsComponent implements OnInit, OnDestroy{
   numberArray = [];
   brainKey;
   word1:FormControl = new FormControl();
@@ -26,7 +26,7 @@ export class RecoveryPhraseWordsComponent implements OnInit{
   }
   ngOnInit(){
     this.generateNumbers();
-    this.brainKey = this.accountService.decryptedBrainKey;
+    this.brainKey = this.accountService.brainKey;
     this.setBrainKeySubscription = this.accountService.brainKeySavedDataChanged.subscribe(data => {
       this.router.navigate(['/wallet/settings']);
   });
@@ -34,7 +34,7 @@ export class RecoveryPhraseWordsComponent implements OnInit{
 
   generateNumbers(){
       for(let i = 0;i<4;i++){
-        let randomNumber = Math.round(Math.random()*12+1)
+        let randomNumber = Math.round(Math.random()*11+1)
         if( this.numberArray.indexOf(randomNumber) == -1){
           this.numberArray.push(randomNumber)
         }else{
@@ -50,8 +50,12 @@ export class RecoveryPhraseWordsComponent implements OnInit{
       brainKeyArray[this.numberArray[2]-1] == this.word3.value && 
       brainKeyArray[this.numberArray[3]-1] == this.word4.value 
     ){
-      console.log(true);
       this.accountService.setBrainKeySaved();
+      this.accountService.brainKey = '';
     }
+  }
+
+  ngOnDestroy(){
+    this.accountService.brainKey = '';
   }
 }

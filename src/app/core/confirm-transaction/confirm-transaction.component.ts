@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { WalletInnerComponent } from '../../wallet/wallet-inner/wallet-inner.component'
+import { FormControl } from '@angular/forms';
+import { CryptService } from '../services/crypt.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-confirm-transaction-dialog',
@@ -8,8 +11,25 @@ import { WalletInnerComponent } from '../../wallet/wallet-inner/wallet-inner.com
   styleUrls: ['./confirm-transaction.component.scss']
 })
 export class ConfirmTransactionDialog {
-  constructor(private dialogRef: MatDialogRef<WalletInnerComponent>) {
+  password:FormControl = new FormControl();
+  passError:boolean = false;
+  passwordVerified:boolean = false;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data:any,
+    private accountService:AccountService, private dialogRef: MatDialogRef<WalletInnerComponent>) {
 
+  }
+
+  continue(){
+    if(CryptService.brainKeyDecrypt(this.accountService.brainKeyEncrypted,this.password.value)){
+      let brainKey = CryptService.brainKeyDecrypt(this.accountService.brainKeyEncrypted,this.password.value);
+      this.passError = false;
+      this.passwordVerified = true;
+      console.log(this.data);
+    }
+    else{
+      this.passError = true;
+    }
   }
 
   close() {

@@ -7,7 +7,12 @@ import { Observable } from 'rxjs';
 export class CryptService {
 
     static brainKeyDecrypt(brainKey, password) {
-        return CryptoJS.AES.decrypt(brainKey, password).toString(CryptoJS.enc.Utf8);
+        try{
+           return CryptoJS.AES.decrypt(brainKey, password).toString(CryptoJS.enc.Utf8);
+        }
+        catch{
+            return null;
+        }
     }
 
     static brainKeyEncrypt(brainKey, password) {

@@ -1,17 +1,18 @@
 <div class="icon-close" (click)="close()"></div>
 
-<div *ngIf="false">
+<div *ngIf="!passwordVerified">
 	<h2>Backup Recovery Phrase</h2>
 	<p class="description">Enter your password to backup your Recovery Phrase.</p>
 
-	<input type="password" placeholder="Password">
+	<input type="password" placeholder="Password" [formControl]="password">
+	<p style="color:red;" *ngIf="passError">{{'error.invalid_email_or_pass' | translate}}</p>
 
 	<div class="buttons">
-		<button class="button button--fat button--primary">Continue</button>
+		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
 	</div>
 </div>
 
-<div *ngIf="true">
+<div *ngIf="passwordVerified">
 	<h2 *ngIf="backup">Backup Recovery Phrase</h2>
 	<h2 *ngIf="!backup">Recovery Phrase</h2>
 

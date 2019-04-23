@@ -21,7 +21,7 @@
 					<img src="assets/images/eveg.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEG</h3>
-						<h4>2.56<small>EVEG</small></h4>
+						<h4>{{evegBalance || 0}}<small>EVEG</small></h4>
 					</div>
 				</div>
 			</div>
@@ -30,12 +30,12 @@
 					<img src="assets/images/eveo.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEO</h3>
-						<h4>1.35<small>EVEO</small></h4>
+						<h4>{{eveoBalance || 0}}<small>EVEO</small></h4>
 					</div>
 				</div>
 			</div>
 			<div class="wallet-inner">
-				<router-outlet></router-outlet>
+				<router-outlet (activate)='onactivate($event)'></router-outlet>
 			</div>
 		</div>
 		<div class="footer">

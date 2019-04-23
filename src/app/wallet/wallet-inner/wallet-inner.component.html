@@ -9,56 +9,70 @@
 	</div>
 	<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={{address}}&choe=UTF-8&chld=L|1" alt="">
 </div>
+<form novalidate (ngSubmit)="transfer()" [formGroup]="transferForm">
 <div class="transfer-section">
 	<h2>Transfer {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
 	<p class="description">Send {{token == 'eveg'?  'EVEG' : 'EVEO'}}s to the recepient's account.</p>
 
 	<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
-	<input type="number" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}">
+	<input type="text" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
+	<p class="error-message" *ngIf="amountErrorMessage" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 
 	<label>Recepient address</label>
-	<input type="text" placeholder="Enter address">
+	<input type="text" placeholder="Enter address" formControlName="address">
+	<p class="error-message" *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">Invalid address</p>
+	<label class="transaction-fee">Gas price <input type="number" formControlName="gasPrice"> Gwei</label>
+	<button class="button button--primary button--upper" [disabled]="transferForm.invalid" (click)="generateTransaction()">Generate transaction</button>
+</div>	
+</form>
 
-	<label class="transaction-fee">Transaction fee <span>15 {{token == 'eveg'?  'EVEG' : 'EVEO'}}</span></label>
-
-	<button class="button button--primary button--upper" (click)="generateTransaction()">Generate transaction</button>
-</div>
 
 <div class="hline"></div>
 
 <div class="history-section">
 	<h2>History</h2>
-
-	<div class="transaction">
+	<div *ngIf="token == 'eveg'" >
+		<div class="transaction" *ngFor="let action of evegTransactions">
 		<div class="transaction__first-col">
-			<h3 class="transaction__type transaction__type--received">Received</h3>
-			<h3 class="transaction__amount">0.00000000 {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h3>
+			<h3 class="transaction__type transaction__type--received" *ngIf="action.toAddress == this.address">Received</h3>
+			<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">Sent</h3>
+			<h3 class="transaction__amount">{{action.amount}} EVEG</h3>
 		</div>
 		<div class="transaction-data">
 			<div class="transaction-data__peer">
-				<small>Payment from</small>
-				<span>PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</span>
+				<small *ngIf="action.fromAddress == this.address">Payment to</small>
+				<small *ngIf="action.toAddress == this.address">Payment from</small>
+				<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
+				<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 			</div>
 			<div class="transaction-data__date">
-				<b>2:21 PM</b>
-				<span>19 Mar 2019</span>
+				<b>{{getHours(action.timestamp*1000)}}</b>
+				<span>{{getDate(action.timestamp*1000)}}</span>
 			</div>
 		</div>
+	</div>	
 	</div>
-	<div class="transaction">
+	<div *ngIf="token == 'eveo'" >
+		<div class="transaction" *ngFor="let action of eveoTransactions">
 		<div class="transaction__first-col">
-			<h3 class="transaction__type transaction__type--sent">Sent</h3>
-			<h3 class="transaction__amount">0.00000000 {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h3>
+			<h3 class="transaction__type transaction__type--received" *ngIf="action.toAddress == this.address">Received</h3>
+			<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">Sent</h3>
+		
+			<h3 class="transaction__amount">{{action.amount}} EVEO</h3>
 		</div>
 		<div class="transaction-data">
 			<div class="transaction-data__peer">
-				<small>Payment to</small>
-				<span>PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</span>
+					<small *ngIf="action.fromAddress == this.address">Payment to</small>
+					<small *ngIf="action.toAddress == this.address">Payment from</small>
+					<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
+					<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 			</div>
 			<div class="transaction-data__date">
-				<b>2:21 PM</b>
-				<span>19 Mar 2019</span>
-			</div>
+					<b>{{getHours(action.timestamp)}}</b>
+					<span>{{getDate(action.timestamp)}}</span>
+				</div>
 		</div>
 	</div>
+	</div>
+	
 </div>
