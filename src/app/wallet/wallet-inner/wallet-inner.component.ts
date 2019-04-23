@@ -39,6 +39,18 @@ export class WalletInnerComponent implements OnInit {
 
   }
 
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
+  }
+
   ngOnInit() {
     this.buildForm();
     if (isPlatformBrowser(this.platformId)) {
@@ -90,10 +102,10 @@ export class WalletInnerComponent implements OnInit {
 
   generateTransaction() {
     let data = {
+      token:this.token,
       amount: this.transferForm.value.amount,
       address: this.transferForm.value.address,
       gasPrice:this.transferForm.value.gasPrice,
-      contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address
     };
     const dialogRef = this.dialog.open(ConfirmTransactionDialog, {
       width: '870px',
@@ -114,7 +126,7 @@ export class WalletInnerComponent implements OnInit {
   private buildForm() {
     this.transferForm = this.FormBuilder.group({
       'address': new FormControl('', [Validators.required, this.checkValidAddress.bind(this)]),
-      'gasPrice':new FormControl(5,[Validators.required]),
+      'gasPrice':new FormControl(20,[Validators.required]),
       'amount': new FormControl(null, {
         validators: [
           Validators.required,

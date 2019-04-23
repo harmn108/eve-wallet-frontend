@@ -21,7 +21,14 @@
 	<label>Recepient address</label>
 	<input type="text" placeholder="Enter address" formControlName="address">
 	<p class="error-message" *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">Invalid address</p>
-	<label class="transaction-fee">Gas price <input type="number" formControlName="gasPrice"> Gwei</label>
+	
+	<label class="transaction-fee">Gas price <mat-slider
+		thumbLabel
+		[displayWith]="formatLabel"
+		tickInterval="1000"
+		formControlName="gasPrice"
+		min="1"
+		max="100"></mat-slider> Gwei</label>
 	<button class="button button--primary button--upper" [disabled]="transferForm.invalid" (click)="generateTransaction()">Generate transaction</button>
 </div>	
 </form>
