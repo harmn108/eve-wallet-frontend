@@ -5,7 +5,7 @@
 	<p class="description">Enter your password to backup your Private Key.</p>
 
 	<input type="password" placeholder="Password" [formControl]="password">
-	<p style="color:red;" *ngIf="passError">{{'error.invalid_email_or_pass' | translate}}</p>
+	<p style="color:red;" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
 	<div class="buttons">
 		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
 	</div>

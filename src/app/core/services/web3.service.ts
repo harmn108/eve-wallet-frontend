@@ -66,10 +66,10 @@ export class Web3Service {
 
   sendToken(params): Promise<string> {
     return this.signAndSendTransaction({
-      from: this.address,
-      to: params.token.contractAddress,
+      from: params.address,
+      to: params.contractAddress,
       gas: 10000,//this.web3.utils.toHex(this.settings.gas),
-      gasPrice: 1000,//this.web3.utils.toHex(this.settings.gasPrice),
+      gasPrice: this.web3.utils.toHex(params.gasPrice),//this.web3.utils.toHex(this.settings.gasPrice),
       // value: "0x0",
       data:
         "0xa9059cbb" +

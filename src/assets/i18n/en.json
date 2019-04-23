@@ -28,6 +28,7 @@
     "error": {
             "invalid_email_or_pass":"Invalid email or password",
             "invalid_email":"Invalid email",
+            "invalid_password":"Invalid password",
             "system_error":"It seems you already have a EVE Wallet, please try to login",
             "ins_invalid_amount_error":"Insufficient Amount"
     },

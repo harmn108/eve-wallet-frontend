@@ -4,7 +4,7 @@
 	<p class="description">Enter your password to make transaction</p>
 
 	<input type="password" placeholder="Password" [formControl]="password">
-	<p style="color:red;" *ngIf="passError">{{'error.invalid_email_or_pass' | translate}}</p>
+	<p style="color:red;" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
 	<div class="buttons">
 		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
 	</div>
@@ -17,20 +17,20 @@
 	<table>
 		<tr>
 			<td>Amount</td>
-			<td class="amount">0.00000000000 EVEO</td>
+			<td class="amount"> {{transferParams.amount}} {{transferParams.token == 'eveg'?  'EVEG' : 'EVEO'}}</td>
 		</tr>
 		<tr>
 			<td>Recipient Address</td>
-			<td class="address">PBQ6xVVbbG9ufLz8RHQieBh7nvxbasDGhgHgzfJesWSVM5ZLuTQTy</td>
+			<td class="address">{{transferParams.address}}</td>
 		</tr>
 		<tr>
-			<td>Transaction Fee</td>
-			<td class="fee">0.00 EVEO</td>
+			<td>Gas price</td>
+			<td class="fee">{{transferParams.gasPrice}} Gwei</td>
 		</tr>
 	</table>
 	
 	<div class="buttons">
-		<button class="button button--primary">Confirm</button>
+		<button class="button button--primary" (click)="confirm()">Confirm</button>
 		<button class="button" (click)="close()">Cancel</button>
 	</div>
 </div>
