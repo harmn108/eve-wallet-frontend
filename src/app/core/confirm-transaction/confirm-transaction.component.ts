@@ -14,6 +14,7 @@ export class ConfirmTransactionDialog {
   password:FormControl = new FormControl();
   passError:boolean = false;
   passwordVerified:boolean = false;
+  token:string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data:any,
     private accountService:AccountService, private dialogRef: MatDialogRef<WalletInnerComponent>) {
@@ -25,7 +26,7 @@ export class ConfirmTransactionDialog {
       let brainKey = CryptService.brainKeyDecrypt(this.accountService.brainKeyEncrypted,this.password.value);
       this.passError = false;
       this.passwordVerified = true;
-      console.log(this.data);
+      this.token = this.data.token;
     }
     else{
       this.passError = true;
