@@ -1,16 +1,17 @@
 <div class="icon-close" (click)="close()" ></div>
 
 <div *ngIf="!passwordVerified">
+	<h2>Review and confirm your transfer</h2>
 	<p class="description">Enter your password to make transaction</p>
 
 	<input type="password" placeholder="Password" [formControl]="password">
-	<p style="color:red;" *ngIf="passError">{{'error.invalid_email_or_pass' | translate}}</p>
+	<p class="error-message" *ngIf="passError">{{'error.invalid_email_or_pass' | translate}}</p>
 	<div class="buttons">
 		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
 	</div>
 </div>
 
-<div *ngIf="passwordVerified">
+<div *ngIf="passwordVerified" class="review-part">
 	<h2>Review and confirm your transfer</h2>
 	<p class="description">Please note, there is no way to cancel confirmed transaction.</p>
 	

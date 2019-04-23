@@ -110,6 +110,13 @@ p.description {
 	border-bottom: 1.5px dashed #9e9e9e;
 }
 
+input[type="text"],
+input[type="number"] {
+	& + .error-message {
+		margin: -15px 0 15px;
+	}
+}
+
 .history-section {
 	.transaction {
 		margin-top: 16px;
