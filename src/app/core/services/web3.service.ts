@@ -9,12 +9,7 @@ import { isPlatformBrowser } from "@angular/common";
 declare var require;
 @Injectable()
 export class Web3Service {
-  pbk: string;
-  pvk: string;
-  address: string;
-  wallet;
   web3: Web3;
-  account;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
@@ -66,18 +61,19 @@ export class Web3Service {
 
   sendToken(params): Promise<string> {
     return this.signAndSendTransaction({
-      from: params.address,
-      to: params.contractAddress,
-      gas: 10000,//this.web3.utils.toHex(this.settings.gas),
+      from: params.from,
+      to: params.to,
+      gas: 1000000,//this.web3.utils.toHex(this.settings.gas),
       gasPrice: this.web3.utils.toHex(params.gasPrice),//this.web3.utils.toHex(this.settings.gasPrice),
       // value: "0x0",
+      pvk:params.pvk,
       data:
         "0xa9059cbb" +
         this.padStart(64, 0, params.toAddress.substr(2)) +
         this.padStart(
           64,
           0,
-          (params.amount * Math.pow(10, params.token.decimalPlaces)).toString(
+          (params.amount * Math.pow(10, params.decimalPlaces)).toString(
             16
           )
         )
@@ -88,29 +84,16 @@ export class Web3Service {
     return this.web3.eth.accounts.hashMessage(""+string);
   }
 
-
-  sendEthereum(params): Promise<string> {
-    return this.signAndSendTransaction({
-      to: params.toAddress,
-      gas: this.web3.utils.toHex(21000),
-      gasPrice: 10000,//this.web3.utils.toHex(this.settings.gasPrice),
-      value: this.web3.utils.toHex(
-        this.web3.utils.toWei(params.amount.toString(), "ether")
-      )
-    });
-  }
-
   private signAndSendTransaction(transactionObject): Promise<string> {
     return new Promise((resolve, reject) => {
       this.web3.eth
-        .getTransactionCount(this.address, "pending")
+        .getTransactionCount(transactionObject.from, "pending")
         .then((nonce: number) => {
           transactionObject.nonce = nonce;
-
           let tx: Tx;
           try {
             tx = new Tx(transactionObject);
-            tx.sign(new Buffer(this.pvk, "hex"));
+            tx.sign(new Buffer(transactionObject.pvk.substr(2), "hex"));
           } catch (e) {
             reject(e);
             return;
@@ -126,8 +109,12 @@ export class Web3Service {
                 }
               }
             )
-            .then(receipt => {})
-            .catch(error => {});
+            .then(receipt => {
+              console.log('okay',receipt);
+            })
+            .catch(error => {
+              console.log('error',error);
+            });
         });
     });
   }

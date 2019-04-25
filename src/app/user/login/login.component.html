@@ -3,13 +3,13 @@
 </div>
 <div *ngIf="!loading">
   <h2>{{'user.login' | translate}}</h2>
-  <p class="descr">Enter you email and password to login</p>
+  <p class="descr">{{'user.login_text' | translate}}</p>
   <form novalidate (ngSubmit)="login()" [formGroup]="loginForm">
-    <input type="text" placeholder="Email" formControlName="email">
-    <input type="password" placeholder="Password" formControlName="password">
+    <input type="text" placeholder="{{'user.email' | translate}}" formControlName="email">
+    <input type="password" placeholder="{{'user.password' | translate}}" formControlName="password">
     <div class="buttons-container">
-      <button class="button button--fat button--upper button--primary" type="submit" [disabled]="loginForm.controls['email'].value == '' || loginForm.controls['password'].value == ''">LOGIN</button>
-      <a [routerLink]="['/user/reset-password']">Forgot your password?</a>
+      <button class="button button--fat button--upper button--primary" type="submit" [disabled]="loginForm.controls['email'].value == '' || loginForm.controls['password'].value == ''">{{'user.login_button' | translate}}</button>
+      <a [routerLink]="['/user/reset-password']">{{'user.forgot_password' | translate}}</a>
     </div>
     <p *ngIf="(loginForm.controls['email'].invalid && loginForm.controls['email'].touched && loginForm.controls['email'].value !== '' && loginType) || (loginForm.controls['password'].invalid && loginForm.controls['password'].touched && loginForm.controls['password'].value !== '' && loginType)" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>
     <p *ngIf="errorMessage" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>

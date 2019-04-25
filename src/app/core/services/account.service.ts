@@ -14,6 +14,7 @@ export class AccountService {
 
     accountInfo: any = null;
     public stringToSign = '';
+    public recoverAccount;
     public accountUpdated: BehaviorSubject<any> = new BehaviorSubject(null);
     public brainKey: string;
     public publicKey = '';
@@ -54,6 +55,8 @@ export class AccountService {
 
     privateKeySavedDataChanged = new Subject<any>();
     brainKeySavedDataChanged = new Subject<any>();
+
+    recoverDataChanged = new Subject<any>();
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
@@ -99,6 +102,17 @@ export class AccountService {
                 this.eveoTransactionsChanged.next(eveoTransactions);
                 }, error => console.log(error));
         }  
+    }
+
+
+    getSettings(){
+        let url = this.userUrl + `/gas-price`;
+        return this.http.get(url);
+    }
+
+    getDecimals(){
+        let url = this.userUrl + `/decimal-places`;
+        return this.http.get(url);
     }
 
     loadConfirm(code: string): void {
@@ -182,6 +196,45 @@ export class AccountService {
                 }, error => this.errorService.handleError('authenticate', error, url));
         }
     }
+
+
+    recoverAuth(pbk){
+        if (isPlatformBrowser(this.platformId)) {
+            let url = this.userUrl + `/recover/authenticate/${pbk}`;
+           return this.http.get(url);
+        }
+    }
+
+
+    recover(password){
+        if (isPlatformBrowser(this.platformId)) {
+            let account = this.recoverAccount;
+            this.brainKey = account.mnemonic;
+            this.brainKeyEncrypted = CryptService.brainKeyEncrypt(this.brainKey, password);
+            let privateKey = account.privateKey;
+            this.publicKey = account.publicKey;
+            let signedString = this.web3.hashToSign(""+this.stringToSign, privateKey);
+            let url = this.userUrl + '/recover/complete';
+            this.http.post(url, {
+                brainKey: this.brainKeyEncrypted,
+                publicKey: this.publicKey,
+                signedString,
+            }) .map((userInfo: any) => {
+                localStorage.setItem('email',userInfo.email);
+                this.accountInfo = userInfo;
+                this.accountInfo.brainKeyEncrypted = this.brainKeyEncrypted;
+                this.accountUpdated.next(this.accountInfo);
+                return this.accountInfo;
+            })
+            .subscribe(data => {
+                this.recoverAccount = {};
+                localStorage.setItem('authToken',this.accountInfo.token);
+                this.getBalance();
+                this.recoverDataChanged.next(data);
+            }, error => this.errorService.handleError('login', error, url));
+        }
+    }
+
 
     login(email: string, password: string, resForStep2) {
         if (isPlatformBrowser(this.platformId)) {
@@ -271,7 +324,6 @@ export class AccountService {
                     this.brainKey = '';
                     this.unsetBalance();
                     this.brainKeyEncrypted = '';
-                    this.web3.account = {};
                     this.logoutData = data;
                     localStorage.removeItem('email');
                     localStorage.removeItem('authToken');

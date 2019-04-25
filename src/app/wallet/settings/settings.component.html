@@ -1,5 +1,5 @@
 <div class="level-container">
-	<h2>Security</h2>
+	<h2>{{'wallet.security' | translate}}</h2>
 
 	<div class="security-level">
 		<div class="security-level__step security-level__step--done"></div>
@@ -8,14 +8,16 @@
 	</div>
 </div>
 
-<div class="alert-container" *ngIf="!account.privateKeySaved || !account.brainKeySaved">
+<div class="alert-container">
 	<img src="assets/images/alert.svg">
-	<p>You have to backup your recovery phrase. It is strongly recommended to store the backup copies in physically separate, offline environment. If someone were to find your recovery phrase they could access your wallet.</p>
+	<p>
+		{{'wallet.have_to_backup' | translate}}
+	</p>
 </div>
 
 <div class="security">
 	<div class="security__item">
-		<h3 class="security__item__name">Email:</h3>
+		<h3 class="security__item__name">{{'wallet.email' | translate}}:</h3>
 		<div class="security__item__inner security__item__inner--email">{{account.email}}</div>
 		<div class="security__item__status">
 			<div class="icon-done"></div>
@@ -23,8 +25,8 @@
 	</div>
 	<div class="security__item">
 		<h3 class="security__item__name">
-			<span>Address:</span>
-			<img src="assets/images/question.svg" matTooltip="Public key is your address to receive tokens." matTooltipPosition="after"/>
+			<span>{{'wallet.address' | translate}}:</span>
+			<img src="assets/images/question.svg" matTooltip="{{'wallet.public_key_tultip' | translate}}" matTooltipPosition="after"/>
 		</h3>
 		<div class="security__item__inner security__item__inner--address">
 			<div>
@@ -35,18 +37,18 @@
 	</div>
 	<div class="security__item">
 		<h3 class="security__item__name">
-			<span>Private Key:</span>
-			<img src="assets/images/question.svg" matTooltip="If someone were to find your private key they could access your wallet." matTooltipPosition="after"/>
+			<span>{{'wallet.private_key' | translate}}:</span>
+			<img src="assets/images/question.svg" matTooltip="{{'wallet.pvk_tooltip' | translate}}" matTooltipPosition="after"/>
 		</h3>
 		<div class="security__item__inner security__item__inner--private-key">
 			<div class="input-wrapper">
-				<input type="password" readonly value="your private key could be here but it wouldn't make sense">
+				<input type="password" readonly value="{{'wallet.pvk_text' | translate}}">
 				<div class="input-wrapper__suffix" (click)="backupPrivateKey(false)">
 					<img src="assets/images/eye.svg"/>
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper" *ngIf="!account.privateKeySaved" (click)="backupPrivateKey(true)">Backup</button>
+			<button class="button button--primary button--upper" *ngIf="!account.privateKeySaved" (click)="backupPrivateKey(true)">{{'wallet.back_up' | translate}}</button>
 		</div>
 		<div class="security__item__status" *ngIf="account.privateKeySaved">
 			<div class="icon-done"></div>
@@ -54,18 +56,18 @@
 	</div>
 	<div class="security__item">
 		<h3 class="security__item__name">
-			<span>Recovery Phrase:</span>
-			<img src="assets/images/question.svg" matTooltip="If someone were to find your recovery phrase they could access your wallet." matTooltipPosition="after"/>
+			<span>{{'wallet.recovery_phrase' | translate}}:</span>
+			<img src="assets/images/question.svg" matTooltip="{{'wallet.recovery_tooltip' | translate}}" matTooltipPosition="after"/>
 		</h3>
 		<div class="security__item__inner security__item__inner--private-key">
 			<div class="input-wrapper">
-				<input type="password" readonly value="your recovery phrase could be here but it wouldn't make sense">
+				<input type="password" readonly value="{{'wallet.your_recovery_phrase' | translate}}">
 				<div class="input-wrapper__suffix" (click)="backupRecoveryPhrase(false)">
 					<img src="assets/images/eye.svg"/>
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper" *ngIf="!account.brainKeySaved" (click)="backupRecoveryPhrase(true)">Backup</button>
+			<button class="button button--primary button--upper" *ngIf="!account.brainKeySaved" (click)="backupRecoveryPhrase(true)">{{'wallet.back_up' | translate}}</button>
 		</div>
 		<div class="security__item__status" *ngIf="account.brainKeySaved">
 			<div class="icon-done"></div>

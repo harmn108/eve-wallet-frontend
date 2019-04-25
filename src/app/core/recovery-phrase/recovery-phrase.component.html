@@ -1,32 +1,32 @@
 <div class="icon-close" (click)="close()"></div>
 
 <div *ngIf="!passwordVerified">
-	<h2>Backup Recovery Phrase</h2>
-	<p class="description">Enter your password to backup your Recovery Phrase.</p>
+	<h2>{{(backup? 'wallet.backup' : 'wallet.recovery_phrase') | translate}}</h2>
+	<p class="description">{{(backup? 'wallet.enter_pass' : 'wallet.enter_pass_see') | translate}}</p>
 
-	<input type="password" placeholder="Password" [formControl]="password">
+	<input type="password" placeholder="{{'user.password' | translate}}" [formControl]="password">
 	<p style="color:red;" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
 
 	<div class="buttons">
-		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
+		<button class="button button--fat button--primary" (click)="continue()">{{'wallet.continue' |translate}}</button>
 	</div>
 </div>
 
 <div *ngIf="passwordVerified">
-	<h2 *ngIf="backup">Backup Recovery Phrase</h2>
-	<h2 *ngIf="!backup">Recovery Phrase</h2>
+	<h2 *ngIf="backup">{{'wallet.backup' | translate}}</h2>
+	<h2 *ngIf="!backup">{{'wallet.recovery_phrase' | translate}}</h2>
 
-	<p class="recovery-phrase-text">If someone were to find your recovery phrase they could access your wallet. It is strongly recommended to store your recovery phrase in physically separate, offline environment.</p>
+	<p class="recovery-phrase-text">{{'wallet.recovery_text' | translate}}</p>
 
-	<b>Your recovery phrase is the only way to reset your web wallet password.</b>
+	<b>{{'wallet.recover_only_way' | translate}}</b>
 
 	<div class="recovery-phrase">
 		{{brainKey}}
 	</div>
 
-	<p *ngIf="backup" class="recovery-phrase-text">In the next step, you will need to enter four words from the recovery phrase in a random order.</p>
+	<p *ngIf="backup" class="recovery-phrase-text">{{'wallet.next_step_text' | translate}}</p>
 
 	<div class="buttons text-right" *ngIf="backup">
-		<button class="button button--primary button--upper" (click)="next()">Next</button>
+		<button class="button button--primary button--upper" (click)="next()">{{'wallet.next' | translate}}</button>
 	</div>
 </div>

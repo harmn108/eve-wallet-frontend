@@ -7,6 +7,7 @@ import { AccountService } from '../../core/services/account.service';
 import { Web3Service } from '../../core/services/web3.service';
 import { TokenService } from '../../core/services/token.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -20,6 +21,7 @@ export class SettingsComponent implements OnInit{
               private web3:Web3Service,
               public dialog: MatDialog,
               private accountService: AccountService,
+              public translateService:TranslateService,
               private snackBar: MatSnackBar) {
 
   }
@@ -54,6 +56,6 @@ export class SettingsComponent implements OnInit{
     document.body.removeChild(input);
     //snackbar open
 
-    this.snackBar.open('Copied!', null, {duration: 1000});
+    this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 1000});
   }
 }

@@ -16,22 +16,22 @@
 	<mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!loading">
-	<h2 *ngIf="request">Please check your email to access your secure link.</h2>
-<h2 *ngIf="!request">Create EVE Wallet</h2>
-<p class="descr" *ngIf="!request">Enter your email to create new wallet</p>
+	<h2 *ngIf="request">{{'user.check_email' | translate}}</h2>
+<h2 *ngIf="!request">{{'user.create_wallet' | translate}}</h2>
+<p class="descr" *ngIf="!request">{{'user.enter_to_create' | translate}}</p>
 
 <div class="input-wrapper">
-	<input type="email" [readonly]="request" [formControl]="emailControl" placeholder="Enter your email">
+	<input type="email" [readonly]="request" [formControl]="emailControl" placeholder="{{'user.email' | translate}}">
 	<div class="input-wrapper__suffix">
 		<div class="button button--primary button--upper" [ngClass]="{'done':request}" (click)="request? check() : requestEmail()">
-			<span *ngIf="!request">Request</span>
+			<span *ngIf="!request">{{'user.create' | translate}}</span>
 			<img src="assets/images/checkmark.svg" alt="" *ngIf="request">
 		</div>
 	</div>
 	<div class="input-wrapper__shadow"></div>
 </div>
 
-<p class="terms">By registering you agree to our <a href="#">Terms & Conditions</a></p>
+<p class="terms">{{'user.by_registering' | translate}} <a href="#">{{'user.terms_and_conditions' | translate}}</a></p>
 
 <p class="error-message" *ngIf="emailControl.value !=='' && emailType">{{'error.invalid_email' | translate}}</p>
 <p class="error-message" *ngIf="errorMessage">{{errorMessage | translate}}</p>

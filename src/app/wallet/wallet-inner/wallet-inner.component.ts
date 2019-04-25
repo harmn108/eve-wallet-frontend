@@ -24,10 +24,12 @@ export class WalletInnerComponent implements OnInit {
   evegBalance;
   eveoBalance;
   balance;
+  decimals;
   coinPrecision = 8;
   amountErrorMessage = '';
-  transferFee = 0.01;
+  transferFee = 0;
   invalidAddress: boolean = false;
+  settings;
   constructor(private accountService: AccountService,
     private FormBuilder: FormBuilder,
     private web3: Web3Service,
@@ -64,10 +66,9 @@ export class WalletInnerComponent implements OnInit {
           res => {
             if (res) {
               this.evegTransactions = res;
-              console.log(this.evegTransactions);
             }
           }
-        )
+        );
       this.accountService.balanceChanged.subscribe(
         res => {
           if (res) {
@@ -76,14 +77,25 @@ export class WalletInnerComponent implements OnInit {
             this.eveoBalance = this.balance[environment.eveo_contract_address];
           }
         }
-      )
+      );
       this.accountService.eveoTransactionsChanged.subscribe(
         res => {
           if (res) {
             this.eveoTransactions = res;
           }
         }
-      )
+      );
+      this.accountService.getSettings().subscribe(
+        settings => {
+          this.settings = settings;
+          this.transferForm.controls['gasPrice'].setValue(this.settings.average);
+        }
+      );
+      this.accountService.getDecimals().subscribe(
+        decimals => {
+          this.decimals = decimals;
+        }
+      );
       this.address = this.accountService.accountInfo.address;
     }
   }
@@ -102,10 +114,12 @@ export class WalletInnerComponent implements OnInit {
 
   generateTransaction() {
     let data = {
-      token:this.token,
+      token: this.token,
       amount: this.transferForm.value.amount,
       address: this.transferForm.value.address,
-      gasPrice:this.transferForm.value.gasPrice,
+      gasPrice: this.transferForm.value.gasPrice,
+      contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
+      decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
     };
     const dialogRef = this.dialog.open(ConfirmTransactionDialog, {
       width: '870px',
@@ -114,7 +128,7 @@ export class WalletInnerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.transferForm.reset();
     });
 
   }
@@ -126,7 +140,7 @@ export class WalletInnerComponent implements OnInit {
   private buildForm() {
     this.transferForm = this.FormBuilder.group({
       'address': new FormControl('', [Validators.required, this.checkValidAddress.bind(this)]),
-      'gasPrice':new FormControl(20,[Validators.required]),
+      'gasPrice': new FormControl(20, [Validators.required]),
       'amount': new FormControl(null, {
         validators: [
           Validators.required,

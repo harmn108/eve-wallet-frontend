@@ -10,6 +10,7 @@ import { UserComponent } from './user.component';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RegisterConfirmationComponent } from './register-confirmation/register-confirmation.component';
+import { AccountCheckGuard } from '../core/guards/account-check.guard';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,7 +36,8 @@ export function createTranslateLoader(http: HttpClient) {
         CreatePasswordComponent,
         RegisterConfirmationComponent,
         ResetPasswordComponent
-    ]
+    ],
+    providers:[AccountCheckGuard]
 })
 export class UserModule {
 }

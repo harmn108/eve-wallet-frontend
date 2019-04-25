@@ -6,6 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { SettingsComponent } from '../../wallet/settings/settings.component';
 import { CryptService } from '../services/crypt.service';
 import { Web3Service } from '../services/web3.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-private-key-dialog',
@@ -25,12 +26,12 @@ export class PrivateKeyDialog implements OnInit{
       private accountService: AccountService,
       private web3:Web3Service,
       @Inject(MAT_DIALOG_DATA) public data:any,
+      public translateService:TranslateService,
       private snackBar: MatSnackBar) {
 
     }
 
     ngOnInit(){ 
-      console.log(this.data);
       this.backup = this.data.backup;
       this.privateKeySavedDataChangedSubscription = this.accountService.privateKeySavedDataChanged.subscribe(data => {
         this.privateKey =''; 
@@ -63,7 +64,7 @@ export class PrivateKeyDialog implements OnInit{
       document.body.removeChild(input);
       //snackbar open
 
-      this.snackBar.open('Copied!', null, {duration: 1000});
+      this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 1000});
     }
 
     close(){

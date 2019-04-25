@@ -1,17 +1,17 @@
 
-<h2>Recovery Phrase</h2>
+<h2>{{'wallet.recovery_phrase' | translate}</h2>
 
 <div class="alert-container">
 	<img src="assets/images/alert.svg">
-	<p>This is only way to reset your password!<br/>Your PBG tokens cant’s be recovered without it</p>
+	<p>{{'wallet.only_way' | translate}}<br/>{{'wallet.cant_recovered' | translate}}</p>
 </div>
 
 <div class="recovery-phrase">
 {{brainKey}}</div>
 
-<p class="recovery-phrase-text">It is strongly recommended that you store backups of your recovery phrase in physically separate, offline environment. Do not share it with anyone else.</p>
+<p class="recovery-phrase-text">{{'wallet.strongly_recomended' | translate}}</p>
 
 <div class="buttons">
-	<button class="button button--primary button--fat button--upper" (click)="recover()">Ok</button>
-	<button class="button button--upper button--fat" (click)="later()">Later</button>
+	<button class="button button--primary button--fat button--upper" (click)="recover()">{{'wallet.ok' | translate}}</button>
+	<button class="button button--upper button--fat" (click)="later()">{{'wallet.later' | translate}}</button>
 </div>

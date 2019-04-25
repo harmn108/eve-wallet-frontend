@@ -14,6 +14,7 @@ import { ReallyPostponeDialog } from './really-postpone/really-postpone.componen
 import { AuthguardService } from './guards/auth.guard';
 import { LoginCheckGuardService } from './guards/login-check.guard';
 import { UserModule } from '../user/user.module';
+import { AccountCheckGuard } from './guards/account-check.guard';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -50,7 +51,8 @@ export function createTranslateLoader(http: HttpClient) {
         // NotificationService,
         // ErrorService
         AuthguardService,
-        LoginCheckGuardService,
+        LoginCheckGuardService
+        
     ],
     // exports: [SafePipe, SharedModule],
     entryComponents: [

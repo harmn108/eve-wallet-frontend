@@ -1,35 +1,43 @@
-<h2>Receive {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
+<h2>{{'wallet.receive' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
 <div class="receive-section">
 	<div>
 		<div class="public-key-wrapper">
 			<div class="public-key">{{address}}</div>
 			<img src="assets/images/copy.svg" (click)="copy()">
 		</div>
-		<p class="description">Your address can also be known as you <b>public key</b>. It is what you share with people so they can send you tokens.</p>
+		<p class="description" [innerHTML]="'wallet.public_key_desc' | translate"></p>
 	</div>
 	<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={{address}}&choe=UTF-8&chld=L|1" alt="">
 </div>
 <form novalidate (ngSubmit)="transfer()" [formGroup]="transferForm">
 <div class="transfer-section">
-	<h2>Transfer {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
-	<p class="description">Send {{token == 'eveg'?  'EVEG' : 'EVEO'}}s to the recepient's account.</p>
+	<h2>{{'wallet.transfer' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
+	<p class="description">{{'wallet.send' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}} {{'wallet.to_the_account' | translate}}</p>
 
 	<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
 	<input type="text" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
 	<p class="error-message" *ngIf="amountErrorMessage" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 
-	<label>Recepient address</label>
-	<input type="text" placeholder="Enter address" formControlName="address">
-	<p class="error-message" *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">Invalid address</p>
+	<label>{{'wallet.rec_address' | translate}}</label>
+	<input type="text" placeholder="{{'wallet.enter_address' | translate}}" formControlName="address">
+	<p class="error-message" *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">{{'error.invalid_address' | translate}}</p>
 	
-	<label class="transaction-fee">Gas price <mat-slider
-		thumbLabel
-		[displayWith]="formatLabel"
-		tickInterval="1000"
-		formControlName="gasPrice"
-		min="1"
-		max="100"></mat-slider> Gwei</label>
-	<button class="button button--primary button--upper" [disabled]="transferForm.invalid" (click)="generateTransaction()">Generate transaction</button>
+	<div class="transaction-fee">
+		<label>{{'wallet.gas_price' | translate}}</label>
+
+		<input type="text" formControlName="gasPrice" [value]="transferForm.controls['gasPrice'].value"> <span>Gwei</span>
+
+		<mat-slider
+			tickInterval="1000"
+			formControlName="gasPrice"
+			[value]="transferForm.controls['gasPrice'].value"
+			min="{{settings?.min}}"
+			max="{{settings?.max}}"></mat-slider>
+	</div>
+
+	<div>
+		<button class="button button--primary button--upper" [disabled]="transferForm.invalid" (click)="generateTransaction()">{{'wallet.generate' | translate}}</button>
+	</div>
 </div>	
 </form>
 
@@ -37,18 +45,18 @@
 <div class="hline"></div>
 
 <div class="history-section">
-	<h2>History</h2>
+	<h2>{{'wallet.history' | translate}}</h2>
 	<div *ngIf="token == 'eveg'" >
 		<div class="transaction" *ngFor="let action of evegTransactions">
 		<div class="transaction__first-col">
-			<h3 class="transaction__type transaction__type--received" *ngIf="action.toAddress == this.address">Received</h3>
-			<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">Sent</h3>
+			<h3 class="transaction__type transaction__type--received" *ngIf="action.toAddress == this.address">{{'wallet.received' | translate}}</h3>
+			<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">{{'wallet.sent' | translate}}</h3>
 			<h3 class="transaction__amount">{{action.amount}} EVEG</h3>
 		</div>
 		<div class="transaction-data">
 			<div class="transaction-data__peer">
-				<small *ngIf="action.fromAddress == this.address">Payment to</small>
-				<small *ngIf="action.toAddress == this.address">Payment from</small>
+				<small *ngIf="action.fromAddress == this.address">{{'wallet.payment_to' | translate}}</small>
+				<small *ngIf="action.toAddress == this.address">{{'wallet.payment_from' | translate}}</small>
 				<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
 				<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 			</div>
@@ -62,15 +70,15 @@
 	<div *ngIf="token == 'eveo'" >
 		<div class="transaction" *ngFor="let action of eveoTransactions">
 		<div class="transaction__first-col">
-			<h3 class="transaction__type transaction__type--received" *ngIf="action.toAddress == this.address">Received</h3>
-			<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">Sent</h3>
+			<h3 class="transaction__type transaction__type--received" *ngIf="action.toAddress == this.address">{{'wallet.received' | translate}}</h3>
+			<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">{{'wallet.sent' | translate}}</h3>
 		
 			<h3 class="transaction__amount">{{action.amount}} EVEO</h3>
 		</div>
 		<div class="transaction-data">
 			<div class="transaction-data__peer">
-					<small *ngIf="action.fromAddress == this.address">Payment to</small>
-					<small *ngIf="action.toAddress == this.address">Payment from</small>
+					<small *ngIf="action.fromAddress == this.address">{{'wallet.payment_to' | translate}}</small>
+					<small *ngIf="action.toAddress == this.address">{{'wallet.payment_from' | translate}}</small>
 					<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
 					<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 			</div>

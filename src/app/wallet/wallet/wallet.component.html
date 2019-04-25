@@ -4,14 +4,9 @@
 			<span></span>
 
 			<div class="menu">
-				<div class="menu-items" [ngClass]="{'menu-items--open': menuOpen}">
-					<a (click)="settings()">Security</a>
-					<a (click)="signout()">Sign out</a>
-				</div>
-				<div class="menu__icon" (click)="toggleMenu()">
-					<span></span>
-					<span></span>
-					<span></span>
+				<div class="menu-items menu-items--open" >
+					<a (click)="settings()">{{'wallet.security' | translate}}</a>
+					<a (click)="signout()">{{'wallet.sign_out' | translate}}</a>
 				</div>
 			</div>
 		</div>

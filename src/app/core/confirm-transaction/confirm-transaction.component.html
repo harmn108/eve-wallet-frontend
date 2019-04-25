@@ -1,36 +1,37 @@
 <div class="icon-close" (click)="close()" ></div>
 
 <div *ngIf="!passwordVerified">
-	<p class="description">Enter your password to make transaction</p>
+		<h2>{{'wallet.review_confirm' | translate}}</h2>
+		<p class="description">{{'wallet.enter_to_make_transaction' | translate}}</p>
 
-	<input type="password" placeholder="Password" [formControl]="password">
-	<p style="color:red;" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
+	<input type="password" placeholder="{{'user.password' | translate}}" [formControl]="password">
+	<p class="error-message" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
 	<div class="buttons">
-		<button class="button button--fat button--primary" (click)="continue()">Continue</button>
+		<button class="button button--fat button--primary" (click)="continue()">{{'wallet.continue' | translate}}</button>
 	</div>
 </div>
 
-<div *ngIf="passwordVerified">
-	<h2>Review and confirm your transfer</h2>
-	<p class="description">Please note, there is no way to cancel confirmed transaction.</p>
+<div *ngIf="passwordVerified" class="review-part">
+	<h2>{{'wallet.review_confirm' | translate}}</h2>
+	<p class="description">{{'wallet.no_way_cancel' | translate}}</p>
 	
 	<table>
 		<tr>
-			<td>Amount</td>
+			<td>{{'wallet.amount' | translate}}</td>
 			<td class="amount"> {{transferParams.amount}} {{transferParams.token == 'eveg'?  'EVEG' : 'EVEO'}}</td>
 		</tr>
 		<tr>
-			<td>Recipient Address</td>
+			<td>{{'wallet.rec_address' | translate}}</td>
 			<td class="address">{{transferParams.address}}</td>
 		</tr>
 		<tr>
-			<td>Gas price</td>
+			<td>{{'wallet.gas_price' | translate}}</td>
 			<td class="fee">{{transferParams.gasPrice}} Gwei</td>
 		</tr>
 	</table>
 	
 	<div class="buttons">
-		<button class="button button--primary" (click)="confirm()">Confirm</button>
-		<button class="button" (click)="close()">Cancel</button>
+		<button class="button button--primary" (click)="confirm()">{{'wallet.confirm' | translate}}</button>
+		<button class="button" (click)="close()">{{'wallet.cancel' | translate}}</button>
 	</div>
 </div>
