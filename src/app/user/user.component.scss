@@ -42,7 +42,7 @@
 			img {
 				width: 80%;
 				max-width: 360px;
-				margin-top: 20px;
+				margin-top: 50px;
 			}
 
 			@media (max-height: 780px) {
@@ -115,4 +115,9 @@
 	.auth-col {
 		padding: 40px 32px;
 	}
+}
+.copyright{
+	font-size: 14px;
+	color: #A19EAF;
+	text-transform: uppercase;
 }
