@@ -87,7 +87,8 @@
         "cancel":"Cancel",
         "will_take_10_sec":"Processing will take 10 seconds.",
         "something_went_wrong":"Something went wrong!",
-        "copied":"Copied!"
+        "copied":"Copied",
+        "see_more":"See more"
     },
     "error": {
             "invalid_email_or_pass":"Invalid email or password",

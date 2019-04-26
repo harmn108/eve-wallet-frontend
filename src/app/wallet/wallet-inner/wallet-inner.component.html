@@ -89,5 +89,10 @@
 		</div>
 	</div>
 	</div>
-	
+	<div style="margin-top: 30px;text-align: center;cursor:pointer" *ngIf="lastEveg && token == 'eveg'">
+		<button class="button button--primary button--upper" [disabled]="seeMorebool" (click)="seeMore()">{{'wallet.see_more' | translate}}</button>
+	</div>
+	<div style="text-align: center;margin-top: 30px;cursor:pointer" *ngIf="lastEveo && token == 'eveo'">
+		<button class="button button--primary button--upper" [disabled]="seeMorebool" (click)="seeMore()">{{'wallet.see_more' | translate}}</button>
+	</div>
 </div>

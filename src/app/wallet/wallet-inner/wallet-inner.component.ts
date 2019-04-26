@@ -30,6 +30,12 @@ export class WalletInnerComponent implements OnInit {
   transferFee = 0;
   invalidAddress: boolean = false;
   settings;
+  seeMorebool:boolean = false;
+  clickSeeMoreEveo:boolean = false;
+  clickSeeMoreEveg:boolean = false;
+  lastEveg:boolean = false;
+  lastEveo:boolean = false;
+
   constructor(private accountService: AccountService,
     private FormBuilder: FormBuilder,
     private web3: Web3Service,
@@ -61,14 +67,6 @@ export class WalletInnerComponent implements OnInit {
           this.token = token;
         }
       );
-      this.accountService.evegTransactionsChanged
-        .subscribe(
-          res => {
-            if (res) {
-              this.evegTransactions = res;
-            }
-          }
-        );
       this.accountService.balanceChanged.subscribe(
         res => {
           if (res) {
@@ -80,8 +78,32 @@ export class WalletInnerComponent implements OnInit {
       );
       this.accountService.eveoTransactionsChanged.subscribe(
         res => {
+           if (res) {
+              this.seeMorebool = false;
+              if(this.clickSeeMoreEveo){
+                this.eveoTransactions = this.eveoTransactions.concat(res.transactions);
+              }
+              else{
+                this.eveoTransactions = res.transactions;
+              }
+              this.lastEveo = res.more;
+          }
+        }
+      );
+      this.accountService.evegTransactionsChanged
+      .subscribe(
+        res => {
           if (res) {
-            this.eveoTransactions = res;
+              this.seeMorebool = false;
+              if(this.clickSeeMoreEveg){
+                console.log(this.evegTransactions,res.transactions);
+                this.evegTransactions = this.evegTransactions.concat(res.transactions);
+                console.log(this.evegTransactions);
+              }
+              else{
+                this.evegTransactions = res.transactions;
+              }
+              this.lastEveg = res.more;
           }
         }
       );
@@ -135,6 +157,19 @@ export class WalletInnerComponent implements OnInit {
 
   transfer() {
 
+  }
+
+  seeMore(){
+    if(this.token == 'eveg'){
+      this.clickSeeMoreEveg = true;
+      this.seeMorebool = true;
+      this.accountService.getEvegTransactions(this.evegTransactions[this.evegTransactions.length-1].transactionHash);
+    }
+    else{
+      this.clickSeeMoreEveo = true;
+      this.seeMorebool = true;
+      this.accountService.getEveoTransactions(this.eveoTransactions[this.eveoTransactions.length-1].transactionHash);
+    }
   }
 
   private buildForm() {

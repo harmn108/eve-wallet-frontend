@@ -81,25 +81,21 @@ export class AccountService {
         }
     }
 
-    getTransactions(){
+    getEvegTransactions(hash = null){
+        console.log(hash);
         if (isPlatformBrowser(this.platformId)) {
-            let url = this.userUrl + '/transactions';
+            let url = this.userUrl + `/transactions/${environment.eveg_contract_address}/4/${hash}`;
             this.http.get(url, {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe((data:any) => {
-                this.transactions = data;
-                let evegTransactions = [];
-                let eveoTransactions = [];
-                this.transactions.forEach(
-                  el => {
-                  if (el.address === environment.eveg_contract_address) {
-                    evegTransactions.push(el);
-                  }
-                  if (el.address === environment.eveo_contract_address) {
-                    eveoTransactions.push(el);
-                  }
-                  }
-                )
-                this.evegTransactionsChanged.next(evegTransactions);
-                this.eveoTransactionsChanged.next(eveoTransactions);
+                this.evegTransactionsChanged.next(data);
+                }, error => console.log(error));
+        }  
+    }
+
+    getEveoTransactions(hash = null){
+        if (isPlatformBrowser(this.platformId)) {
+            let url = this.userUrl + `/transactions/${environment.eveo_contract_address}/4/${hash}`;
+            this.http.get(url, {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe((data:any) => {
+                this.eveoTransactionsChanged.next(data);
                 }, error => console.log(error));
         }  
     }

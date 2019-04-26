@@ -28,7 +28,8 @@ export class WalletComponent implements OnInit {
 				this.active = active;
 			}
 		);
-		this.accountService.getTransactions();
+		this.accountService.getEvegTransactions();
+		this.accountService.getEveoTransactions();
 		this.accountService.balanceChanged.subscribe(
 			res => {
 				if(res){
@@ -65,12 +66,14 @@ export class WalletComponent implements OnInit {
 	}
 
 	onactivate(e) {
-		if (e.constructor.name == 'RecoveryFirstComponent') {
+		if (this.router.url == '/wallet/recovery-phrase') {
 			this.active = null;
 			this.tokenService.active.next(this.active);
 			this.disabled = true;
 		}
-		if (e.constructor.name == 'SettingsComponent') {
+		if (this.router.url == '/wallet/settings') {
+			console.log('here')
+
 			this.active = null;
 			this.tokenService.active.next(this.active);
 		}
