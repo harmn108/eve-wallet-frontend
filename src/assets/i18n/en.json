@@ -60,7 +60,7 @@
         "gas_price":"Gas price",
         "generate":"Generate transaction",
         "history":"Transactions history",
-        "no_history":"No history",
+        "no_history":"No transactions",
         "received":"Received",
         "sent":"Sent",
         "payment_to":"Payment to",
