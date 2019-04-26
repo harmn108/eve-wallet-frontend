@@ -29,7 +29,7 @@
 		<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
 		<div class="form-fields">
 			<div class="coin-field">
-				<input type="text" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
+				<input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
 				<p class="error-message" *ngIf="amountErrorMessage" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 			</div>
 			<div class="transaction-fee">
@@ -54,7 +54,11 @@
 <div class="hline"></div>
 
 <div class="history-section">
-	<h2>{{'wallet.history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveg' && evegTransactions.length !==0">{{'wallet.history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveo' && eveoTransactions.length !==0">{{'wallet.history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveg' && evegTransactions.length==0">{{'wallet.no_history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveo' && eveoTransactions.length==0">{{'wallet.no_history' | translate}}</h2>
+
 	<div *ngIf="token == 'eveg'">
 		<div class="transaction" *ngFor="let action of evegTransactions">
 			<div class="transaction__first-col">

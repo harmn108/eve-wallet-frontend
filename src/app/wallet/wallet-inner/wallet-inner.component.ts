@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment.prod';
 import { ErrorService } from '../../core/services/error.service';
 import * as moment from 'moment';
 import { Web3Service } from '../../core/services/web3.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-wallet-inner',
   templateUrl: './wallet-inner.component.html',
@@ -39,6 +40,7 @@ export class WalletInnerComponent implements OnInit {
   constructor(private accountService: AccountService,
     private FormBuilder: FormBuilder,
     private web3: Web3Service,
+    public translateService:TranslateService,
     public dialog: MatDialog,
     private tokenService: TokenService,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -129,7 +131,7 @@ export class WalletInnerComponent implements OnInit {
     document.body.removeChild(input);
     //snackbar open
 
-    this.snackBar.open('Copied!', null, { duration: 1000 });
+    this.snackBar.open(this.translateService.instant('wallet.copied'), null, { duration: 1000 });
   }
 
   generateTransaction() {
@@ -149,6 +151,7 @@ export class WalletInnerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.transferForm.reset();
+      this.transferForm.controls['gasPrice'].setValue(this.settings.average);
     });
 
   }
@@ -173,7 +176,7 @@ export class WalletInnerComponent implements OnInit {
   private buildForm() {
     this.transferForm = this.FormBuilder.group({
       'address': new FormControl('', [Validators.required, this.checkValidAddress.bind(this)]),
-      'gasPrice': new FormControl(20, [Validators.required]),
+      'gasPrice': new FormControl(null, [Validators.required]),
       'amount': new FormControl(null, {
         validators: [
           Validators.required,
@@ -196,7 +199,6 @@ export class WalletInnerComponent implements OnInit {
         };
       }
     }
-
   }
 
 
