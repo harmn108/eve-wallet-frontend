@@ -18,20 +18,22 @@ p.description {
 }
 .form-fields{
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
-	margin-bottom: 25px;
-	>div{
-		flex: 0 0 49%;
+	margin: 0 0 25px;
+
+	> div {
+		flex: 1;
 	}
 	.coin-field input{
 		margin-bottom: 0;
 	}
+
 	@media screen and (max-width: 767px){
 		flex-direction: column;
 		align-items: normal;
+		margin: 0 0 25px;
 	}
-
 }
 .receive-section {
 	width: 100%;
@@ -116,17 +118,33 @@ p.description {
 
 	.transaction-fee {
 		display: flex;
-		align-items: center;
-		>div{
+		align-items: flex-start;
+
+		> div {
 			flex: 0 0 44%;
 			min-width: 170px;
+			
+			&:first-child {
+				margin: 9px 0 0;
+				text-align: right;
+
+				span { margin: 0 8px 0 0; }
+			}
+
 			@media screen and (max-width: 767px){
-				flex: none;
+				flex: 0 0 auto;
+				min-width: unset;
+
+				&:first-child {
+					text-align: left;
+				}
 			}
-			}
+		}
+
 		label {
 			display: inline-block;
 			font-size: 16px;
+			margin: 0 8px 0 0;
 		}
 
 		input {
@@ -141,21 +159,28 @@ p.description {
 			margin: 0 6px 0 12px;
 		}
 
+		span {
+			margin: 9px 15px 0;
+			color: #8A8FA5;
+		}
+
 		mat-slider {
 			//flex: 0 0 55%;
 			width: 100%;
 			max-width: 320px;
+			margin: -4px 0 0;
+
 			.mat-slider-horizontal{
 				height: 36px;
 			}
+
+			+ span {
+				margin-right: 0;
+			}
 		}
 
-		span {
-			margin-right: 15px;
-			color: #8A8FA5;
-		}
 		@media screen and (max-width: 767px){
-			margin-top: 10px;
+			margin-top: 25px;
 		}
 	}
 
@@ -184,7 +209,7 @@ p.description {
 input[type="text"],
 input[type="number"] {
 	& + .error-message {
-		margin: -15px 0 15px;
+		margin: 8px 0 0;
 	}
 }
 
@@ -199,7 +224,8 @@ input[type="number"] {
 }
 
 ::ng-deep .mat-slider-thumb,
-::ng-deep .mat-slider-track-fill {
+::ng-deep .mat-slider-track-fill,
+::ng-deep .mat-slider-thumb-label {
 	background-color: #607BED!important;
 }
 
