@@ -58,11 +58,34 @@
 }
 
 .footer {
+	width: 100%;
 	padding: 25px 0;
 	color: #A19EAF;
 
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+
+	> div {
+		white-space: nowrap;
+	}
+
+	a {
+		display: inline-block;
+		margin: 0 0 0 17px;
+	}
+
+	img {
+		display: block;
+	}
+
 	@media (max-width: 576px) {
 		text-align: center;
+		flex-direction: column;
+
+		> div:first-child {
+			margin: 0 0 16px;
+		}
 	}
 }
 
@@ -122,6 +145,8 @@
 		cursor: pointer;
 
 		img {
+			width: 80px;
+			height: 80px;
 			border-radius: 50%;
 		}
 

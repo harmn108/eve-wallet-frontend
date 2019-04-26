@@ -99,6 +99,20 @@
 	}
 }
 
+.share-app{
+	margin-top: 56px;
+	a{
+		display: inline-block;
+		&:not(:last-child){
+			margin-right: 24px;
+		}
+		img{
+			height: 40px;
+		}
+	}
+
+}
+
 @media (max-width: 1024px) {
 	.auth-col {
 		width: 100%;

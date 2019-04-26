@@ -36,12 +36,19 @@ export class ConfirmTransactionDialog {
         this.passError = false;
         this.passwordVerified = true;
         this.transferParams = this.data;
+
+        this.removeMaxWidth();
       }
       this.passError = true;
     }
     else{
       this.passError = true;
     }
+  }
+
+  removeMaxWidth() {
+    (document.querySelector('.wallet-dialog .mat-dialog-container') as HTMLElement)
+        .style.maxWidth = '100%';
   }
 
   confirm(){

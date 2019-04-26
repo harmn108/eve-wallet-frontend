@@ -12,7 +12,7 @@
 		</div>
 		<div class="wallet">
 			<div class="wallet-card a" [ngClass]="{'wallet-card--active':active == 'eveg'}" (click)="setActive('eveg')">
-				<div class="wallet-card__inner wallet-card__inner--silver">
+				<div class="wallet-card__inner wallet-card__inner--gold">
 					<img src="assets/images/eveg.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEG</h3>
@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="wallet-card b" [ngClass]="{'wallet-card--active':active == 'eveo'}" (click)="setActive('eveo')">
-				<div class="wallet-card__inner wallet-card__inner--gold">
+				<div class="wallet-card__inner wallet-card__inner--silver">
 					<img src="assets/images/eveo.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEO</h3>
@@ -34,7 +34,13 @@
 			</div>
 		</div>
 		<div class="footer">
-			© 2019 EVE
+			<div>
+				© 2019 EVERYONE
+			</div>
+			<div>
+				<a href="javascript:void(0)"><img src="assets/images/AppStore.svg" alt=""></a>
+				<a href="javascript:void(0)"><img src="assets/images/GooglePlay.svg" alt=""></a>
+			</div>
 		</div>
 	</div>
 </div>
