@@ -32,6 +32,7 @@
         "strongly_recomended":"It is strongly recommended that you store backups of your recovery phrase in physically separate, offline environment. Do not share it with anyone else.",
         "ok":"Ok",
         "later":"Later",
+        "your_address":"Your Address",
         "backup":"Backup Recovery Phrase",
         "please_enter":"Please enter the words from your Recovery Phrase in the required order.",
         "word":"Word",

@@ -1,46 +1,53 @@
-<h2>{{'wallet.receive' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
 <div class="receive-section">
 	<div>
+		<h2>{{'wallet.receive' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
+		<p class="description" [innerHTML]="'wallet.public_key_desc' | translate"></p>
+
+		<span class="address-label">{{'wallet.your_address' | translate}}</span>
 		<div class="public-key-wrapper">
 			<div class="public-key">{{address}}</div>
 			<img src="assets/images/copy.svg" (click)="copy()">
 		</div>
-		<p class="description" [innerHTML]="'wallet.public_key_desc' | translate"></p>
 	</div>
 	<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={{address}}&choe=UTF-8&chld=L|1" alt="">
 </div>
+
+<div class="hline first"></div>
+
 <form novalidate (ngSubmit)="transfer()" [formGroup]="transferForm">
-<div class="transfer-section">
+	<div class="transfer-section">
 	<h2>{{'wallet.transfer' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>
 	<p class="description">{{'wallet.send' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}} {{'wallet.to_the_account' | translate}}</p>
-
-	<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
-	<input type="text" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
-	<p class="error-message" *ngIf="amountErrorMessage" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 
 	<label>{{'wallet.rec_address' | translate}}</label>
 	<input type="text" placeholder="{{'wallet.enter_address' | translate}}" formControlName="address">
 	<p class="error-message" *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">{{'error.invalid_address' | translate}}</p>
-	
-	<div class="transaction-fee">
-		<label>{{'wallet.gas_price' | translate}}</label>
 
-		<input type="text" formControlName="gasPrice" [value]="transferForm.controls['gasPrice'].value"> <span>Gwei</span>
+	<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
+	<div class="form-fields">
+		<div class="coin-field">
+			<input type="text" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
+			<p class="error-message" *ngIf="amountErrorMessage" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
+		</div>
+		<div class="transaction-fee">
+			<div>
+				<label>{{'wallet.gas_price' | translate}}</label>
+				<input type="text" formControlName="gasPrice" [value]="transferForm.controls['gasPrice'].value"> <span>Gwei</span>
+			</div>
 
-		<mat-slider
-			tickInterval="1000"
-			formControlName="gasPrice"
-			[value]="transferForm.controls['gasPrice'].value"
-			min="{{settings?.min}}"
-			max="{{settings?.max}}"></mat-slider>
+			<mat-slider
+					tickInterval="1000"
+					formControlName="gasPrice"
+					[value]="transferForm.controls['gasPrice'].value"
+					min="{{settings?.min}}"
+					max="{{settings?.max}}"></mat-slider>
+		</div>
 	</div>
-
 	<div>
 		<button class="button button--primary button--upper" [disabled]="transferForm.invalid" (click)="generateTransaction()">{{'wallet.generate' | translate}}</button>
 	</div>
 </div>	
 </form>
-
 
 <div class="hline"></div>
 
