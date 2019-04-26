@@ -5,6 +5,11 @@ h2 {
 	margin: 0 0 4px;
 	color: #1F2742;
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
 
 p.description {
 	color: #8A8FA5;

@@ -82,7 +82,6 @@ export class AccountService {
     }
 
     getEvegTransactions(hash = null){
-        console.log(hash);
         if (isPlatformBrowser(this.platformId)) {
             let url = this.userUrl + `/transactions/${environment.eveg_contract_address}/4/${hash}`;
             this.http.get(url, {headers: new HttpHeaders({'X-API-TOKEN': this.accountInfo.token})}).subscribe((data:any) => {

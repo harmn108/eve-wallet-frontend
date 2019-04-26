@@ -30,14 +30,13 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'eve-wallet-frontend-app'}),
+    BrowserAnimationsModule,
     AppRoutingModule,
-    MatSliderModule,
     CoreModule,
     TransferHttpCacheModule,
     UserModule,
     WalletModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

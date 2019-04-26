@@ -23,7 +23,8 @@
         "reset_pass":"Reset Password",
         "enter_recovery":"Enter your Recovery phrase to create new password.",
         "reset":"Reset",
-        "invalid_rec":"Invalid recovery phrase"
+        "invalid_rec":"Invalid recovery phrase",
+        "invalid_phrase":"Something went wrong. Make sure you entered the words from recovery phrase in correct order."
     },
     "wallet": {
         "recovery_phrase":"Recovery Phrase",
@@ -37,7 +38,7 @@
         "please_enter":"Please enter the words from your Recovery Phrase in the required order.",
         "word":"Word",
         "finish":"Finish",
-        "go_copy":"Go back to copy my recovery phrase",
+        "go_copy":"Back",
         "security":"Security",
         "have_to_backup":"You have to backup your recovery phrase. It is strongly recommended to store the backup copies in physically separate, offline environment. If someone were to find your recovery phrase they could access your wallet.",
         "email" :"Email",
@@ -51,10 +52,10 @@
         "public_key_tultip":"Public key is your address to receive tokens.",
         "pvk_tooltip":"If someone were to find your private key they could access your wallet.",
         "receive":"Receive",
-        "public_key_desc":"Your address can also be known as you <b>public key</b>. It is what you share with people so they can send you tokens.",
+        "public_key_desc":"Share your address with people so they can send you tokens.",
         "transfer":"Transfer",
         "send":"Send",
-        "to_the_account":"to the recepient's account.",
+        "to_the_account":"to the recipient's address.",
         "enter_address":"Enter address",
         "gas_price":"Gas price",
         "generate":"Generate transaction",

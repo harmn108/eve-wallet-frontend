@@ -19,6 +19,7 @@ export class RecoveryPhraseWordsComponent implements OnInit, OnDestroy{
   word3:FormControl = new FormControl();
   word4:FormControl = new FormControl();
   setBrainKeySubscription: Subscription;
+  phraseError:boolean = false;
 
 	constructor(
     private accountService:AccountService, public router:Router, public dialog: MatDialog) {
@@ -27,6 +28,9 @@ export class RecoveryPhraseWordsComponent implements OnInit, OnDestroy{
   ngOnInit(){
     this.generateNumbers();
     this.brainKey = this.accountService.brainKey;
+    if(!this.brainKey){
+      this.router.navigate(['/wallet/settings']);
+    }
     this.setBrainKeySubscription = this.accountService.brainKeySavedDataChanged.subscribe(data => {
       this.router.navigate(['/wallet/settings']);
   });
@@ -52,6 +56,9 @@ export class RecoveryPhraseWordsComponent implements OnInit, OnDestroy{
     ){
       this.accountService.setBrainKeySaved();
       this.accountService.brainKey = '';
+    }
+    else{
+      this.phraseError = true;
     }
   }
 

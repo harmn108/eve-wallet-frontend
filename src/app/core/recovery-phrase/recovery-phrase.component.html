@@ -5,7 +5,7 @@
 	<p class="description">{{(backup? 'wallet.enter_pass' : 'wallet.enter_pass_see') | translate}}</p>
 
 	<input type="password" placeholder="{{'user.password' | translate}}" [formControl]="password">
-	<p style="color:red;" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
+	<p class="error-message" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
 
 	<div class="buttons">
 		<button class="button button--fat button--primary" (click)="continue()">{{'wallet.continue' |translate}}</button>

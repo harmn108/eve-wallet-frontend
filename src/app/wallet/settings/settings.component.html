@@ -67,7 +67,7 @@
 				</div>
 				<div class="input-wrapper__shadow"></div>
 			</div>
-			<button class="button button--primary button--upper" *ngIf="!account.brainKeySaved" (click)="backupRecoveryPhrase(true)">{{'wallet.back_up' | translate}}</button>
+			<button class="button button--primary button--upper"  (click)="backupRecoveryPhrase(true)">{{'wallet.back_up' | translate}}</button>
 		</div>
 		<div class="security__item__status" *ngIf="account.brainKeySaved">
 			<div class="icon-done"></div>

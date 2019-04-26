@@ -20,8 +20,8 @@
 		<small>{{'wallet.word' | translate}} {{numberArray[3]}}</small>
 	</div>
 </div>
-
 <div class="buttons">
 	<button class="button button--fat button--primary button--upper" [disabled]="!word1.value || !word2.value || !word3.value || !word4.value" (click)="finish()">{{'wallet.finish' | translate}}</button>
 	<a routerLink="/wallet/settings">{{'wallet.go_copy' | translate}}</a>
 </div>
+<p class="error-message" *ngIf="phraseError">{{'user.invalid_phrase' | translate}}</p>

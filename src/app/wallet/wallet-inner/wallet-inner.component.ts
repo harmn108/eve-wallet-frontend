@@ -96,9 +96,7 @@ export class WalletInnerComponent implements OnInit {
           if (res) {
               this.seeMorebool = false;
               if(this.clickSeeMoreEveg){
-                console.log(this.evegTransactions,res.transactions);
                 this.evegTransactions = this.evegTransactions.concat(res.transactions);
-                console.log(this.evegTransactions);
               }
               else{
                 this.evegTransactions = res.transactions;
