@@ -54,7 +54,11 @@
 <div class="hline"></div>
 
 <div class="history-section">
-	<h2>{{'wallet.history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveg' && evegTransactions.length !==0">{{'wallet.history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveo' && eveoTransactions.length !==0">{{'wallet.history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveg' && evegTransactions.length==0">{{'wallet.no_history' | translate}}</h2>
+	<h2 *ngIf="token == 'eveo' && eveoTransactions.length==0">{{'wallet.no_history' | translate}}</h2>
+
 	<div *ngIf="token == 'eveg'">
 		<div class="transaction" *ngFor="let action of evegTransactions">
 			<div class="transaction__first-col">

@@ -151,6 +151,7 @@ export class WalletInnerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.transferForm.reset();
+      this.transferForm.controls['gasPrice'].setValue(this.settings.average);
     });
 
   }
@@ -175,7 +176,7 @@ export class WalletInnerComponent implements OnInit {
   private buildForm() {
     this.transferForm = this.FormBuilder.group({
       'address': new FormControl('', [Validators.required, this.checkValidAddress.bind(this)]),
-      'gasPrice': new FormControl(20, [Validators.required]),
+      'gasPrice': new FormControl(null, [Validators.required]),
       'amount': new FormControl(null, {
         validators: [
           Validators.required,
@@ -198,7 +199,6 @@ export class WalletInnerComponent implements OnInit {
         };
       }
     }
-
   }
 
 
