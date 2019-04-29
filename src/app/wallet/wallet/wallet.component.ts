@@ -27,7 +27,7 @@ export class WalletComponent implements OnInit {
 	ngOnInit() {
 		this.accountService.ethBalance.subscribe(
 			eth => {
-				this.ethBalance = eth.toFixed(4);
+				this.ethBalance = eth.toString();
 			}
 		)
 			this.tokenService.active.subscribe(
@@ -73,7 +73,7 @@ export class WalletComponent implements OnInit {
 	}
 
 	onactivate(e) {
-		if (this.router.url == '/wallet/recovery-phrase') {
+		if (this.router.url == '/wallet/recovery-phrase' || this.router.url == '/wallet/backup-recovery-phrase') {
 			this.active = null;
 			this.tokenService.active.next(this.active);
 			this.disabled = true;

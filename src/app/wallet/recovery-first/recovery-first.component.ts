@@ -17,6 +17,9 @@ export class RecoveryFirstComponent implements OnInit{
   
   ngOnInit(){
     this.brainKey = this.accountService.brainKey;
+    if(!this.brainKey){
+      this.router.navigate(['wallet/settings']);
+    }
   }
 
   recover(){

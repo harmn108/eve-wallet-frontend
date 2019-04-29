@@ -63,8 +63,8 @@ export class WalletInnerComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.ethBalance.subscribe(
-			eth => {
-        this.ethBalance = parseFloat(eth.toFixed(4));
+			(eth:any) => {
+        this.ethBalance = parseFloat(eth);
         this.accountService.getSettings().subscribe(
           settings => {
             this.settings = settings;
@@ -208,7 +208,7 @@ export class WalletInnerComponent implements OnInit {
   }
 
   checkValidGasPrice(control: FormControl) {
-    if (control.value && this.ethBalance) {
+    if (control.value && control.dirty) {
       if ((control.value)/(Math.pow(10,9)) < this.ethBalance) {
         return false;
       }
