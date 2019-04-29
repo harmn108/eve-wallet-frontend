@@ -119,6 +119,10 @@ export class Web3Service {
     });
   }
 
+  getEthBalance(address){
+    return this.web3.eth.getBalance(address);
+  }
+
   checkValidAddress(address) {
     return this.web3.utils.isAddress(address);
   }

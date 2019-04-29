@@ -34,15 +34,21 @@
 			</div>
 			<div class="transaction-fee">
 				<div>
-					<label>{{'wallet.gas_price' | translate}}</label>
-					<span>[Gwei]</span>
+					<div>
+						<label>{{'wallet.gas_price' | translate}}</label>
+						<span>[Gwei]</span>
+					</div>
+					<span>{{settings?.min}}</span>
+					<mat-slider thumbLabel [displayWith]="formatLabel" formControlName="gasPrice"
+						[value]="transferForm.controls['gasPrice'].value" min="{{settings?.min}}" max="{{settings?.max}}">
+					</mat-slider>
+					<span>{{settings?.max}}</span>
 				</div>
-				<span>{{settings?.min}}</span>
-				<mat-slider thumbLabel [displayWith]="formatLabel" formControlName="gasPrice"
-					[value]="transferForm.controls['gasPrice'].value" min="{{settings?.min}}" max="{{settings?.max}}">
-				</mat-slider>
-				<span>{{settings?.max}}</span>
+				<p class="error-message"
+			*ngIf="transferForm.controls['gasPrice'].errors && transferForm.controls['gasPrice'].errors.invalidGasPrice">
+			{{'error.invalid_gas' | translate}}</p>
 			</div>
+			
 		</div>
 		<div>
 			<button class="button button--primary button--upper" [disabled]="transferForm.invalid"

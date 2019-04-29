@@ -36,7 +36,7 @@ export class WalletInnerComponent implements OnInit {
   clickSeeMoreEveg:boolean = false;
   lastEveg:boolean = false;
   lastEveo:boolean = false;
-
+  ethBalance;
   constructor(private accountService: AccountService,
     private FormBuilder: FormBuilder,
     private web3: Web3Service,
@@ -62,6 +62,17 @@ export class WalletInnerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.accountService.ethBalance.subscribe(
+			eth => {
+        this.ethBalance = parseFloat(eth.toFixed(4));
+        this.accountService.getSettings().subscribe(
+          settings => {
+            this.settings = settings;
+            this.transferForm.controls['gasPrice'].setValue(this.settings.average);
+          }
+        );
+			}
+		);
     this.buildForm();
     if (isPlatformBrowser(this.platformId)) {
       this.tokenService.active.subscribe(
@@ -107,12 +118,7 @@ export class WalletInnerComponent implements OnInit {
           }
         }
       );
-      this.accountService.getSettings().subscribe(
-        settings => {
-          this.settings = settings;
-          this.transferForm.controls['gasPrice'].setValue(this.settings.average);
-        }
-      );
+      
       this.accountService.getDecimals().subscribe(
         decimals => {
           this.decimals = decimals;
@@ -176,7 +182,7 @@ export class WalletInnerComponent implements OnInit {
   private buildForm() {
     this.transferForm = this.FormBuilder.group({
       'address': new FormControl('', [Validators.required, this.checkValidAddress.bind(this)]),
-      'gasPrice': new FormControl(null, [Validators.required]),
+      'gasPrice': new FormControl(null, [Validators.required,this.checkValidGasPrice.bind(this)]),
       'amount': new FormControl(null, {
         validators: [
           Validators.required,
@@ -196,6 +202,19 @@ export class WalletInnerComponent implements OnInit {
       else {
         return {
           invalidAddress: true
+        };
+      }
+    }
+  }
+
+  checkValidGasPrice(control: FormControl) {
+    if (control.value && this.ethBalance) {
+      if ((control.value)/(Math.pow(10,9)) < this.ethBalance) {
+        return false;
+      }
+      else {
+        return {
+          invalidGasPrice: true
         };
       }
     }

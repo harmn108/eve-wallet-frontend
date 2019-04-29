@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../../core/services/account.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment.prod';
+import { Web3Service } from '../../core/services/web3.service';
 
 @Component({
 	selector: 'app-wallet',
@@ -18,12 +19,18 @@ export class WalletComponent implements OnInit {
 	evegBalance;
 	eveoBalance;
 	balance;
-	constructor(private accountService: AccountService, public router: Router, private tokenService: TokenService) {
+	ethBalance;
+	constructor(private web3:Web3Service, private accountService: AccountService, public router: Router, private tokenService: TokenService) {
 
 	}
 
 	ngOnInit() {
-		this.tokenService.active.subscribe(
+		this.accountService.ethBalance.subscribe(
+			eth => {
+				this.ethBalance = eth.toFixed(4);
+			}
+		)
+			this.tokenService.active.subscribe(
 			active => {
 				this.active = active;
 			}

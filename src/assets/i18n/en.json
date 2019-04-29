@@ -91,7 +91,8 @@
         "will_take_10_sec":"Processing will take 10 seconds.",
         "something_went_wrong":"Something went wrong!",
         "copied":"Copied",
-        "see_more":"See more"
+        "see_more":"See more",
+        "balance":"balance"
     },
     "error": {
             "invalid_email_or_pass":"Invalid email or password",
@@ -99,7 +100,8 @@
             "invalid_password":"Invalid password",
             "system_error":"It seems you already have a EVE Wallet, please try to login.",
             "ins_invalid_amount_error":"Insufficient Amount",
-            "invalid_address":"Invalid address"
+            "invalid_address":"Invalid address",
+            "invalid_gas":"Insufficient ETH"
     },
     "core": {
        

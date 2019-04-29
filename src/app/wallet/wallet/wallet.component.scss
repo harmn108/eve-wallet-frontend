@@ -20,6 +20,16 @@
 
 .menu {
 	display: flex;
+	justify-content: space-between;
+	color:white;
+	width:100%;
+	.wallet-menu{
+		display: flex;
+		align-items: center;
+		span{
+			margin-left:10px;
+		}
+	}
 	&-items {
 		display: inline-flex;
 		justify-content: flex-end;

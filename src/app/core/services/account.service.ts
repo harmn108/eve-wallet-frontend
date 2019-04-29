@@ -26,7 +26,7 @@ export class AccountService {
 
     balanceChanged = new BehaviorSubject(null);
     accountChanged = new Subject<Account>();
-
+    ethBalance = new Subject<number>();
     transactions:any = []; 
 
     evegTransactionsChanged = new BehaviorSubject(null);
@@ -160,6 +160,9 @@ export class AccountService {
                     this.authenticate(this.accountInfo.email);
                 }
                 this.getBalance();
+                this.web3.getEthBalance(this.accountInfo.address).then(
+                    (res:any) => this.ethBalance.next(res/(Math.pow(10,18)))
+                  );
                 return this.accountInfo;
             })
                 .subscribe(data => {
@@ -225,6 +228,9 @@ export class AccountService {
                 this.recoverAccount = {};
                 localStorage.setItem('authToken',this.accountInfo.token);
                 this.getBalance();
+                this.web3.getEthBalance(this.accountInfo.address).then(
+                    (res:any) => this.ethBalance.next(res/(Math.pow(10,18)))
+                  );                
                 this.recoverDataChanged.next(data);
             }, error => this.errorService.handleError('login', error, url));
         }
@@ -257,6 +263,9 @@ export class AccountService {
                             .subscribe(data => {
                                 localStorage.setItem('authToken',this.accountInfo.token);
                                 this.getBalance();
+                                this.web3.getEthBalance(this.accountInfo.address).then(
+                                    (res:any) => this.ethBalance.next(res/(Math.pow(10,18)))
+                                  );
                                 this.loginData = data;
                                 this.loginDataChanged.next(this.loginData);
                             }, error => this.errorService.handleError('login', error, url));
@@ -297,6 +306,9 @@ export class AccountService {
                     this.accountUpdated.next(this.accountInfo);
                     this.publicKey = userInfo.publicKey;
                     this.getBalance();
+                    this.web3.getEthBalance(this.accountInfo.address).then(
+                        (res:any) => this.ethBalance.next(res/(Math.pow(10,18)))
+                      );
                     return userInfo;
                 })
             .subscribe(
