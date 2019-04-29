@@ -71,9 +71,9 @@ a {
 		}
 	}
 
-	&--fat {
-		padding: 16px 32px;
-	}
+	// &--fat {
+	// 	padding: 16px 32px;
+	// }
 
 	&--upper {
 		text-transform: uppercase;
@@ -88,9 +88,9 @@ input[type="text"],
 input[type="password"],
 input[type="number"],
 input[type="email"] {
-	font: 16px/19px 'Lato', sans-serif;
+	font: 16px/20px 'Lato', sans-serif;
 	border-radius: 8px;
-	padding: 16px 23px;
+	padding: 8px 6px 8px 10px;
 	border: 1px solid rgba(#323044, .5);
 	color: #1F2742;
 	outline: none;
@@ -149,14 +149,14 @@ textarea {
 	.input-wrapper__suffix {
 		min-width: 52px;
 		display: inline-block;
-		height: 52px;
+		height: 36px;
 		vertical-align: middle;
 	}
 
 	.input-wrapper__shadow {
     position: absolute;
-    top: -1px; left: -1px;
-    bottom: -1px; right: -1px;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
     border-radius: 8px;
     pointer-events: none;
 	}
@@ -172,7 +172,7 @@ textarea {
 .wallet-dialog .mat-dialog-container {
 	position: relative;
 	padding: 50px 60px;
-	border-radius: 20px;
+	border-radius: 8px;
 	max-width: 60%;
 	margin: 0 auto;
 	width: auto;
@@ -217,12 +217,13 @@ textarea {
 
 .alert-container {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	margin: 20px 0;
 
 	img {
 		flex: 0 0 20px;
 		height: 20px;
+		margin: 2px 0 0 0;
 	}
 
 	p {
@@ -230,5 +231,22 @@ textarea {
 		line-height: 19px;
 		color: #3C466C;
 		margin-left: 18px;
+	}
+}
+
+.mat-tooltip {
+	font-size: 14px;
+}
+
+.share-app{
+	margin-top: 56px;
+	a{
+		display: inline-block;
+		&:not(:last-child){
+			margin-right: 24px;
+		}
+		img{
+			height: 40px;
+		}
 	}
 }

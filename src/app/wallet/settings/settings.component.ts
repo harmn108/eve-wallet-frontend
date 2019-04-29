@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit{
 
 	backupPrivateKey(backup) {
 		const dialogRef = this.dialog.open(PrivateKeyDialog, {
-  		width: '870px',
+  		width: '960px',
       panelClass: 'wallet-dialog',
       data:{backup:backup}
   	});

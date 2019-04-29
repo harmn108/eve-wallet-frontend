@@ -14,4 +14,8 @@
     <p *ngIf="(loginForm.controls['email'].invalid && loginForm.controls['email'].touched && loginForm.controls['email'].value !== '' && loginType) || (loginForm.controls['password'].invalid && loginForm.controls['password'].touched && loginForm.controls['password'].value !== '' && loginType)" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>
     <p *ngIf="errorMessage" class="error-message">{{'error.invalid_email_or_pass' | translate}}</p>
   </form>
+  <div class="share-app">
+    <a href="javascript:void(0)"><img src="assets/images/AppStore.svg" alt=""></a>
+    <a href="javascript:void(0)"><img src="assets/images/GooglePlay.svg" alt=""></a>
+  </div>
 </div>

@@ -12,6 +12,10 @@ p.description {
 	margin: 0 0 24px;
 }
 
+input {
+	width: 100%;
+}
+
 table {
 	width: 100%;
 	font-weight: bold;
@@ -34,6 +38,7 @@ table {
 	@media (max-width: 767px) {
 		&, & > tbody, & > thead {
 			display: inline-block;
+			text-align: left;
 		}
 
 		tr {
