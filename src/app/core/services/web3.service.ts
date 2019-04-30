@@ -63,8 +63,8 @@ export class Web3Service {
     return this.signAndSendTransaction({
       from: params.from,
       to: params.to,
-      gas: 1000000,//this.web3.utils.toHex(this.settings.gas),
-      gasPrice: this.web3.utils.toHex(params.gasPrice),//this.web3.utils.toHex(this.settings.gasPrice),
+      gas: 100000,//this.web3.utils.toHex(this.settings.gas),
+      gasPrice: this.web3.utils.toWei(params.gasPrice.toString(), 'gwei'),//this.web3.utils.toHex(this.settings.gasPrice),
       // value: "0x0",
       pvk:params.pvk,
       data:
