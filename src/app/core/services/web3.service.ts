@@ -87,7 +87,7 @@ export class Web3Service {
   private signAndSendTransaction(transactionObject): Promise<string> {
     return new Promise((resolve, reject) => {
       this.web3.eth
-        .getTransactionCount(transactionObject.from, "pending")
+        .getTransactionCount(transactionObject.from, "latest")
         .then((nonce: number) => {
           transactionObject.nonce = nonce;
           let tx: Tx;
