@@ -27,7 +27,7 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
         if (isPlatformBrowser(this.platformId)) {
             this.activatedRoute.params.subscribe(params => {
                 if (params.code && params.code.length === 32) {
-                    this.openTfaApp('eve-wallet://everyone.bz/user/confirmation/'+params.code);
+                    this.openTfaApp('eve://everyone.bz/user/confirmation/'+params.code);
                     this.accountService.loadConfirm(params.code);
                 } else {
                     this.router.navigate(['/page-not-found']);
@@ -49,9 +49,15 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
 
     openTfaApp(url) {
             if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                var newTag = document.createElement("a"); 
+                newTag.addEventListener('click',
+            () => {
                 window.location.href = `${url}`;
+            }
+            )
                }    
     }
+
 
     ngOnDestroy() {
         if (isPlatformBrowser(this.platformId)) {
