@@ -95,7 +95,7 @@
 				<h3 class="transaction__type transaction__type--sent" *ngIf="action.fromAddress == this.address">
 					{{'wallet.sent' | translate}}</h3>
 
-				<h3 class="transaction__amount">{{action.amount}} EVEO</h3>
+				<h3 class="transaction__amount">{{action.amount | numberPipe}} EVEO</h3>
 			</div>
 			<div class="transaction-data">
 				<div class="transaction-data__peer">
@@ -105,8 +105,8 @@
 					<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 				</div>
 				<div class="transaction-data__date">
-					<b>{{getHours(action.timestamp)}}</b>
-					<span>{{getDate(action.timestamp)}}</span>
+					<b>{{getHours(action.timestamp*1000)}}</b>
+					<span>{{getDate(action.timestamp*1000)}}</span>
 				</div>
 			</div>
 		</div>
