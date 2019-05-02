@@ -4,8 +4,8 @@
 		<p class="description" [innerHTML]="'wallet.public_key_desc' | translate"></p>
 
 		<span class="address-label">{{'wallet.your_address' | translate}}</span>
-		<div class="public-key-wrapper">
-			<div class="public-key">{{address}}</div>
+		<div class="public-key-wrapper"  >
+			<div class="public-key"> <span class="notranslate">{{address}}</span></div>
 			<img src="assets/images/copy.svg" (click)="copy()">
 		</div>
 	</div>

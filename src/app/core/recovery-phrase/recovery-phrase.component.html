@@ -21,7 +21,9 @@
 	<b>{{'wallet.recover_only_way' | translate}}</b>
 
 	<div class="recovery-phrase">
-		{{brainKey}}
+		<span class="notranslate">
+				{{brainKey}}
+		</span>
 	</div>
 
 	<p *ngIf="backup" class="recovery-phrase-text">{{'wallet.next_step_text' | translate}}</p>

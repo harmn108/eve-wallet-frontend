@@ -6,7 +6,7 @@
 			<div class="menu">
 				<div class="wallet-menu">
 					<img src="assets/images/wallet.svg" alt="">
-					<span>{{ethBalance}} ETH</span>
+					<span class="notranslate">{{ethBalance}} ETH</span>
 				</div>
 				<div class="menu-items menu-items--open" >
 					<a (click)="settings()">{{'wallet.security' | translate}}</a>
@@ -20,7 +20,7 @@
 					<img src="assets/images/eveg.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEG</h3>
-						<h4>{{evegBalance || 0}}<small>EVEG</small></h4>
+						<h4 class="notranslate">{{evegBalance || 0}}<small>EVEG</small></h4>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 					<img src="assets/images/eveo.svg" alt="">
 					<div class="wallet-card__name">
 						<h3>EVEO</h3>
-						<h4>{{eveoBalance || 0}}<small>EVEO</small></h4>
+						<h4 class="notranslate">{{eveoBalance || 0}}<small>EVEO</small></h4>
 					</div>
 				</div>
 			</div>
