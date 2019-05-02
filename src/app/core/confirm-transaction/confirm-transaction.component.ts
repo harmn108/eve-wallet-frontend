@@ -61,14 +61,15 @@ export class ConfirmTransactionDialog {
       toAddress:this.transferParams.address,
       pvk:this.privateKey,
       decimalPlaces:this.data.decimalPlaces
-    }
+    };
      this.web3.sendToken(data).then(
       res => {
-        this.snackBar.open(this.translateService.instant("wallet.will_take_10_sec"), null, { duration: 1000 });
+        this.snackBar.open(this.translateService.instant("wallet.will_take_10_sec")+this.transferParams.time+' minutes', null, { duration: 1000 });
         this.close();
       }
     ).catch(
       err => {
+        console.log('error',err);
         this.snackBar.open(this.translateService.instant("wallet.something_went_wrong"), null, { duration: 1000 });
         this.close();
     }

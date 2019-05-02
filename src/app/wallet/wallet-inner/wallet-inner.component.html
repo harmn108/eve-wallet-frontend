@@ -29,7 +29,7 @@
 		<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
 		<div class="form-fields">
 			<div class="coin-field">
-				<input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
+				<input type="text" (keypress)="ifNumber($event)" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
 				<p class="error-message" *ngIf="amountErrorMessage && transferForm.controls['amount'].value != 0" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 			</div>
 			<div class="transaction-fee">

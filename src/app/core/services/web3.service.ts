@@ -63,9 +63,9 @@ export class Web3Service {
     return this.signAndSendTransaction({
       from: params.from,
       to: params.to,
-      gas: 100000,//this.web3.utils.toHex(this.settings.gas),
-      gasPrice: this.web3.utils.toWei(params.gasPrice.toString(), 'gwei'),//this.web3.utils.toHex(this.settings.gasPrice),
-      // value: "0x0",
+      gas: this.web3.utils.toHex('100000'),//this.web3.utils.toHex(this.settings.gas),
+      gasPrice: this.web3.utils.toHex(this.web3.utils.toWei(params.gasPrice.toString(), 'gwei')),//this.web3.utils.toHex(this.settings.gasPrice),
+      value: "0x0",
       pvk:params.pvk,
       data:
         "0xa9059cbb" +
@@ -85,6 +85,7 @@ export class Web3Service {
   }
 
   private signAndSendTransaction(transactionObject): Promise<string> {
+    console.log(transactionObject);
     return new Promise((resolve, reject) => {
       this.web3.eth
         .getTransactionCount(transactionObject.from, "latest")

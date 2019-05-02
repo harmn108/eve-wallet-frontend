@@ -77,6 +77,8 @@ export class WalletInnerComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.tokenService.active.subscribe(
         token => {
+          this.transferForm.controls['amount'].reset();
+          this.amountErrorMessage = '';
           this.token = token;
         }
       );
@@ -128,6 +130,15 @@ export class WalletInnerComponent implements OnInit {
     }
   }
 
+  ifNumber(evt)
+		 {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+        return false;
+    }
+    return true; }
+
   copy() {
     var input = document.createElement('input');
     input.setAttribute('value', this.address);
@@ -146,6 +157,7 @@ export class WalletInnerComponent implements OnInit {
       amount: this.transferForm.value.amount,
       address: this.transferForm.value.address,
       gasPrice: this.transferForm.value.gasPrice,
+      transactionTime: this.settings.time,
       contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
       decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
     };

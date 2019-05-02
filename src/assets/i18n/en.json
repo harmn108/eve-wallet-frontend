@@ -88,7 +88,7 @@
         "amount":"Amount",
         "rec_address":"Address",
         "cancel":"Cancel",
-        "will_take_10_sec":"Processing will take 10 seconds.",
+        "will_take_10_sec":"Average transaction time ",
         "something_went_wrong":"Something went wrong!",
         "copied":"Copied",
         "see_more":"See more",
