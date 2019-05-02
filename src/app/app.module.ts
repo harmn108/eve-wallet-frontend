@@ -18,7 +18,6 @@ import { WalletModule } from './wallet/wallet.module';
 import { Web3Service } from './core/services/web3.service';
 import { CryptService } from './core/services/crypt.service';
 import { TokenService } from './core/services/token.service';
-import {MatSliderModule} from '@angular/material/slider';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -29,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'eve-wallet-frontend-app'}),
+    BrowserModule.withServerTransition({ appId: 'eve-wallet-frontend-app' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
@@ -52,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ErrorService,
     Web3Service,
     CryptService,
-    TokenService
+    TokenService,
   ],
   bootstrap: [AppComponent]
 })

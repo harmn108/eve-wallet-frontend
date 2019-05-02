@@ -16,10 +16,10 @@ export class WalletComponent implements OnInit {
 	active: string;
 	logOutSubscription: Subscription;
 	disabled: boolean = false;
-	evegBalance;
-	eveoBalance;
+	evegBalance = 0;
+	eveoBalance = 0;
 	balance;
-	ethBalance;
+	ethBalance = '0';
 	constructor(private web3:Web3Service, private accountService: AccountService, public router: Router, private tokenService: TokenService) {
 
 	}
