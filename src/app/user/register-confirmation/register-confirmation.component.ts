@@ -49,12 +49,7 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
 
     openTfaApp(url) {
             if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                var newTag = document.createElement("a"); 
-                newTag.addEventListener('click',
-            () => {
                 window.location.href = `${url}`;
-            }
-            )
                }    
     }
 
