@@ -64,13 +64,12 @@ export class ConfirmTransactionDialog {
     };
      this.web3.sendToken(data).then(
       res => {
-        this.snackBar.open(this.translateService.instant("wallet.will_take_10_sec")+this.transferParams.transactionTime+' minutes', null, { duration: 1000 });
+        this.snackBar.open(this.translateService.instant("wallet.will_take_10_sec")+this.transferParams.transactionTime+' minutes', null, { duration: 3000 });
         this.close();
       }
     ).catch(
       err => {
-        console.log('error',err);
-        this.snackBar.open(this.translateService.instant("wallet.something_went_wrong"), null, { duration: 1000 });
+        this.snackBar.open(err, null, { duration: 3000 });
         this.close();
     }
     )

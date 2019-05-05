@@ -101,7 +101,8 @@
             "system_error":"It seems you already have a EVE Wallet, please try to login.",
             "ins_invalid_amount_error":"Insufficient Amount",
             "invalid_address":"Invalid address",
-            "invalid_gas":"Insufficient ETH"
+            "invalid_gas":"Insufficient ETH",
+            "account_already_exist":"Account already exist"
     },
     "core": {
        

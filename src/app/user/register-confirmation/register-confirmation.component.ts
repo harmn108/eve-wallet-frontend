@@ -27,8 +27,9 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
         if (isPlatformBrowser(this.platformId)) {
             this.activatedRoute.params.subscribe(params => {
                 if (params.code && params.code.length === 32) {
-                    this.openTfaApp('eve://everyone.bz/user/confirmation/'+params.code);
                     this.accountService.loadConfirm(params.code);
+                    
+                    
                 } else {
                     this.router.navigate(['/page-not-found']);
                 }

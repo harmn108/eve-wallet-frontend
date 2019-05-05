@@ -119,12 +119,18 @@ export class AccountService {
                     this.code = code;
                     this.confirmCode = result;
                     this.confirmCodeChanged.next(result);
+                    this.openTfaApp('eve://everyone.bz/user/confirmation/'+code);
                 }, error => {
+                    alert(url);
                     this.errorService.handleError('loadConfirm', error, url)
                 });
         }
     }
-
+    openTfaApp(url) {
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            window.location.href = `${url}`;
+           }    
+}
     preRegister(email: string): void {
         if (isPlatformBrowser(this.platformId)) {
             let url = this.userUrl + '/signup';
