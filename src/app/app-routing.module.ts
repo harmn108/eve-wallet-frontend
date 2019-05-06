@@ -6,6 +6,7 @@ import { HomepageComponent } from './core/homepage/homepage.component';
 import { userRoutes } from './user/user-routing.module';
 import { walletRoutes } from './wallet/wallet-routing.module';
 import { LoginComponent } from './user/login/login.component';
+import { ExpireLinkComponent } from './shared/expire-link/expire-link';
 
 const routes: Routes = [
     {
@@ -25,6 +26,11 @@ const routes: Routes = [
         path: 'page-not-found',
         pathMatch: 'full',
         component: PageNotFoundComponent
+    },
+    {
+        path: 'expire-link',
+        pathMatch: 'full',
+        component: ExpireLinkComponent
     },
     {
         path: '**',

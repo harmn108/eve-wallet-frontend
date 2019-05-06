@@ -28,8 +28,6 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
             this.activatedRoute.params.subscribe(params => {
                 if (params.code && params.code.length === 32) {
                     this.accountService.loadConfirm(params.code);
-                    
-                    
                 } else {
                     this.router.navigate(['/page-not-found']);
                 }
@@ -37,7 +35,7 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
 
             this.errorEventEmiterSubscription = this.errorService.errorEventEmiter.subscribe((data: ErrorEvent) => {
                 if (data.action === 'loadConfirm') {
-                    this.router.navigate(['/page-not-found']);
+                    this.router.navigate(['/expire-link']);
                 }
             });
 

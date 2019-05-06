@@ -119,13 +119,13 @@ export class AccountService {
                     this.code = code;
                     this.confirmCode = result;
                     this.confirmCodeChanged.next(result);
-                    this.openTfaApp('eve://everyone.bz/user/confirmation/' + code);
+                    // this.openApp('eve://everyone.bz/user/confirmation/' + code);
                 }, error => {
                     this.errorService.handleError('loadConfirm', error, url)
                 });
         }
     }
-    openTfaApp(url) {
+    openApp(url) {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             window.location.href = `${url}`;
         }
