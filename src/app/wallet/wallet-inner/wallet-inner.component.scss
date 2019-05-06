@@ -116,6 +116,10 @@ p.description {
 		padding: 5px 6px 5px 10px;
 	}
 
+	.transfer-input{
+		margin-bottom: 0;
+	}
+
 	.transaction-fee .error-message {
 		text-align: right;
 		@media screen and (max-width: 767px) {
