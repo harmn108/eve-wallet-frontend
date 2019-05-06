@@ -62,6 +62,9 @@ export class WalletInnerComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.accountService.etherBalance){
+      this.accountService.getEthBalance();
+    }
     this.accountService.ethBalance.subscribe(
 			(eth:any) => {
         this.ethBalance = parseFloat(eth);

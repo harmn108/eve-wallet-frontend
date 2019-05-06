@@ -12,5 +12,8 @@ export class NumberPipe implements PipeTransform {
     if(number){
       return number.toLocaleString();
     }
+    else{
+      return 0;
+    }
   }
 }
