@@ -20,11 +20,13 @@
 		<p class="description">{{'wallet.send' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}
 			{{'wallet.to_the_account' | translate}}</p>
 
-		<label>{{'wallet.rec_address' | translate}}</label>
-		<input type="text" placeholder="{{'wallet.enter_address' | translate}}" formControlName="address">
-		<p class="error-message"
-			*ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">
-			{{'error.invalid_address' | translate}}</p>
+		<div style="margin-bottom: 25px">
+			<label>{{'wallet.rec_address' | translate}}</label>
+			<input class="transfer-input" type="text" placeholder="{{'wallet.enter_address' | translate}}" formControlName="address">
+			<p class="error-message"
+			   *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">
+				{{'error.invalid_address' | translate}}</p>
+		</div>
 
 		<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
 		<div class="form-fields">
