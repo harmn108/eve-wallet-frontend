@@ -60,7 +60,7 @@ export class WalletComponent implements OnInit {
 	}
 
 	setActive(active) {
-		if (this.router.url == '/wallet/recovery-phrase' || this.router.url == '/wallet/backup-recovery-phrase') {
+		if (this.router.url == '/wallet/recovery-phrase' || this.router.url == '/wallet/backup-recovery-phrase' || this.router.url == '/wallet/recovery-phrase') {
 			return;
 		}
 		this.router.navigate(['/wallet']);
@@ -73,7 +73,7 @@ export class WalletComponent implements OnInit {
 	}
 
 	onactivate(e) {
-		if (this.router.url == '/wallet/settings') {
+		if (this.router.url == '/wallet/settings' || this.router.url == '/wallet/backup-recovery-phrase' || this.router.url == '/wallet/recovery-phrase') {
 			this.active = null;
 			this.tokenService.active.next(this.active);
 		}
