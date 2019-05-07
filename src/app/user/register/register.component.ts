@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
   title: string = 'register';
   emailType: boolean = false;

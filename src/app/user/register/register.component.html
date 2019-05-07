@@ -16,8 +16,8 @@
 	<mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!loading">
-	<h2 *ngIf="request">{{'user.check_email' | translate}}</h2>
-<h2 *ngIf="!request">{{'user.create_wallet' | translate}}</h2>
+<h2 >{{'user.create_wallet' | translate}}</h2>
+<p class="descr" *ngIf="request">{{'user.check_email' | translate}}</p>
 <p class="descr" *ngIf="!request">{{'user.enter_to_create' | translate}}</p>
 
 <div class="input-wrapper">
