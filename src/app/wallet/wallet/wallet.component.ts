@@ -47,6 +47,8 @@ export class WalletComponent implements OnInit {
 			}
 		)
 		this.logOutSubscription = this.accountService.logoutDataChanged.subscribe(data => {
+			this.active='eveg';
+			this.tokenService.active.next('eveg');
 			this.router.navigate(['/user/login']);
 		});
 	}
@@ -78,6 +80,7 @@ export class WalletComponent implements OnInit {
 			this.tokenService.active.next(this.active);
 		}
 		else {
+			this.active = 'eveg';
 			this.disabled = false;
 		}
 	}

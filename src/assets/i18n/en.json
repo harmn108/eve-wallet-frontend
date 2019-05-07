@@ -45,6 +45,7 @@
         "finish":"Done",
         "go_copy":"Back",
         "security":"Security",
+        "the_only_way":"Your recovery phrase is the only way to reset your web wallet password, make sure you have access to it if necessary.",
         "have_to_backup":"You have to backup your recovery phrase. It is strongly recommended to store the backup copies in physically separate, offline environment. If someone were to find your recovery phrase they could access your wallet.",
         "email" :"Email",
         "have_to_backup_pvk_and_phrase":"You have to backup your private key and recovery phrase. It is strongly recommended to store the backup copies in physically separate, offline environment. If someone were to find your password, private key or recovery phrase they could access your wallet.",
