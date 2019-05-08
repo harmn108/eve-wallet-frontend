@@ -10,7 +10,13 @@ export class NumberPipe implements PipeTransform {
 
   transform(number) {
     if(number){
-      return number.toLocaleString();
+      let stringValue = number.toString();
+      let stringArr = stringValue.split('.');
+      let digits = 0;
+      if(stringArr[1]){
+        digits = stringArr[1].length;
+      }
+      return number.toLocaleString(undefined, { minimumFractionDigits: digits });
     }
     else{
       return 0;

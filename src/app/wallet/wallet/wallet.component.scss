@@ -109,12 +109,12 @@
 	width: 50%;
 	padding: 20px;
 	border-radius: 8px 8px 0 0;
-
 	&--active {
 		cursor: default;
 		background: #ffffff;
 
-		.wallet-card__inner { cursor: default; }
+		.wallet-card__inner { cursor: default; display: flex;
+			justify-content: center;}
 
 		&:before {
 			content: '';
@@ -165,7 +165,7 @@
 	}
 
 	&__name {
-		margin-left: 8px;
+		margin-left: 24px;
 		h3 {
 			font-size: 28px;
 			line-height: 36px;
@@ -203,6 +203,10 @@
 			//display: none;
 		}
 	}
+}
+
+.no-curser{
+	cursor: default;
 }
 
 .wallet-inner {

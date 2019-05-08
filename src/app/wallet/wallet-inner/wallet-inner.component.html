@@ -1,3 +1,8 @@
+<div style="display: flex;align-items: center;justify-content: flex-start;padding:10px 0 30px;">
+		<h2>{{'wallet.ba_lance' | translate}}: </h2>
+		<p class="balance">{{(token == 'eveg'? evegBalance : eveoBalance) | numberPipe}}<small> {{token == 'eveg'?  'EVEG' : 'EVEO'}}</small></p>
+
+</div>
 <div class="receive-section">
 	<div>
 		<h2>{{'wallet.receive' | translate}} {{token == 'eveg'?  'EVEG' : 'EVEO'}}</h2>

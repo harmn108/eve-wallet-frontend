@@ -63,6 +63,7 @@ export class WalletComponent implements OnInit {
 
 	setActive(active) {
 		if (this.router.url == '/wallet/recovery-phrase' || this.router.url == '/wallet/backup-recovery-phrase' || this.router.url == '/wallet/recovery-phrase') {
+			this.disabled = true;
 			return;
 		}
 		this.router.navigate(['/wallet']);
