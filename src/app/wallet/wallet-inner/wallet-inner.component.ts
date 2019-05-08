@@ -71,24 +71,24 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if(!this.accountService.etherBalance){
-      this.accountService.getEthBalance();
-    }
-    this.accountService.ethBalance.subscribe(
-			(eth:any) => {
-        this.ethBalance = parseFloat(eth);
-        this.accountService.getSettings().subscribe(
-          settings => {
-              this.settings = settings['price'];
-              this.time = settings['time'];
-            this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2 );
-              this.ethFee = Decimal.div(this.settings.average, 10e9)
-          }
-        );
-			}
-		);
-    this.buildForm();
     if (isPlatformBrowser(this.platformId)) {
+        if(!this.accountService.etherBalance){
+            this.accountService.getEthBalance();
+        }
+        this.accountService.ethBalance.subscribe(
+            (eth:any) => {
+                this.ethBalance = parseFloat(eth);
+                this.accountService.getSettings().subscribe(
+                    settings => {
+                        this.settings = settings['price'];
+                        this.time = settings['time'];
+                        this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2 );
+                        this.ethFee = Decimal.div(this.settings.average, 10e9)
+                    }
+                );
+            }
+        );
+        this.buildForm();
       this.tokenService.active.subscribe(
         token => {
           this.transferForm.controls['amount'].reset();

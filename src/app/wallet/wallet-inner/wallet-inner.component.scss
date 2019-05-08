@@ -199,10 +199,10 @@ p.balance{
 					&:after {
 						content: '';
 						display: inline-block;
-						width: 2px; height: 6px;
+						width: 1px; height: 8px;
 						background-color: #bdbdbd;
 						position: absolute;
-						top: -23px;
+						top: -28px;
 					}
 
 					&:first-child {
