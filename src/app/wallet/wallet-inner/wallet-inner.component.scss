@@ -126,78 +126,129 @@ p.balance{
 		margin-bottom: 0;
 	}
 
-	.transaction-fee .error-message {
-		text-align: right;
-		@media screen and (max-width: 767px) {
-			text-align: left;
-		}
-	}
+  .transaction-fee {
+  	display: flex;
 
-	.transaction-fee > div{
-		display: flex;
-		align-items: flex-start;
+		> div{
+			flex: 1;
 
-		> div {
-			flex: 0 0 44%;
-			min-width: 170px;
-			
 			&:first-child {
-				margin: 9px 0 0;
+				flex: 0 0 100px;
+				padding: 8px;
 				text-align: right;
 
-				span { margin: 0 8px 0 0; }
-			}
-
-			@media screen and (max-width: 767px){
-				flex: 0 0 auto;
-				min-width: unset;
-
-				&:first-child {
+				@media (max-width: 767px) {
 					text-align: left;
+					padding: 8px 0;
+					flex: 0 0 auto;
 				}
 			}
-		}
 
-		label {
-			display: inline-block;
-			font-size: 16px;
-			margin: 0 8px 0 0;
-		}
-
-		input {
-			height: auto;
-			min-height: 22px;
-			max-width: 30px;
-			border: none;
-			border-radius: 0;
-			padding: 0;
-			color: #607BED;
-			border-bottom: 2px dashed #607BED;
-			margin: 0 6px 0 12px;
-		}
-
-		span {
-			margin: 9px 15px 0;
-			color: #8A8FA5;
-		}
-
-		mat-slider {
-			//flex: 0 0 55%;
-			width: 100%;
-			max-width: 320px;
-			margin: -4px 0 0;
-
-			.mat-slider-horizontal{
-				height: 36px;
+			label {
+				display: inline-block;
+				font-size: 16px;
+				margin: 0 8px 0 0;
 			}
 
-			+ span {
-				margin-right: 0;
+			input {
+				height: auto;
+				min-height: 22px;
+				max-width: 30px;
+				border: none;
+				border-radius: 0;
+				padding: 0;
+				color: #607BED;
+				border-bottom: 2px dashed #607BED;
+				margin: 0 6px 0 12px;
 			}
-		}
 
-		@media screen and (max-width: 767px){
-			margin-top: 25px;
+			span {
+				margin: 9px 15px 0;
+				color: #8A8FA5;
+			}
+
+			mat-slider {
+				//flex: 0 0 55%;
+				width: 100%;
+				max-width: 320px;
+				margin: -4px 0 0;
+
+				.mat-slider-horizontal{
+					height: 36px;
+				}
+
+				+ span {
+					margin-right: 0;
+				}
+
+				@media (max-width: 767px) {
+					max-width: unset;
+				}
+			}
+
+			.indicator {
+				position: relative;
+				height: 28px;
+
+				span {
+					font-size: 12px;
+					position: absolute;
+					margin: 0;
+					top: 0;
+
+					&:after {
+						content: '';
+						display: inline-block;
+						width: 2px; height: 6px;
+						background-color: #bdbdbd;
+						position: absolute;
+						top: -23px;
+					}
+
+					&:first-child {
+						left: 8px;
+
+						&:after {
+							left: 0;
+						}
+					}
+
+					&:nth-child(2) {
+						left: 50%;
+						transform: translateX(-50%);
+
+						&:after {
+							left: inherit;
+							transform: inherit;
+						}
+					}
+
+					&:last-child {
+						right: 8px;
+
+						&:after {
+							right: 0;
+						}
+					}
+				}
+			}
+
+			.transaction_fee{
+				color: #8A8FA5;
+				font-size: 14px;
+				line-height: 18px;
+				padding: 0 8px;
+			}
+
+			.error-message {
+				padding: 0 8px;
+				margin-top: 8px;
+			}
+
+
+			@media screen and (max-width: 767px){
+				margin-top: 25px;
+			}
 		}
 	}
 
@@ -342,10 +393,4 @@ input[type="number"] {
 			font-size: 14px;
 		}
 	}
-}
-.transaction_fee{
-	color: #8A8FA5;
-	font-size: 14px;
-	line-height: 18px;
-	padding-left: 99px;
 }

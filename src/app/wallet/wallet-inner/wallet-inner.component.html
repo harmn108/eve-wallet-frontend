@@ -41,38 +41,29 @@
 			</div>
 			<div class="transaction-fee">
 				<div>
-					<div>
-						<label>{{'wallet.gas_price' | translate}}</label>
-					</div>
-					<!--<span>{{settings?.min}}</span>-->
+					<label>{{'wallet.gas_price' | translate}}</label>
+				</div>
+				<div>
 					<mat-slider   (change)="updateFee($event)"  [displayWith]="formatLabel" formControlName="gasPrice"
 						[value]="transferForm.controls['gasPrice'].value" [step]="(settings?.max - settings?.min) / 2" min="{{settings?.min}}" max="{{settings?.max}}">
 					</mat-slider>
-					
-					<!--<span>{{settings?.max}}</span>-->
-				</div>
-				<div>
-						<div>Safe low </div>
-						<div>Average</div>
-						<div>Fast</div>
-					
+					<div class="indicator">
+						<span>Very slow</span>
+						<span>Average</span>
+						<span>Fast</span>
 					</div>
-				<p class="transaction_fee" *ngIf="ethFee !== null" >
+					<p class="transaction_fee" *ngIf="ethFee !== null" >
 
-					GWEI {{transferForm.controls['gasPrice'].value === settings?.min ? settings?.min : transferForm.controls['gasPrice'].value === settings?.max ?  settings?.max : settings?.average}}
-					({{ethFee | sciNotation}} ETH)
+						GWEI {{transferForm.controls['gasPrice'].value === settings?.min ? settings?.min : transferForm.controls['gasPrice'].value === settings?.max ?  settings?.max : settings?.average}}
+						({{ethFee | sciNotation}} ETH)
 
-					<br>
+						<br>
+						
+						Time: {{transferForm.controls['gasPrice'].value === settings?.min ? time?.min : transferForm.controls['gasPrice'].value === settings?.max ?   time?.max:  time?.average}} sec.
 					
-					Status : {{transferForm.controls['gasPrice'].value === settings?.min ? ('wallet.low' | translate) : transferForm.controls['gasPrice'].value === settings?.max ?   ('wallet.fast' | translate):  ('wallet.medium' | translate)}},
-					Time : {{transferForm.controls['gasPrice'].value === settings?.min ? time?.min : transferForm.controls['gasPrice'].value === settings?.max ?   time?.max:  time?.average}} sec.
-				
-				</p>
-
-
-				<p class="error-message"
-			*ngIf="transferForm.controls['gasPrice'].errors && transferForm.controls['gasPrice'].errors.invalidGasPrice">
-			{{'error.invalid_gas' | translate}}</p>
+					</p>
+					<p class="error-message" *ngIf="transferForm.controls['gasPrice'].errors && transferForm.controls['gasPrice'].errors.invalidGasPrice">{{'error.invalid_gas' | translate}}</p>
+				</div>
 			</div>
 		</div>
 		<div>
