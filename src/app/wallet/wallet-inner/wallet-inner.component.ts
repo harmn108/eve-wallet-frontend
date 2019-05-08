@@ -195,13 +195,13 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
         this.gasPriceError = false;
         this.addressError = false;
         this.amountErrorMessage = null;
-        if (this.checkValidGasPrice(this.transferForm.controls['gasPrice']) && this.checkValidGasPrice(this.transferForm.controls['gasPrice']).invalidGasPrice) {
+        if (this.checkValidGasPrice(this.transferForm.controls['gasPrice']) && this.checkValidGasPrice(this.transferForm.controls['gasPrice'])['invalidGasPrice']) {
             this.gasPriceError = true;
         }
-        if (this.checkValidAddress(this.transferForm.controls['address']) && this.checkValidAddress(this.transferForm.controls['address']).invalidAddress) {
+        if (this.checkValidAddress(this.transferForm.controls['address']) && this.checkValidAddress(this.transferForm.controls['address'])['invalidAddress']) {
             this.addressError = true;
         }
-        if (this.validateAmount(this.transferForm.controls['amount']) && this.validateAmount(this.transferForm.controls['amount']).invalidAmount) {
+        if (this.validateAmount(this.transferForm.controls['amount']) && this.validateAmount(this.transferForm.controls['amount'])['invalidAmount']) {
             this.amountError = true;
         }
         this.tSubmitted = true;
