@@ -71,6 +71,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+      this.buildForm();
     if (isPlatformBrowser(this.platformId)) {
         if(!this.accountService.etherBalance){
             this.accountService.getEthBalance();
@@ -88,7 +89,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
                 );
             }
         );
-        this.buildForm();
+
       this.tokenService.active.subscribe(
         token => {
           this.transferForm.controls['amount'].reset();

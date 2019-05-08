@@ -29,7 +29,7 @@
 			<label>{{'wallet.rec_address' | translate}}</label>
 			<input class="transfer-input" type="text" placeholder="{{'wallet.enter_address' | translate}}" formControlName="address">
 			<p class="error-message"
-			   *ngIf="transferForm.controls['address'].errors && transferForm.controls['address'].errors.invalidAddress">
+			   *ngIf="transferForm?.controls['address']?.errors && transferForm?.controls['address']?.errors.invalidAddress">
 				{{'error.invalid_address' | translate}}</p>
 		</div>
 
@@ -37,7 +37,7 @@
 		<div class="form-fields">
 			<div class="coin-field">
 				<input type="text" (keypress)="ifNumber($event)" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
-				<p class="error-message" *ngIf="amountErrorMessage && transferForm.controls['amount'].value != 0" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
+				<p class="error-message" *ngIf="amountErrorMessage && transferForm?.controls['amount']?.value != 0" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 			</div>
 			<div class="transaction-fee">
 				<div>
@@ -45,7 +45,7 @@
 				</div>
 				<div>
 					<mat-slider   (change)="updateFee($event)"  [displayWith]="formatLabel" formControlName="gasPrice"
-						[value]="transferForm.controls['gasPrice'].value" [step]="(settings?.max - settings?.min) / 2" min="{{settings?.min}}" max="{{settings?.max}}">
+						[value]="transferForm?.controls['gasPrice']?.value" [step]="(settings?.max - settings?.min) / 2" min="{{settings?.min}}" max="{{settings?.max}}">
 					</mat-slider>
 					<div class="indicator">
 						<span>Safe low</span>
@@ -54,20 +54,20 @@
 					</div>
 					<p class="transaction_fee" *ngIf="ethFee !== null" >
 
-						GWEI {{transferForm.controls['gasPrice'].value === settings?.min ? settings?.min : transferForm.controls['gasPrice'].value === settings?.max ?  settings?.max : settings?.average}}
+						GWEI {{transferForm?.controls['gasPrice']?.value === settings?.min ? settings?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?  settings?.max : settings?.average}}
 						({{ethFee | sciNotation}} ETH)
 
 						<br>
 						
-						Time: {{transferForm.controls['gasPrice'].value === settings?.min ? time?.min : transferForm.controls['gasPrice'].value === settings?.max ?   time?.max:  time?.average}} sec.
+						Time: {{transferForm?.controls['gasPrice']?.value === settings?.min ? time?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?   time?.max:  time?.average}} sec.
 					
 					</p>
-					<p class="error-message" *ngIf="transferForm.controls['gasPrice'].errors && transferForm.controls['gasPrice'].errors.invalidGasPrice">{{'error.invalid_gas' | translate}}</p>
+					<p class="error-message" *ngIf="transferForm?.controls['gasPrice']?.errors && transferForm?.controls['gasPrice']?.errors.invalidGasPrice">{{'error.invalid_gas' | translate}}</p>
 				</div>
 			</div>
 		</div>
 		<div>
-			<button class="button button--primary button--upper" [disabled]="transferForm.invalid"
+			<button class="button button--primary button--upper" [disabled]="transferForm?.invalid"
 				(click)="generateTransaction()">{{'wallet.generate' | translate}}</button>
 		</div>
 	</div>
@@ -84,11 +84,11 @@
 	<div *ngIf="token == 'eveg'">
 		<div class="transaction" *ngFor="let action of evegTransactions">
 			<div class="transaction__first-col">
-				<h3 class="transaction__type transaction__type--pending" *ngIf="!action.blockHash">
+				<h3 class="transaction__type transaction__type--pending" *ngIf="!action?.blockHash">
 					{{'wallet.pending' | translate}}</h3>
-				<h3 class="transaction__type transaction__type--received" *ngIf="action.blockHash && action.toAddress == this.address">
+				<h3 class="transaction__type transaction__type--received" *ngIf="action?.blockHash && action?.toAddress == this.address">
 					{{'wallet.received' | translate}}</h3>
-				<h3 class="transaction__type transaction__type--sent" *ngIf="action.blockHash && action.fromAddress == this.address">
+				<h3 class="transaction__type transaction__type--sent" *ngIf="action?.blockHash && action?.fromAddress == this.address">
 					{{'wallet.sent' | translate}}</h3>
 				<h3 class="transaction__amount">{{action.amount | numberPipe}} EVEG</h3>
 			</div>
