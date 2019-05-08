@@ -65,7 +65,7 @@ export class ConfirmTransactionDialog {
      this.web3.sendToken(data).then(
       res => {
           this.accountService.addPendingTransaction(res);
-          this.snackBar.open(this.translateService.instant("wallet.will_take_10_sec")+this.transferParams.transactionTime+' minutes', null, { duration: 3000 });
+          this.snackBar.open(this.translateService.instant("wallet.will_take_10_sec")+this.transferParams.transactionTime+' seconds', null, { duration: 3000 });
         this.close();
       }
     ).catch(

@@ -108,7 +108,7 @@ export class Web3Service {
                     message = "Nonce too low";
                   }
                   if (error.message.includes('nonce may not be larger than')){
-                    message = "Nonce may not be larger than";
+                    message = "Invalid Nonce";
                   }
                   if (error.message.includes('insufficient funds for gas')){
                     message = "Insufficient funds for gas";

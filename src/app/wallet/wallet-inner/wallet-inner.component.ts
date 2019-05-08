@@ -42,6 +42,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
   lastEveo:boolean = false;
   ethBalance;
   ethFee: any = 0;
+  time: any;
   private _updateTransactions$ = new Subject<void>();
 
   private _unsubscribe$ = new ReplaySubject<void>(1);
@@ -79,6 +80,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
         this.accountService.getSettings().subscribe(
           settings => {
               this.settings = settings['price'];
+              this.time = settings['time'];
             this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2 );
               this.ethFee = Decimal.div(this.settings.average, 10e9)
           }

@@ -45,17 +45,28 @@
 						<label>{{'wallet.gas_price' | translate}}</label>
 					</div>
 					<!--<span>{{settings?.min}}</span>-->
-					<mat-slider (change)="updateFee($event)"  [displayWith]="formatLabel" formControlName="gasPrice"
+					<mat-slider   (change)="updateFee($event)"  [displayWith]="formatLabel" formControlName="gasPrice"
 						[value]="transferForm.controls['gasPrice'].value" [step]="(settings?.max - settings?.min) / 2" min="{{settings?.min}}" max="{{settings?.max}}">
 					</mat-slider>
+					
 					<!--<span>{{settings?.max}}</span>-->
 				</div>
+				<div>
+						<div>Safe low </div>
+						<div>Average</div>
+						<div>Fast</div>
+					
+					</div>
 				<p class="transaction_fee" *ngIf="ethFee !== null" >
 
 					GWEI {{transferForm.controls['gasPrice'].value === settings?.min ? settings?.min : transferForm.controls['gasPrice'].value === settings?.max ?  settings?.max : settings?.average}}
 					({{ethFee | sciNotation}} ETH)
 
-					{{transferForm.controls['gasPrice'].value === settings?.min ? ('wallet.low' | translate) : transferForm.controls['gasPrice'].value === settings?.max ?   ('wallet.fast' | translate):  ('wallet.medium' | translate)}}
+					<br>
+					
+					Status : {{transferForm.controls['gasPrice'].value === settings?.min ? ('wallet.low' | translate) : transferForm.controls['gasPrice'].value === settings?.max ?   ('wallet.fast' | translate):  ('wallet.medium' | translate)}},
+					Time : {{transferForm.controls['gasPrice'].value === settings?.min ? time?.min : transferForm.controls['gasPrice'].value === settings?.max ?   time?.max:  time?.average}} sec.
+				
 				</p>
 
 
