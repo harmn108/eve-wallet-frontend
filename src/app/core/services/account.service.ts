@@ -99,6 +99,15 @@ export class AccountService {
         }
     }
 
+    addPendingTransaction(hash: string) {
+        if (isPlatformBrowser(this.platformId)) {
+            let url = this.userUrl + `/add-transaction/${hash}`;
+            this.http.post(url, {hash}, { headers: new HttpHeaders({ 'X-API-TOKEN': this.accountInfo.token, 'hash': hash }) }).subscribe((data: any) => {
+
+            }, error => console.log(error));
+        }
+    }
+
 
     getSettings() {
         let url = this.userUrl + `/gas-price`;

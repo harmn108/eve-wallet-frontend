@@ -280,6 +280,9 @@ input[type="number"] {
 		&--sent:before {
 			background-image: url(../../../assets/images/sent.svg);
 		}
+		&--pending:before {
+			background-image: url(../../../assets/images/pending.svg);
+		}
 	}
 
 	&__amount {
@@ -333,4 +336,10 @@ input[type="number"] {
 			font-size: 14px;
 		}
 	}
+}
+.transaction_fee{
+	color: #8A8FA5;
+	font-size: 14px;
+	line-height: 18px;
+	padding-left: 99px;
 }

@@ -3,7 +3,7 @@ import { TokenService } from '../../core/services/token.service';
 import { Router } from '@angular/router';
 import { AccountService } from '../../core/services/account.service';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment.stage';
 import { Web3Service } from '../../core/services/web3.service';
 
 @Component({

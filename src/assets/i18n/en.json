@@ -69,6 +69,7 @@
         "history":"Transactions history",
         "no_history":"No transactions",
         "received":"Received",
+        "pending": "Pending",
         "sent":"Sent",
         "payment_to":"Payment to",
         "payment_from":"Payment from",
@@ -100,7 +101,10 @@
         "something_went_wrong":"Something went wrong!",
         "copied":"Copied",
         "see_more":"See more",
-        "balance":"balance"
+        "balance":"balance",
+        "medium": "Average",
+        "fast": "Fast",
+        "low": "Safe Low"
     },
     "error": {
             "invalid_email_or_pass":"Incorrect email or password",

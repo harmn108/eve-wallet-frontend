@@ -85,7 +85,7 @@ export class Web3Service {
   }
 
   private signAndSendTransaction(transactionObject): Promise<string> {
-    return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
       this.web3.eth
         .getTransactionCount(transactionObject.from, "latest")
         .then((nonce: number) => {
@@ -103,7 +103,7 @@ export class Web3Service {
               "0x" + tx.serialize().toString("hex"),
               (error, hash: string) => {
                 if (error) {
-                  let message;
+                    let message;
                   if (error.message.includes('nonce too low')) {
                     message = "Nonce too low";
                   }
@@ -118,7 +118,8 @@ export class Web3Service {
                   }
                   reject(message);
                 } else {
-                  resolve(hash);
+
+                    resolve(hash);
                 }
               }
             )

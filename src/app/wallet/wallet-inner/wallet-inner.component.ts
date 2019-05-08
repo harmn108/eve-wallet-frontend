@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { ConfirmTransactionDialog } from '../../core/confirm-transaction/confirm-transaction.component';
 import { TokenService } from '../../core/services/token.service';
@@ -10,12 +10,16 @@ import { ErrorService } from '../../core/services/error.service';
 import * as moment from 'moment';
 import { Web3Service } from '../../core/services/web3.service';
 import { TranslateService } from '@ngx-translate/core';
+import { interval, ReplaySubject, Subject } from 'rxjs';
+
+import {Decimal} from 'decimal.js';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-wallet-inner',
   templateUrl: './wallet-inner.component.html',
   styleUrls: ['./wallet-inner.component.scss']
 })
-export class WalletInnerComponent implements OnInit {
+export class WalletInnerComponent implements OnInit, OnDestroy {
   token: string = 'eveg';
   address: string;
   transferForm: FormGroup;
@@ -37,6 +41,10 @@ export class WalletInnerComponent implements OnInit {
   lastEveg:boolean = false;
   lastEveo:boolean = false;
   ethBalance;
+  ethFee: any = 0;
+  private _updateTransactions$ = new Subject<void>();
+
+  private _unsubscribe$ = new ReplaySubject<void>(1);
   constructor(private accountService: AccountService,
     private FormBuilder: FormBuilder,
     private web3: Web3Service,
@@ -70,8 +78,9 @@ export class WalletInnerComponent implements OnInit {
         this.ethBalance = parseFloat(eth);
         this.accountService.getSettings().subscribe(
           settings => {
-            this.settings = settings;
-            this.transferForm.controls['gasPrice'].setValue(this.settings.average);
+              this.settings = settings['price'];
+            this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2 );
+              this.ethFee = Decimal.div(this.settings.average, 10e9)
           }
         );
 			}
@@ -131,7 +140,26 @@ export class WalletInnerComponent implements OnInit {
       );
       this.address = this.accountService.accountInfo.address;
     }
+
+    this._updateTransactions$.pipe(
+        switchMap(() => interval(10000).pipe(
+            tap(() => {
+                this.accountService.getEveoTransactions();
+                this.accountService.getEvegTransactions();
+            })
+        )),
+        takeUntil(this._unsubscribe$)
+    ).subscribe()
+
   }
+
+    updateFee(e) {
+        let p = e.value;
+            if (p !== this.settings.min && p !== this.settings.max) {
+              p = this.settings.average;
+            }
+        this.ethFee = Decimal.div(p,10e9);
+    }
 
   ifNumber(evt)
 		 {
@@ -155,11 +183,15 @@ export class WalletInnerComponent implements OnInit {
   }
 
   generateTransaction() {
-    let data = {
+      let gasPrice = this.transferForm.value.gasPrice;
+      if (gasPrice !== this.settings.min && gasPrice !== this.settings.max) {
+        gasPrice = this.settings.average;
+      }
+      let data = {
       token: this.token,
       amount: this.transferForm.value.amount,
       address: this.transferForm.value.address,
-      gasPrice: this.transferForm.value.gasPrice,
+      gasPrice: gasPrice,
       transactionTime: this.settings.time,
       contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
       decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
@@ -171,8 +203,12 @@ export class WalletInnerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.transferForm.reset();
-      this.transferForm.controls['gasPrice'].setValue(this.settings.average);
+          this.transferForm.reset();
+          this.accountService.getEveoTransactions();
+          this.accountService.getEvegTransactions();
+          this.accountService.getBalance();
+          this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2  );
+          this._updateTransactions$.next();
     });
 
   }
@@ -278,5 +314,10 @@ export class WalletInnerComponent implements OnInit {
     //   .replace(/^\S+\s/,'');
     return date;
   }
+
+    ngOnDestroy(): void {
+    this._unsubscribe$.next();
+    this._unsubscribe$.complete();
+    }
 
 }
