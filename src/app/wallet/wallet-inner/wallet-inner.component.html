@@ -57,12 +57,12 @@
 					</div>
 					<p class="transaction_fee" *ngIf="ethFee !== null" >
 
-						GWEI {{transferForm?.controls['gasPrice']?.value === settings?.min ? settings?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?  settings?.max : settings?.average}}
+						Gwei {{transferForm?.controls['gasPrice']?.value === settings?.min ? settings?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?  settings?.max : settings?.average}}
 						({{ethFee | sciNotation}} ETH)
 
 						<br>
 						
-						Time: {{transferForm?.controls['gasPrice']?.value === settings?.min ? time?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?   time?.max:  time?.average}} sec.
+						Time: {{transferForm?.controls['gasPrice']?.value === settings?.min ? (time?.min | time) : transferForm?.controls['gasPrice']?.value === settings?.max ?   (time?.max | time ):  (time?.average | time )}}
 					
 					</p>
 					<p class="error-message" *ngIf="gasPriceError && tSubmitted">{{'error.invalid_gas' | translate}}</p>

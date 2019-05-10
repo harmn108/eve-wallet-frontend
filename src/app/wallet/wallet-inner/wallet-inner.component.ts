@@ -180,15 +180,37 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
     }
 
     copy() {
-        var input = document.createElement('input');
-        input.setAttribute('value', this.address);
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
-        //snackbar open
+        let textarea = null;
+        const  iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+        try {
+            textarea = document.createElement('textarea');
+            textarea.style.height = '0px';
+            textarea.style.left = '-100px';
+            textarea.style.opacity = '0';
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-100px';
+            textarea.style.width = '0px';
+            document.body.appendChild(textarea);
+            textarea.value = this.address;
+            if (iOS) {
+                const range = document.createRange();
+                const selection = window.getSelection();
+                range.selectNodeContents(textarea);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                textarea.setSelectionRange(0, 999999);
+            } else {
+                textarea.select();
+            }
+            document.execCommand('copy');
+            this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 5000});
 
-        this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 100000});
+        } finally {
+            if (textarea && textarea.parentNode) {
+                textarea.parentNode.removeChild(textarea);
+            }
+        }
+
     }
 
     generateTransaction() {
