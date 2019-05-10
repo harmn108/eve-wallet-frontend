@@ -2,7 +2,7 @@
     "user": {
         "login":"LogIn",
         "create":"Create",
-        "login_text":"Enter you email and password to login.",
+        "login_text":"Enter your email and password to login.",
         "email":"Email",
         "password":"Password",
         "new_password":"New password",

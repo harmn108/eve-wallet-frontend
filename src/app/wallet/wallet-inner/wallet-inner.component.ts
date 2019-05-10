@@ -188,7 +188,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
         document.body.removeChild(input);
         //snackbar open
 
-        this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 1000});
+        this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 100000});
     }
 
     generateTransaction() {
@@ -209,6 +209,8 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
             return;
         }
         let gasPrice = this.transferForm.value.gasPrice;
+        let transTime = gasPrice === this.settings.min ? this.time.min : gasPrice === this.settings.max ? this.time.max : this.time.average
+
         if (gasPrice !== this.settings.min && gasPrice !== this.settings.max) {
             gasPrice = this.settings.average;
         }
@@ -217,7 +219,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
             amount: this.transferForm.value.amount,
             address: this.transferForm.value.address,
             gasPrice: gasPrice,
-            transactionTime: this.settings.time,
+            transactionTime: this.time,
             contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
             decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
         };
