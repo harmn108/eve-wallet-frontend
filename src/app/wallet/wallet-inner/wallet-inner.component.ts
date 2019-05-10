@@ -90,7 +90,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
                             this.settings = settings['price'];
                             this.time = settings['time'];
                             this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2);
-                            this.ethFee = Decimal.div(this.settings.average, 10e9)
+                            this.ethFee = Decimal.div(this.settings.average, 10e8)
                         }
                     );
                 }
@@ -167,7 +167,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
         if (p !== this.settings.min && p !== this.settings.max) {
             p = this.settings.average;
         }
-        this.ethFee = Decimal.div(p, 10e9);
+        this.ethFee = Decimal.div(p, 10e8);
     }
 
     ifNumber(evt) {
