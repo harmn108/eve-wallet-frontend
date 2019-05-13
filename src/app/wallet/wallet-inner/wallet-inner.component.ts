@@ -241,7 +241,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
             amount: this.transferForm.value.amount,
             address: this.transferForm.value.address,
             gasPrice: gasPrice,
-            transactionTime: this.time,
+            transactionTime: transTime,
             contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
             decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
         };
@@ -254,9 +254,6 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe(result => {
             this.transferForm.reset();
             this.tSubmitted = false;
-            this.accountService.getEveoTransactions();
-            this.accountService.getEvegTransactions();
-            this.accountService.getBalance();
             this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2);
             this._updateTransactions$.next();
         });

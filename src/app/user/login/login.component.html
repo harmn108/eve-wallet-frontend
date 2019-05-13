@@ -4,7 +4,7 @@
 <div *ngIf="!loading">
   <h2>{{'user.login' | translate}}</h2>
   <p class="descr">{{'user.login_text' | translate}}</p>
-  <form novalidate (ngSubmit)="login()" [formGroup]="loginForm">
+  <form>
     <input type="text" placeholder="{{'user.email' | translate}}" formControlName="email">
     <input type="password" placeholder="{{'user.password' | translate}}" formControlName="password">
     <div class="buttons-container">

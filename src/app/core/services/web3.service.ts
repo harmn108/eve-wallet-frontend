@@ -118,7 +118,6 @@ export class Web3Service {
                   }
                   reject(message);
                 } else {
-
                     resolve(hash);
                 }
               }
