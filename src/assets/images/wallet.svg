@@ -1,14 +1,216 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="22px" height="18px" viewBox="0 0 22 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Group 27</title>
-    <desc>Created with Sketch.</desc>
-    <g id="web_app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="main_ver-2" transform="translate(-284.000000, -26.000000)">
-            <g id="Group-27" transform="translate(283.000000, 23.000000)">
-                <path d="M21.5,8.68421053 L21.5,4.42105263 C21.5,3.63622693 20.8284271,3 20,3 L2.5,3 C1.67157288,3 1,3.63622693 1,4.42105263 L1,19.5789474 C1,20.3637731 1.67157288,21 2.5,21 L20,21 C20.8284271,21 21.5,20.3637731 21.5,19.5789474 L21.5,15.3157895 C22.3284271,15.3157895 23,14.6795625 23,13.8947368 L23,10.1052632 C23,9.32043746 22.3284271,8.68421053 21.5,8.68421053 Z M20,19.5789474 L2.5,19.5789474 L2.5,4.42105263 L20,4.42105263 L20,8.68421053 L17.5,8.68421053 C16.6715729,8.68421053 16,9.32043746 16,10.1052632 L16,13.8947368 C16,14.6795625 16.6715729,15.3157895 17.5,15.3157895 L20,15.3157895 L20,19.5789474 Z M21.5,13.8947368 L17.5,13.8947368 L17.5,10.1052632 L21.5,10.1052632 L21.5,13.8947368 Z" id="Shape" fill="#FFFFFF"></path>
-                <rect id="Rectangle" opacity="0.496954055" x="0" y="0" width="24" height="24"></rect>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.6;}
+	.st1{clip-path:url(#SVGID_2_);fill:#010101;}
+	.st2{opacity:0.45;}
+	.st3{clip-path:url(#SVGID_4_);fill:#010101;}
+	.st4{opacity:0.8;}
+	.st5{clip-path:url(#SVGID_6_);fill:#010101;}
+	.st6{clip-path:url(#SVGID_8_);fill:#010101;}
+	.st7{clip-path:url(#SVGID_10_);fill:#010101;}
+	.st8{fill:none;}
+	.st9{fill:none;stroke:#FFFFFF;}
+	.st10{fill:none;stroke:#FFFFFF;stroke-linecap:round;}
+	.st11{opacity:0;fill:#FFFFFF;}
+	.st12{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;}
+	.st13{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-miterlimit:10;}
+	.st14{fill:none;stroke:#607BED;}
+	.st15{fill:none;stroke:#607BED;stroke-linecap:round;}
+	.st16{fill:none;stroke:#00EE8C;}
+	.st17{fill:none;stroke:#00EE8C;stroke-linecap:round;}
+	.st18{fill:none;stroke:#607BED;stroke-linecap:round;stroke-linejoin:round;}
+	.st19{fill:none;stroke:#F1B400;}
+	.st20{fill:none;stroke:#F1B400;stroke-linecap:round;}
+	.st21{fill:none;stroke:#363636;stroke-linecap:round;stroke-miterlimit:10;}
+	.st22{fill:#FFFFFF;}
+</style>
+<g class="st0">
+	<g>
+		<defs>
+			<rect id="SVGID_1_" x="-1537.4" y="240.7" width="652" height="340.9"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st1" d="M-1211.3,240.7L-1537.4,389l326.1,192.6l326-192.6L-1211.3,240.7z"/>
+	</g>
+</g>
+<g class="st2">
+	<g>
+		<defs>
+			<rect id="SVGID_3_" x="-1537.4" y="-152.1" width="326.1" height="733.7"/>
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st3" d="M-1537.4,389l326.1,192.6v-733.7L-1537.4,389z"/>
+	</g>
+</g>
+<g class="st4">
+	<g>
+		<defs>
+			<rect id="SVGID_5_" x="-1211.3" y="-152.1" width="326.1" height="733.7"/>
+		</defs>
+		<clipPath id="SVGID_6_">
+			<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st5" d="M-1211.3-152.1v733.7l326-192.6L-1211.3-152.1z"/>
+	</g>
+</g>
+<g class="st2">
+	<g>
+		<defs>
+			<rect id="SVGID_7_" x="-1537.4" y="450.8" width="326.1" height="459.4"/>
+		</defs>
+		<clipPath id="SVGID_8_">
+			<use xlink:href="#SVGID_7_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st6" d="M-1537.4,450.8l326.1,459.4V643.4L-1537.4,450.8z"/>
+	</g>
+</g>
+<g class="st4">
+	<g>
+		<defs>
+			<rect id="SVGID_9_" x="-1211.3" y="450.8" width="326.2" height="459.4"/>
+		</defs>
+		<clipPath id="SVGID_10_">
+			<use xlink:href="#SVGID_9_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st7" d="M-1211.3,643.4v266.7l326.2-459.4L-1211.3,643.4z"/>
+	</g>
+</g>
+<title>Send</title>
+<desc>Created with Sketch.</desc>
+<g>
+	<rect id="Rectangle-Copy-3_1_" x="-104.3" y="-0.1" class="st8" width="24" height="24"/>
+	<g id="Group-48_1_" transform="translate(4.000000, 5.000000)">
+		<g id="Group-47_1_">
+			<g id="Group-46_1_">
+				<path id="Shape_5_" class="st9" d="M-88.4,7v4.9c0,1.1-0.9,1.9-1.9,1.9h-12.1c-1.1,0-1.9-0.9-1.9-1.9V7"/>
+				<g id="Group-44_1_" transform="translate(5.650633, 0.000000)">
+					<polyline id="Shape_4_" class="st9" points="-99.8,3.3 -102.1,1.1 -104.3,3.3 					"/>
+					<path id="Shape_3_" class="st10" d="M-102.1,8.9V1.1"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+<g>
+	<rect x="-78" y="-0.2" class="st11" width="24" height="24"/>
+	<g>
+		<path id="Shape_11_" class="st9" d="M-58,11.5v4.9c0,1.1-0.9,1.9-1.9,1.9h-12.1c-1.1,0-1.9-0.9-1.9-1.9v-4.9"/>
+		<g id="Group-44_3_" transform="translate(5.650633, 0.000000)">
+			<polyline id="Shape_10_" class="st9" points="-73.9,11.1 -71.7,13.4 -69.4,11.1 			"/>
+			<path id="Shape_2_" class="st10" d="M-71.6,5.5v7.8"/>
+		</g>
+	</g>
+</g>
+<g>
+	<rect x="-51.7" y="-0.1" class="st11" width="24" height="24"/>
+	<polyline id="Stroke-140-Copy_1_" class="st12" points="-32.7,6.9 -42.5,16.9 -46.7,12.4 	"/>
+</g>
+<g>
+	<rect x="-25.3" y="-0.1" class="st11" width="24" height="24"/>
+	<g>
+		<g id="Group-61_2_">
+			<g id="Group-48_2_" transform="translate(4.000000, 5.000000)">
+				<g id="Group-46_2_">
+					<path id="Shape_1_" class="st9" d="M-9.3,7v4.9c0,1.1-0.9,1.9-1.9,1.9h-12.2c-1,0-1.9-0.9-1.9-1.9V7"/>
+				</g>
+			</g>
+		</g>
+		<polyline class="st10" points="-13.3,7.3 -13.3,9.7 -11.2,9.7 		"/>
+		<circle class="st10" cx="-13.3" cy="9.3" r="4.3"/>
+	</g>
+</g>
+<g>
+	<rect x="13.7" y="-38.6" class="st11" width="24" height="24"/>
+	<g>
+		<line class="st13" x1="31.8" y1="-32.8" x2="19.5" y2="-20.5"/>
+		<line class="st13" x1="19.5" y1="-32.8" x2="31.8" y2="-20.5"/>
+	</g>
+</g>
+<g>
+	<rect x="38.2" y="27.4" class="st11" width="24" height="24"/>
+	<g>
+		<line class="st13" x1="56.3" y1="33.3" x2="44" y2="45.5"/>
+		<line class="st13" x1="44" y1="33.3" x2="56.3" y2="45.5"/>
+	</g>
+</g>
+<g id="Group-61_4_">
+	<rect id="Rectangle-Copy-3_2_" x="-104.8" y="-26.1" class="st8" width="24" height="24"/>
+	<g id="Group-48_4_" transform="translate(4.000000, 5.000000)">
+		<g id="Group-47_2_">
+			<g id="Group-46_4_">
+				<path id="Shape_14_" class="st14" d="M-88.9-19v4.9c0,1.1-0.9,1.9-1.9,1.9h-12.1c-1.1,0-1.9-0.9-1.9-1.9V-19"/>
+				<g id="Group-44_4_" transform="translate(5.650633, 0.000000)">
+					<polyline id="Shape_13_" class="st14" points="-100.3,-22.7 -102.6,-24.9 -104.8,-22.7 					"/>
+					<path id="Shape_12_" class="st15" d="M-102.6-17.1v-7.8"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+<g>
+	<rect x="-78.5" y="-26.2" class="st11" width="24" height="24"/>
+	<g>
+		<path id="Shape_9_" class="st16" d="M-58.5-14.5v4.9c0,1.1-0.9,1.9-1.9,1.9h-12.1c-1.1,0-1.9-0.9-1.9-1.9v-4.9"/>
+		<g id="Group-44_2_" transform="translate(5.650633, 0.000000)">
+			<polyline id="Shape_8_" class="st16" points="-74.4,-14.9 -72.2,-12.6 -69.9,-14.9 			"/>
+			<path id="Shape_7_" class="st17" d="M-72.1-20.5v7.8"/>
+		</g>
+	</g>
+</g>
+<g>
+	<rect x="-52.2" y="-26.1" class="st11" width="24" height="24"/>
+	<polyline id="Stroke-140-Copy_2_" class="st18" points="-33.2,-19.1 -43,-9.1 -47.2,-13.6 	"/>
+</g>
+<g>
+	<rect x="-25.8" y="-26.1" class="st11" width="24" height="24"/>
+	<g>
+		<g id="Group-61_3_">
+			<g id="Group-48_3_" transform="translate(4.000000, 5.000000)">
+				<g id="Group-46_3_">
+					<path id="Shape_6_" class="st19" d="M-9.8-19v4.9c0,1.1-0.9,1.9-1.9,1.9h-12.2c-1,0-1.9-0.9-1.9-1.9V-19"/>
+				</g>
+			</g>
+		</g>
+		<polyline class="st20" points="-13.8,-18.7 -13.8,-16.3 -11.7,-16.3 		"/>
+		<circle class="st20" cx="-13.8" cy="-16.7" r="4.3"/>
+	</g>
+</g>
+<g>
+	<line class="st21" x1="17.6" y1="-20.1" x2="5.4" y2="-7.9"/>
+	<line class="st21" x1="5.4" y1="-20.1" x2="17.6" y2="-7.9"/>
+</g>
+<rect x="-0.5" y="-26" class="st11" width="24" height="24"/>
+<title>Group 27</title>
+<desc>Created with Sketch.</desc>
+<rect x="-25.3" y="-0.1" class="st11" width="24" height="24"/>
+<g>
+	<g>
+		<g>
+			<path class="st22" d="M18.2,20.6h-15c-1.4,0-2.5-1.1-2.5-2.5V5.9c0-1.4,1.1-2.5,2.5-2.5h15c1.4,0,2.5,1.1,2.5,2.5v4.1h-2.5
+				c-0.3,0-0.5,0.2-0.5,0.5v3.2c0,0.3,0.2,0.5,0.5,0.5h2.5v4.1C20.8,19.5,19.6,20.6,18.2,20.6z M3.2,4.4C2.4,4.4,1.8,5,1.8,5.9v12.3
+				c0,0.8,0.7,1.5,1.5,1.5h15c0.8,0,1.5-0.7,1.5-1.5v-3.1h-1.5c-0.8,0-1.5-0.7-1.5-1.5v-3.2c0-0.8,0.7-1.5,1.5-1.5h1.5V5.9
+				c0-0.8-0.7-1.5-1.5-1.5H3.2z"/>
+		</g>
+		<g>
+			<path class="st22" d="M21.8,15.1h-3.5c-0.8,0-1.5-0.7-1.5-1.5v-3.2c0-0.8,0.7-1.5,1.5-1.5h3.5c0.8,0,1.5,0.7,1.5,1.5v3.2
+				C23.2,14.4,22.6,15.1,21.8,15.1z M18.2,9.9c-0.3,0-0.5,0.2-0.5,0.5v3.2c0,0.3,0.2,0.5,0.5,0.5h3.5c0.3,0,0.5-0.2,0.5-0.5v-3.2
+				c0-0.3-0.2-0.5-0.5-0.5H18.2z"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<polygon class="st22" points="13.2,12.3 10.8,13.8 8.3,12.3 10.8,8.2 			"/>
+		</g>
+		<g>
+			<polygon class="st22" points="13.2,12.8 10.8,16.2 8.3,12.8 10.8,14.2 			"/>
+		</g>
+	</g>
+</g>
 </svg>

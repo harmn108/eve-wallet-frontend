@@ -79,6 +79,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.buildForm();
         if (isPlatformBrowser(this.platformId)) {
+
             if (!this.accountService.etherBalance) {
                 this.accountService.getEthBalance();
             }
@@ -90,6 +91,13 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
                             this.settings = settings['price'];
                             this.time = settings['time'];
                             this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2);
+                            if(this.settings.min == this.settings.average && this.settings.average == this.settings.max){
+                                this.settings = {
+                                    min:this.settings.min,
+                                    average:this.settings.average*1.1,
+                                    max:this.settings.max*1.2,
+                                }
+                            }
                             this.ethFee = Decimal.div(this.settings.average, 10e8)
                         }
                     );
