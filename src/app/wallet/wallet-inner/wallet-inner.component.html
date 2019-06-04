@@ -57,8 +57,10 @@
 					</div>
 					<p class="transaction_fee" *ngIf="ethFee !== null" >
 
-						Gwei {{transferForm?.controls['gasPrice']?.value === settings?.min ? settings?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?  settings?.max : settings?.average}}
-						({{ethFee | sciNotation}} ETH)
+						 {{transferForm?.controls['gasPrice']?.value === settings?.min ? settings?.min : transferForm?.controls['gasPrice']?.value === settings?.max ?  settings?.max : settings?.average}} Gwei
+
+						{{estFee? '('+(estFee | sciNotation) + ' ETH)' : ''}}
+
 
 						<br>
 						

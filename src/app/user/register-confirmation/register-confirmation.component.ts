@@ -27,7 +27,7 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
         if (isPlatformBrowser(this.platformId)) {
             this.activatedRoute.params.subscribe(params => {
                 if (params.code && params.code.length === 32) {
-                    this.accountService.loadConfirm(params.code);
+                    this.accountService.loadConfirm(params.code,params.app);
                 } else {
                     this.router.navigate(['/page-not-found']);
                 }

@@ -37,6 +37,11 @@ export const userRoutes: Routes = [
                     canActivate:[AccountCheckGuard]
                 },
                 {
+                    path: 'confirmation/:code/:app',
+                    pathMatch: 'full',
+                    component: RegisterConfirmationComponent,
+                },
+                {
                     path: 'confirmation/:code',
                     pathMatch: 'full',
                     component: RegisterConfirmationComponent,

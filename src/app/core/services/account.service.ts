@@ -64,6 +64,7 @@ export class AccountService {
         private errorService: ErrorService,
         private web3: Web3Service,
         private router: Router) {
+
     }
 
 
@@ -119,7 +120,7 @@ export class AccountService {
         return this.http.get(url);
     }
 
-    loadConfirm(code: string): void {
+    loadConfirm(code: string, app): void {
         if (isPlatformBrowser(this.platformId)) {
             let url = this.userUrl + `/signup/confirmation/${code}`;
             this.http.get(url)
@@ -128,15 +129,18 @@ export class AccountService {
                     this.code = code;
                     this.confirmCode = result;
                     this.confirmCodeChanged.next(result);
-                    // this.openApp('eve://everyone.bz/user/confirmation/' + code);
+                    if(app){
+                    this.openApp('eve://everyone.bz/user/confirmation/' + code);
+                    }
                 }, error => {
                     this.errorService.handleError('loadConfirm', error, url)
                 });
         }
     }
+
     openApp(url) {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            window.location.href = `${url}`;
+                window.location.href = `${url}`;
         }
     }
     preRegister(email: string): void {

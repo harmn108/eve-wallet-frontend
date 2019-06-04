@@ -48,19 +48,20 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
     gasPriceError = false;
     addressError = false;
     amountError = false;
+    estFee;
     private _updateTransactions$ = new Subject<void>();
 
     private _unsubscribe$ = new ReplaySubject<void>(1);
 
     constructor(private accountService: AccountService,
-                private FormBuilder: FormBuilder,
-                private web3: Web3Service,
-                public translateService: TranslateService,
-                public dialog: MatDialog,
-                private tokenService: TokenService,
-                @Inject(PLATFORM_ID) private platformId: Object,
-                private errorService: ErrorService,
-                private snackBar: MatSnackBar) {
+        private FormBuilder: FormBuilder,
+        private web3: Web3Service,
+        public translateService: TranslateService,
+        public dialog: MatDialog,
+        private tokenService: TokenService,
+        @Inject(PLATFORM_ID) private platformId: Object,
+        private errorService: ErrorService,
+        private snackBar: MatSnackBar) {
 
     }
 
@@ -91,18 +92,65 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
                             this.settings = settings['price'];
                             this.time = settings['time'];
                             this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2);
-                            if(this.settings.min == this.settings.average && this.settings.average == this.settings.max){
+                            if (this.settings.min == this.settings.average && this.settings.average == this.settings.max) {
                                 this.settings = {
-                                    min:this.settings.min,
-                                    average:this.settings.average*1.1,
-                                    max:this.settings.max*1.2,
+                                    min: this.settings.min,
+                                    average: this.settings.average * 1.1,
+                                    max: this.settings.max * 1.2
                                 }
                             }
-                            this.ethFee = Decimal.div(this.settings.average, 10e8)
+                            this.ethFee = Decimal.div(this.settings.average, 10e8);
                         }
                     );
                 }
             );
+
+
+
+
+            // let data = {
+            //     from: this.accountService.accountInfo.address,
+            //     to: this.transferParams.contractAddress,
+            //     gas: 10000,//this.web3.utils.toHex(this.settings.gas),
+            //     gasPrice:this.transferParams.gasPrice,
+            //     amount:this.transferParams.amount,
+            //     toAddress:this.transferParams.address,
+            //     decimalPlaces:this.data.decimalPlaces
+            // };
+            // this.web3.estimateGas(data);
+
+            this.transferForm.valueChanges.subscribe(
+                val => {
+                    let gasPrice = val.gasPrice;
+                    if (this.settings) {
+                        if (gasPrice !== this.settings.min && gasPrice !== this.settings.max) {
+                            gasPrice = this.settings.average;
+                        }
+                        if (this.transferForm.valid) {
+                            const data = {
+                                from: this.accountService.accountInfo.address,
+                                to: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
+                                gasPrice: gasPrice,
+                                amount: this.transferForm.value.amount,
+                                toAddress: this.transferForm.value.address,
+                                decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
+                            };
+                            this.web3.estimateGas(data).then(
+                                res => {
+                                    this.estFee = gasPrice * (res / 1e9 );
+                                }
+                            ).catch(
+                                err => this.estFee = null
+                            ) ;
+                        }
+                        else {
+                            this.estFee = null;
+                        }
+                    }
+                    }
+            );
+
+
 
             this.tokenService.active.subscribe(
                 token => {
@@ -189,7 +237,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
 
     copy() {
         let textarea = null;
-        const  iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+        const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
         try {
             textarea = document.createElement('textarea');
             textarea.style.height = '0px';
@@ -211,7 +259,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
                 textarea.select();
             }
             document.execCommand('copy');
-            this.snackBar.open(this.translateService.instant('wallet.copied'), null, {duration: 5000});
+            this.snackBar.open(this.translateService.instant('wallet.copied'), null, { duration: 5000 });
 
         } finally {
             if (textarea && textarea.parentNode) {
@@ -250,6 +298,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
             address: this.transferForm.value.address,
             gasPrice: gasPrice,
             transactionTime: transTime,
+            estFee: this.estFee,
             contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
             decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
         };
@@ -287,7 +336,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
 
     private buildForm() {
         this.transferForm = this.FormBuilder.group({
-            'address': new FormControl('', [Validators.required]),
+            'address': new FormControl('', [Validators.required, this.checkValidAddress.bind(this)]),
             'gasPrice': new FormControl(null, [Validators.required]),
             'amount': new FormControl(null, {
                 validators: [

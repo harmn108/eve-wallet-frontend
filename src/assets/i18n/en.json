@@ -105,7 +105,8 @@
         "ba_lance":"Balance",
         "medium": "Average",
         "fast": "Fast",
-        "low": "Safe Low"
+        "low": "Safe Low",
+        "est_fee":"Estimated transaction fee"
     },
     "error": {
             "invalid_email_or_pass":"Incorrect email or password",

@@ -80,6 +80,28 @@ export class Web3Service {
     });
   }
 
+
+  estimateGas(params){
+    let transactionObject = {
+        from: params.from,
+        to: params.to,
+        gas: this.web3.utils.toHex('100000'),//this.web3.utils.toHex(this.settings.gas),
+        gasPrice: this.web3.utils.toHex(this.web3.utils.toWei(params.gasPrice.toString(), 'gwei')),//this.web3.utils.toHex(this.settings.gasPrice),
+        value: "0x0",
+        data:
+            "0xa9059cbb" +
+            this.padStart(64, 0, params.toAddress.substr(2)) +
+            this.padStart(
+                64,
+                0,
+                (params.amount * Math.pow(10, params.decimalPlaces)).toString(
+                    16
+                )
+            )
+    }
+    return this.web3.eth.estimateGas(transactionObject);
+  }
+
   stringtoHash(string) {
     return this.web3.eth.accounts.hashMessage("" + string);
   }
