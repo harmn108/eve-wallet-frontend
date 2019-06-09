@@ -73,7 +73,7 @@ export class Web3Service {
         this.padStart(
           64,
           0,
-          this.web3.utils.toHex(params.amount * Math.pow(10, params.decimalPlaces)).substr(2)
+          this.web3.utils.toHex(this.web3.utils.toWei(params.amount.toString())).substr(2)
         )
     });
   }
@@ -92,7 +92,7 @@ export class Web3Service {
             this.padStart(
                 64,
                 0,
-                this.web3.utils.toHex(params.amount * Math.pow(10, params.decimalPlaces)).substr(2)
+                this.web3.utils.toHex(this.web3.utils.toWei(params.amount.toString())).substr(2)
             )
     }
     return this.web3.eth.estimateGas(transactionObject);
