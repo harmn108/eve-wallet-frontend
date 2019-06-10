@@ -10,17 +10,21 @@ export class NumberPipe implements PipeTransform {
 
   transform(number, ...args) {
     let stringValue;
-    if(number){
-      stringValue = Number(number).toString();
-      let stringArr = stringValue.split('.');
-      let digits = 0;
-      if(stringArr[1]){
-        digits = stringArr[1].toString().length;
+    // if(number){
+    //   stringValue = Number(number).toString();
+    //     let stringArr = stringValue.split('.');
+    //   let digits = 0;
+    //   if(stringArr[1]){
+    //     digits = stringArr[1].toString().length;
+    //   }
+    //   return Number(stringValue).toLocaleString(undefined, { minimumFractionDigits: digits });
+    // }
+    // else{
+    //   return 0;
+    // }
+      if (typeof number !== 'string') {
+        return number;
       }
-      return Number(stringValue).toLocaleString(undefined, { minimumFractionDigits: digits });
-    }
-    else{
-      return 0;
-    }
+      return number.replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1,')
   }
 }
