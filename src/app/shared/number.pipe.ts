@@ -33,6 +33,6 @@ export class NumberPipe implements PipeTransform {
         return b;
      }
 
-    return number;
+    return b;
   }
 }
