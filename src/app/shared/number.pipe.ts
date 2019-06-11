@@ -25,6 +25,14 @@ export class NumberPipe implements PipeTransform {
       if (typeof number !== 'string') {
         return number;
       }
-      return number.replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1,')
+     const intStr: string =  number.split('.')[0];
+
+     let b =  intStr.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+     if (number.split('.')[1]) {
+        b =  intStr.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') + '.' + number.split('.')[1];
+        return b;
+     }
+
+    return number;
   }
 }

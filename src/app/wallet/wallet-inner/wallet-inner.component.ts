@@ -25,6 +25,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
     address: string;
     transferForm: FormGroup;
     transactions;
+    mobile = false;
     evegTransactions = [];
     eveoTransactions = [];
     evegBalance;
@@ -80,7 +81,10 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.buildForm();
         if (isPlatformBrowser(this.platformId)) {
-
+            this.mobile = window.innerWidth < 767;
+            window.addEventListener('resize', () => {
+                this.mobile = window.innerWidth < 767;
+            });
             if (!this.accountService.etherBalance) {
                 this.accountService.getEthBalance();
             }
