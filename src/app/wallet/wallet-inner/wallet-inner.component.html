@@ -95,7 +95,12 @@
 					{{'wallet.received' | translate}}</h3>
 				<h3 class="transaction__type transaction__type--sent" *ngIf="action?.blockHash && action?.fromAddress == this.address">
 					{{'wallet.sent' | translate}}</h3>
-				<h3 class="transaction__amount">{{action.amount | numberPipe}} EVEG</h3>
+				<div class="transaction-data__date" *ngIf="mobile" style="float: right;     width: initial;">
+					<b>{{getHours(action.timestamp*1000)}}</b>
+					<span>{{getDate(action.timestamp*1000)}}</span>
+				</div>
+				<h3 class="transaction__amount" [class.mobileAmount]="mobile" >{{action.amount | numberPipe}} EVEG</h3>
+
 			</div>
 			<div class="transaction-data">
 				<div class="transaction-data__peer">
@@ -104,7 +109,7 @@
 					<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
 					<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 				</div>
-				<div class="transaction-data__date">
+				<div class="transaction-data__date" *ngIf="!mobile">
 					<b>{{getHours(action.timestamp*1000)}}</b>
 					<span>{{getDate(action.timestamp*1000)}}</span>
 				</div>
@@ -124,7 +129,7 @@
 					<b>{{getHours(action.timestamp*1000)}}</b>
 					<span>{{getDate(action.timestamp*1000)}}</span>
 				</div>
-				<h3 class="transaction__amount">{{action.amount | numberPipe}} EVEO</h3>
+				<h3 class="transaction__amount" [class.mobileAmount]="mobile" >{{action.amount | numberPipe}} EVEO</h3>
 			
 			</div>
 			<div class="transaction-data">
