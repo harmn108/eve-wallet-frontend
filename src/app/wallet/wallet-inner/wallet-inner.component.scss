@@ -420,3 +420,19 @@ input[type="number"] {
 .mobileAmount{
   display: block !important;
 }
+.max {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 14px;
+  color: #37446d;
+  bottom: 0;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid #9897a1;
+  background: white;
+  cursor: pointer;
+}

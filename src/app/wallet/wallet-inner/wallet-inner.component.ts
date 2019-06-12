@@ -222,6 +222,14 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
 
     }
 
+    fillMax() {
+        if (this.token === 'eveg'){
+            this.transferForm.controls['amount'].setValue(this.evegBalance)
+        } else {
+            this.transferForm.controls['amount'].setValue(this.eveoBalance)
+        }
+    }
+
     updateFee(e) {
         let p = e.value;
         if (p !== this.settings.min && p !== this.settings.max) {
