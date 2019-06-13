@@ -16,9 +16,14 @@ export class NumberPipe implements PipeTransform {
 
         let b = intStr.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         if (number.split('.')[1]) {
-            return b + '.' + number.split('.')[1].substr(0, 8);
+            const fraction = number.split('.')[1].substr(0, 8);
+            if (fraction.length < 8) {
+                const repeatCount = 8 - fraction.length;
+                return b + '.' + fraction + '0'.repeat(repeatCount)
+            }
+            return b + '.' + fraction
+        }else {
+            return b + '.' + '0'.repeat(8)
         }
-
-        return b;
     }
 }
