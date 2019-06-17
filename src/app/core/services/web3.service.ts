@@ -5,6 +5,8 @@ import bip39 from 'bip39';
 import { Buffer } from "buffer";
 import { environment } from "../../../environments/environment.stage";
 import { isPlatformBrowser } from "@angular/common";
+import { forkJoin } from 'rxjs';
+import { fromPromise } from 'rxjs/internal-compatibility';
 
 declare var require;
 @Injectable()
@@ -100,6 +102,12 @@ export class Web3Service {
 
   stringtoHash(string) {
     return this.web3.eth.accounts.hashMessage("" + string);
+  }
+  checkPendingTransactions(from) {
+    return forkJoin(
+        fromPromise(this.web3.eth.getTransactionCount(from, "pending")),
+        fromPromise(this.web3.eth.getTransactionCount(from, "latest"))
+    )
   }
 
   private signAndSendTransaction(transactionObject): Promise<string> {
