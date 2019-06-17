@@ -10,10 +10,11 @@ import { ErrorService } from '../../core/services/error.service';
 import * as moment from 'moment';
 import { Web3Service } from '../../core/services/web3.service';
 import { TranslateService } from '@ngx-translate/core';
-import { interval, ReplaySubject, Subject } from 'rxjs';
+import { interval, of, ReplaySubject, Subject } from 'rxjs';
 
 import { Decimal } from 'decimal.js';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { delay, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+
 
 @Component({
     selector: 'app-wallet-inner',
@@ -45,6 +46,7 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
     ethBalance;
     ethFee: any = 0;
     time: any;
+    pendingError = false;
     tSubmitted = false;
     gasPriceError = false;
     addressError = false;
@@ -304,28 +306,35 @@ export class WalletInnerComponent implements OnInit, OnDestroy {
         if (gasPrice !== this.settings.min && gasPrice !== this.settings.max) {
             gasPrice = this.settings.average;
         }
-        let data = {
-            token: this.token,
-            amount: this.transferForm.value.amount,
-            address: this.transferForm.value.address,
-            gasPrice: gasPrice,
-            transactionTime: transTime,
-            estFee: this.estFee,
-            contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
-            decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
-        };
-        const dialogRef = this.dialog.open(ConfirmTransactionDialog, {
-            width: '870px',
-            panelClass: 'wallet-dialog',
-            data: data
+        this.web3.checkPendingTransactions(this.accountService.accountInfo.address).subscribe(res => {
+           if (res[0] !== res[1]) {
+              this.pendingError = true;
+               return;
+           }
+            let data = {
+                token: this.token,
+                amount: this.transferForm.value.amount,
+                address: this.transferForm.value.address,
+                gasPrice: gasPrice,
+                transactionTime: transTime,
+                estFee: this.estFee,
+                contractAddress: this.token == 'eveg' ? environment.eveg_contract_address : environment.eveo_contract_address,
+                decimalPlaces: this.token == 'eveg' ? this.decimals[environment.eveg_contract_address] : this.decimals[environment.eveo_contract_address]
+            };
+            const dialogRef = this.dialog.open(ConfirmTransactionDialog, {
+                width: '870px',
+                panelClass: 'wallet-dialog',
+                data: data
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+                this.transferForm.reset();
+                this.tSubmitted = false;
+                this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2);
+                this._updateTransactions$.next();
+            });
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.transferForm.reset();
-            this.tSubmitted = false;
-            this.transferForm.controls['gasPrice'].setValue((this.settings.max + this.settings.min) / 2);
-            this._updateTransactions$.next();
-        });
 
     }
 

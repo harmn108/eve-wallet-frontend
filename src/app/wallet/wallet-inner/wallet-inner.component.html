@@ -76,6 +76,9 @@
 			<button class="button button--primary button--upper"
 				(click)="generateTransaction()">{{'wallet.generate' | translate}}</button>
 		</div>
+		<p *ngIf="pendingError" style="padding-top: 10px; color: red">
+			You have pending transactions.  <a href="https://etherscan.io/txsPending?a='{{address}}'">View it on Etherscan</a>
+		</p>
 	</div>
 </form>
 
