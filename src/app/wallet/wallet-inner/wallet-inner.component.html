@@ -1,6 +1,6 @@
 <div style="display: flex;align-items: center;justify-content: flex-start;padding:10px 0 30px;">
 		<h3>{{'wallet.ba_lance' | translate}}: </h3><span> </span>
-	<p class="balance">{{(token == 'eveg'? evegBalance : eveoBalance) | numberPipe}}<small> {{token == 'eveg'?  'EVEG' : 'EVEO'}}</small></p>
+	<p class="balance" >{{(token == 'eveg'? evegBalance : eveoBalance) | numberPipe}}<small> {{token == 'eveg'?  'EVEG' : 'EVEO'}}</small></p>
 
 </div>
 
@@ -38,8 +38,9 @@
 
 		<label>{{token == 'eveg'?  'EVEG' : 'EVEO'}} Amount</label>
 		<div class="form-fields">
-			<div class="coin-field">
+			<div class="coin-field" style="position: relative">
 				<input type="text" (keypress)="ifNumber($event)" placeholder="{{token == 'eveg'?  'EVEG' : 'EVEO'}}" formControlName="amount">
+				<span class="max" (click)="fillMax()">MAX</span>
 				<p class="error-message" *ngIf="amountErrorMessage" fxLayout="row" [innerHTML]="amountErrorMessage"></p>
 			</div>
 			<div class="transaction-fee">
@@ -75,6 +76,9 @@
 			<button class="button button--primary button--upper"
 				(click)="generateTransaction()">{{'wallet.generate' | translate}}</button>
 		</div>
+		<p *ngIf="pendingError" style="padding-top: 10px; color: red">
+			You have pending transactions.  <a href="https://etherscan.io/txsPending?a='{{address}}'">View it on Etherscan</a>
+		</p>
 	</div>
 </form>
 
@@ -95,7 +99,12 @@
 					{{'wallet.received' | translate}}</h3>
 				<h3 class="transaction__type transaction__type--sent" *ngIf="action?.blockHash && action?.fromAddress == this.address">
 					{{'wallet.sent' | translate}}</h3>
-				<h3 class="transaction__amount">{{action.amount | numberPipe}} EVEG</h3>
+				<div class="transaction-data__date" *ngIf="mobile" style="float: right;     width: initial;">
+					<b>{{getHours(action.timestamp*1000)}}</b>
+					<span>{{getDate(action.timestamp*1000)}}</span>
+				</div>
+				<h3 class="transaction__amount" [class.mobileAmount]="mobile" >{{action.amount | numberPipe}} EVEG</h3>
+
 			</div>
 			<div class="transaction-data">
 				<div class="transaction-data__peer">
@@ -104,7 +113,7 @@
 					<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
 					<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 				</div>
-				<div class="transaction-data__date">
+				<div class="transaction-data__date" *ngIf="!mobile">
 					<b>{{getHours(action.timestamp*1000)}}</b>
 					<span>{{getDate(action.timestamp*1000)}}</span>
 				</div>
@@ -120,8 +129,12 @@
 					{{'wallet.received' | translate}}</h3>
 				<h3 class="transaction__type transaction__type--sent" *ngIf="action.blockHash && action.fromAddress == this.address">
 					{{'wallet.sent' | translate}}</h3>
-
-				<h3 class="transaction__amount">{{action.amount | numberPipe}} EVEO</h3>
+				<div class="transaction-data__date" *ngIf="mobile" style="float: right;     width: initial;">
+					<b>{{getHours(action.timestamp*1000)}}</b>
+					<span>{{getDate(action.timestamp*1000)}}</span>
+				</div>
+				<h3 class="transaction__amount" [class.mobileAmount]="mobile" >{{action.amount | numberPipe}} EVEO</h3>
+			
 			</div>
 			<div class="transaction-data">
 				<div class="transaction-data__peer">
@@ -130,7 +143,7 @@
 					<span *ngIf="action.fromAddress == this.address">{{action.toAddress}}</span>
 					<span *ngIf="action.toAddress == this.address">{{action.fromAddress}}</span>
 				</div>
-				<div class="transaction-data__date">
+				<div class="transaction-data__date" *ngIf="!mobile">
 					<b>{{getHours(action.timestamp*1000)}}</b>
 					<span>{{getDate(action.timestamp*1000)}}</span>
 				</div>
