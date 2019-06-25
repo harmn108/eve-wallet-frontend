@@ -1,0 +1,137 @@
+.auth {
+	font-size: 0;
+	width: 100%;
+	height: 100vh;
+
+	&-col {
+		font-size: 16px;
+		display: inline-block;
+		width: 50%;
+		min-height: 100%;
+		overflow: auto;
+		vertical-align: top;
+		position: absolute;
+
+		&--dark {
+			background: linear-gradient(135deg, #191925 0%, #122042 100%);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding: 70px 80px 40px;
+			user-select: none; left: 0;
+
+			h1 {
+				font-size: 100px;
+				line-height: 1;
+				font-weight: normal;
+				color: #ffffff;
+				margin: 36px 0 0;
+			}
+
+			.logos {
+				img {
+					display: inline-block;
+					width: 120px;
+
+					&:not(:last-child) {
+						margin: 0 16px 0 0;
+					}
+				}
+			}
+
+			img {
+				width: 80%;
+				max-width: 360px;
+				margin-top: 50px;
+			}
+
+			@media (max-height: 780px) {
+				.logos img {
+					width: 82px;
+					&:not(:last-child) {
+						margin: 0 12px 0 0;
+					}
+				}
+
+				h1 {
+					font-size: 82px;
+					margin: 24px 0 0;
+				}
+
+				img {
+					max-width: 320px;
+				}
+			}
+		}
+
+		&--light {
+			right: 0;
+			padding: 70px 72px;
+		}
+
+		&__logo {
+			display: flex;
+			max-width: 400px;
+			min-height: calc(15vh - 24px);
+			padding-bottom: 35px;
+			margin: 24px auto 0;
+			align-items: flex-end;
+			justify-content: flex-start;
+
+			img {
+				display: none;
+				width: 70px;
+				height: 70px;
+				margin-right: 15px;
+			}
+
+			@media (max-width: 1024px) {
+				img { display: inline-block; }
+			}
+		}
+
+		&__inner {
+			display: block;
+			max-width: 400px;
+			margin: 0 auto;
+			padding-top: .05px;
+		}
+	}
+}
+
+.share-app{
+	margin-top: 56px;
+	a{
+		display: inline-block;
+		&:not(:last-child){
+			margin-right: 24px;
+		}
+		img{
+			height: 40px;
+		}
+	}
+
+}
+
+@media (max-width: 1024px) {
+	.auth-col {
+		width: 100%;
+		min-height: 80%;
+		position: static;
+
+		&--dark {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.auth-col {
+		padding: 40px 32px;
+	}
+}
+.copyright{
+	font-size: 14px;
+	color: #A19EAF;
+	text-transform: uppercase;
+}

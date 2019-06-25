@@ -1,0 +1,42 @@
+h2 {
+	font-size: 24px;
+	line-height: 30px;
+	text-transform: uppercase;
+	margin: 0 0 4px;
+}
+
+p.description {
+	font-size: 14px;
+	line-height: 17px;
+	color: #8A8FA5;
+	margin: 0 0 36px;
+}
+
+.recovery-phrase {
+	margin: 24px 0;
+	word-break: break-word;
+	font-size: 16px;
+	font-weight: 600;
+	color: #1f2742;
+	background: #ecf3f8;
+	border-radius: 8px;
+	min-height: 46px;
+	padding: 10px 24px;
+}
+
+.error-message {
+	margin: -16px 0 22px;
+}
+
+input[type="password"] {
+	width: 100%;
+	margin: 0 0 35px;
+}
+
+.recovery-phrase-text {
+	margin: 20px 0;
+
+	&:first-of-type, &:first-of-type + b {
+		color: #8A8FA5;
+	}
+}

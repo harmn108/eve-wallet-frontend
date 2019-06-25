@@ -1,0 +1,44 @@
+<!-- <h2>Create EVE Wallet</h2>
+<p class="descr">Enter your email to create new wallet</p>
+
+<div class="input-wrapper">
+	<input type="email" placeholder="Enter your email">
+	<div class="input-wrapper__suffix">
+		<button class="button button--primary button--upper">Request</button>
+	</div>
+	<div class="input-wrapper__shadow"></div>
+</div>
+
+<p class="terms">By registering you agree to our <a href="#">Terms & Conditions</a></p>
+
+<p class="error-message">Passwords do not match</p>-->
+<div class="sat-loading" *ngIf="loading">
+	<mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loading">
+<h2 >{{'user.create_wallet' | translate}}</h2>
+<p class="descr" *ngIf="request">{{'user.check_email' | translate}}</p>
+<p class="descr" *ngIf="!request">{{'user.enter_to_create' | translate}}</p>
+
+<div class="input-wrapper">
+	<input type="email" [readonly]="request" [formControl]="emailControl" placeholder="{{'user.email' | translate}}">
+	<div class="input-wrapper__suffix">
+		<div class="button button--primary button--upper" [ngClass]="{'done':request}" (click)="request? check() : requestEmail()">
+			<span *ngIf="!request">{{'user.create' | translate}}</span>
+			<img src="assets/images/checkmark.svg" alt="" *ngIf="request">
+		</div>
+	</div>
+	<div class="input-wrapper__shadow"></div>
+</div>
+
+<!-- <p class="terms">{{'user.by_registering' | translate}} <a href="#">{{'user.terms_and_conditions' | translate}}</a></p> -->
+<p class="terms"></p>
+<p class="error-message" *ngIf="emailControl.value !=='' && emailType">{{'error.invalid_email' | translate}}</p>
+<p class="error-message" *ngIf="errorMessage">{{errorMessage | translate}}</p>
+
+<div class="share-app">
+  <a href="javascript:void(0)"><img src="assets/images/AppStore.svg" alt=""></a>
+  <a href="javascript:void(0)"><img src="assets/images/GooglePlay.svg" alt=""></a>
+</div>
+
+</div>

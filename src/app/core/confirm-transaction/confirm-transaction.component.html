@@ -1,0 +1,37 @@
+<div class="icon-close" (click)="close()" ></div>
+
+<div *ngIf="!passwordVerified">
+		<h2>{{'wallet.review_confirm' | translate}}</h2>
+		<p class="description">{{'wallet.enter_to_make_transaction' | translate}}</p>
+
+	<input type="password" placeholder="{{'user.password' | translate}}" [formControl]="password">
+	<p class="error-message" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
+	<div class="buttons">
+		<button class="button button--fat button--primary" (click)="continue()">{{'wallet.continue' | translate}}</button>
+	</div>
+</div>
+
+<div *ngIf="passwordVerified" class="review-part">
+	<h2>{{'wallet.review_confirm' | translate}}</h2>
+	<p class="description">{{'wallet.no_way_cancel' | translate}}</p>
+	
+	<table>
+		<tr>
+			<td>{{'wallet.amount' | translate}}</td>
+			<td class="amount"> {{transferParams.amount}} {{transferParams.token == 'eveg'?  'EVEG' : 'EVEO'}}</td>
+		</tr>
+		<tr>
+			<td>{{'wallet.rec_address' | translate}}</td>
+			<td class="address">{{transferParams.address}}</td>
+		</tr>
+		<tr>
+			<td>{{'wallet.est_fee' | translate}}</td>
+			<td class="fee">{{transferParams.estFee}} ETH</td>
+		</tr>
+	</table>
+	
+	<div class="buttons">
+		<button class="button button--primary" (click)="confirm()">{{'wallet.confirm' | translate}}</button>
+		<button class="button" (click)="close()">{{'wallet.cancel' | translate}}</button>
+	</div>
+</div>

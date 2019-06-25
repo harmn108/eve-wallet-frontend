@@ -1,0 +1,16 @@
+
+<h2>{{'wallet.recovery_phrase' | translate}}</h2>
+
+<div class="alert-container">
+	<img src="assets/images/alert.svg">
+	<p>{{'wallet.only_way_first' | translate}}</p>
+</div>
+
+<div class="recovery-phrase" >
+	<span class="notranslate">{{brainKey}}</span>
+</div>
+
+<div class="buttons">
+	<button class="button button--primary button--fat button--upper" (click)="recover()">{{'wallet.backup_1' | translate}}</button>
+	<button class="button button--upper button--fat" (click)="later()">{{'wallet.later' | translate}}</button>
+</div>

@@ -1,0 +1,48 @@
+h2 {
+	font-size: 24px;
+	line-height: 30px;
+	text-transform: uppercase;
+	margin: 0 0 24px;
+}
+
+p.description {
+	font-size: 14px;
+	line-height: 17px;
+	color: #8A8FA5;
+	margin: 0 0 25px;
+}
+
+.alert-container {
+	align-items: flex-start;
+	margin: 20px 0 35px;
+
+	img {
+		margin-top: 2px;
+	}
+
+	p {
+		color: #8A8FA5;
+	}
+
+	span {
+		display: block;
+		margin: 20px 0 0;
+		color: #1F2742;
+	}
+}
+
+.buttons {
+	.button:first-child {
+		margin: 0 27px 0 0;
+	}
+
+	@media (max-width: 576px) {
+		.button {
+			width: 100%;
+
+			&:first-child {
+				margin: 0 0 12px;
+			}
+		}
+	}
+}

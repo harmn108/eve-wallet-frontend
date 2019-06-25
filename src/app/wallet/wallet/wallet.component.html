@@ -1,0 +1,48 @@
+<div class="user-page">
+	<div class="container">
+		<div class="header">
+			<span></span>
+
+			<div class="menu">
+				<div class="wallet-menu">
+					<img style="width: 24px; height: 24px" src="assets/images/eth.svg" alt="">
+					<span class="notranslate">{{ethBalance | numberPipe}} ETH</span>
+				</div>
+				<div class="menu-items menu-items--open" >
+					<a (click)="settings()">{{'wallet.security' | translate}}</a>
+					<a (click)="signout()">{{'wallet.sign_out' | translate}}</a>
+				</div>
+			</div>
+		</div>
+		<div class="wallet">
+			<div class="wallet-card a" [ngClass]="{'wallet-card--active':active == 'eveg'}" (click)="setActive('eveg')">
+				<div class="wallet-card__inner wallet-card__inner--gold"  [ngClass]="{'no-curser':disabled}">
+					<img src="assets/images/eveg.svg" alt="">
+					<div class="wallet-card__name">
+						<h3>EVEG</h3>
+					</div>
+				</div>
+			</div>
+			<div class="wallet-card b" [ngClass]="{'wallet-card--active':active == 'eveo'}" (click)="setActive('eveo')">
+				<div class="wallet-card__inner wallet-card__inner--silver" [ngClass]="{'no-curser':disabled}">
+					<img src="assets/images/eveo.svg" alt="">
+					<div class="wallet-card__name">
+						<h3>EVEO</h3>
+					</div>
+				</div>
+			</div>
+			<div class="wallet-inner">
+				<router-outlet (activate)='onactivate($event)'></router-outlet>
+			</div>
+		</div>
+		<div class="footer">
+			<div>
+				© 2019 EVERYONE
+			</div>
+			<div>
+				<a href="javascript:void(0)"><img src="assets/images/AppStore.svg" alt=""></a>
+				<a href="javascript:void(0)"><img src="assets/images/GooglePlay.svg" alt=""></a>
+			</div>
+		</div>
+	</div>
+</div>

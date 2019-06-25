@@ -1,0 +1,35 @@
+<div class="icon-close" (click)="close()" ></div>
+
+<div *ngIf="!passwordVerified">
+	<h2>{{ (backup? 'wallet.backup_pvk' : 'wallet.private_key') | translate}}</h2>
+	<p class="description">{{(backup? 'wallet.enter_pass_pvk' : 'wallet.enter_pass_pvk_see') | translate}}</p>
+
+	<input type="password" placeholder="{{'user.password' | translate}}" [formControl]="password">
+	<p class="error-message" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
+	<div class="buttons">
+		<button class="button button--fat button--primary" (click)="continue()">{{'wallet.continue' | translate}}</button>
+	</div>
+</div>
+
+<div *ngIf="passwordVerified">
+	<h2 *ngIf="backup">{{'wallet.backup_pvk' | translate}}</h2>
+	<h2 *ngIf="!backup">{{'wallet.private_key' | translate}}</h2>
+
+	<div class="alert-container">
+		<img src="assets/images/alert.svg">
+		<p>{{'wallet.pvk_tooltip' | translate}}</p>
+	</div>
+
+	<div class="public-key">
+		<span class="notranslate">{{privateKey}}</span>
+		<img src="assets/images/copy.svg" (click)="copy()">
+	</div>
+	<label *ngIf="backup">
+		<input type="checkbox" class="checkbox" [formControl]="seenControl">
+		<span>{{'wallet.backed_up' | translate}}</span>
+	</label>
+
+	<div class="buttons text-right" *ngIf="backup">
+		<button class="button button--primary button--upper" [disabled]="!seenControl.value" (click)="confirm()">{{'wallet.confirm' | translate}}</button>
+	</div>
+</div>

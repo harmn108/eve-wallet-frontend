@@ -1,0 +1,79 @@
+<div class="level-container">
+	<h2>{{'wallet.security' | translate}}</h2>
+
+	<div class="security-level">
+		<div class="security-level__step security-level__step--done"></div>
+		<div class="security-level__step" [ngClass]="{'security-level__step--done':account.privateKeySaved || account.brainKeySaved}"></div>
+		<div class="security-level__step" [ngClass]="{'security-level__step--done':account.privateKeySaved && account.brainKeySaved}"></div>
+	</div>
+</div>
+
+<div class="alert-container">
+	<img src="assets/images/alert.svg">
+	<p *ngIf="!account.privateKeySaved || !account.brainKeySaved">
+		{{'wallet.have_to_backup_pvk_and_phrase' | translate}}
+	</p>
+	<p *ngIf="account.privateKeySaved && account.brainKeySaved">
+		{{'wallet.the_only_way' | translate}}
+	</p>
+</div>
+
+<div class="security">
+	<div class="security__item">
+		<h3 class="security__item__name">{{'wallet.email' | translate}}:</h3>
+		<div class="security__item__inner security__item__inner--email">{{account.email}}</div>
+		<div class="security__item__status">
+			<div class="icon-done"></div>
+		</div>
+	</div>
+	<div class="security__item">
+		<h3 class="security__item__name">
+			<span>{{'wallet.address' | translate}}:</span>
+			<img src="assets/images/question.svg" matTooltip="{{'wallet.public_key_tultip' | translate}}" matTooltipPosition="after"/>
+		</h3>
+		<div class="security__item__inner security__item__inner--address">
+			<div>
+				<span class="notranslate">{{account.address}}</span>
+				<img (click)="copy()" src="assets/images/copy.svg">
+			</div>
+		</div>
+	</div>
+	<div class="security__item">
+		<h3 class="security__item__name">
+			<span>{{'wallet.private_key' | translate}}:</span>
+			<img src="assets/images/question.svg" matTooltip="{{'wallet.pvk_tooltip' | translate}}" matTooltipPosition="after"/>
+		</h3>
+		<div class="security__item__inner security__item__inner--private-key">
+			<div class="input-wrapper">
+				<input type="password" readonly value="{{'wallet.pvk_text' | translate}}">
+				<div class="input-wrapper__suffix" (click)="backupPrivateKey(false)">
+					<img src="assets/images/eye.svg"/>
+				</div>
+				<div class="input-wrapper__shadow"></div>
+			</div>
+			<button class="button button--primary button--upper" *ngIf="!account.privateKeySaved" (click)="backupPrivateKey(true)">{{'wallet.back_up' | translate}}</button>
+		</div>
+		<div class="security__item__status" *ngIf="account.privateKeySaved">
+			<div class="icon-done"></div>
+		</div>
+	</div>
+	<div class="security__item">
+		<h3 class="security__item__name">
+			<span>{{'wallet.recovery_phrase' | translate}}:</span>
+			<img src="assets/images/question.svg" matTooltip="{{'wallet.recovery_tooltip' | translate}}" matTooltipPosition="after"/>
+		</h3>
+		<div class="security__item__inner security__item__inner--private-key">
+			<div class="input-wrapper">
+				<input type="password" readonly value="{{'wallet.your_recovery_phrase' | translate}}">
+				<div class="input-wrapper__suffix" (click)="backupRecoveryPhrase(false)">
+					<img src="assets/images/eye.svg"/>
+				</div>
+				<div class="input-wrapper__shadow"></div>
+			</div>
+			<button class="button button--primary button--upper" *ngIf="!account.brainKeySaved" (click)="backupRecoveryPhrase(true)">{{'wallet.back_up' | translate}}</button>
+		</div>
+		<div class="security__item__status" *ngIf="account.brainKeySaved">
+			<div class="icon-done"></div>
+		</div>
+	</div>
+</div>

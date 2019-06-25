@@ -1,0 +1,34 @@
+<div class="icon-close" (click)="close()"></div>
+
+<div *ngIf="!passwordVerified">
+	<h2>{{(backup? 'wallet.backup' : 'wallet.recovery_phrase') | translate}}</h2>
+	<p class="description">{{(backup? 'wallet.enter_pass' : 'wallet.enter_pass_see') | translate}}</p>
+
+	<input type="password" placeholder="{{'user.password' | translate}}" [formControl]="password">
+	<p class="error-message" *ngIf="passError">{{'error.invalid_password' | translate}}</p>
+
+	<div class="buttons">
+		<button class="button button--fat button--primary" (click)="continue()">{{'wallet.continue' |translate}}</button>
+	</div>
+</div>
+
+<div *ngIf="passwordVerified">
+	<h2 *ngIf="backup">{{'wallet.backup' | translate}}</h2>
+	<h2 *ngIf="!backup">{{'wallet.recovery_phrase' | translate}}</h2>
+
+	<p class="recovery-phrase-text">{{'wallet.recovery_text' | translate}}</p>
+
+	<b>{{'wallet.recover_only_way' | translate}}</b>
+
+	<div class="recovery-phrase">
+		<span class="notranslate">
+				{{brainKey}}
+		</span>
+	</div>
+
+	<p *ngIf="backup" class="recovery-phrase-text">{{'wallet.next_step_text' | translate}}</p>
+
+	<div class="buttons text-right" *ngIf="backup">
+		<button class="button button--primary button--upper" (click)="next()">{{'wallet.next' | translate}}</button>
+	</div>
+</div>

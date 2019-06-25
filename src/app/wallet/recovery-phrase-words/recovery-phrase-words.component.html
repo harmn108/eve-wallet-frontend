@@ -1,0 +1,27 @@
+<h2>{{'wallet.backup' | translate}}</h2>
+
+<p class="description">{{'wallet.please_enter' | translate}}</p>
+
+<div class="words" *ngIf="numberArray.length">
+	<div class="words__word">
+		<input type="text" class="input--small" [formControl]="word1"/>
+		<small>{{'wallet.word' | translate}} {{numberArray[0]}}</small>
+	</div>
+	<div class="words__word">
+		<input type="text" class="input--small" [formControl]="word2"/>
+		<small>{{'wallet.word' | translate}} {{numberArray[1]}}</small>
+	</div>
+	<div class="words__word">
+		<input type="text" class="input--small" [formControl]="word3"/>
+		<small>{{'wallet.word' | translate}} {{numberArray[2]}}</small>
+	</div>
+	<div class="words__word">
+		<input type="text" class="input--small" [formControl]="word4"/>
+		<small>{{'wallet.word' | translate}} {{numberArray[3]}}</small>
+	</div>
+</div>
+<div class="buttons">
+	<button class="button button--fat button--primary button--upper" [disabled]="!word1.value || !word2.value || !word3.value || !word4.value" (click)="finish()">{{'wallet.finish' | translate}}</button>
+	<a routerLink="/wallet/settings">{{'wallet.go_copy' | translate}}</a>
+</div>
+<p class="error-message" *ngIf="phraseError">{{'user.invalid_phrase' | translate}}</p>
